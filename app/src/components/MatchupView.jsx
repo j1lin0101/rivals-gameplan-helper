@@ -7,15 +7,15 @@ const SAFE_COLOR  = 'var(--safe)'
 const RISKY_COLOR = 'var(--risky)'
 const PUNISH_COLOR = 'var(--punish)'
 
-// Tumble % color scale — yellow (low %, great for combos) → gray (high %, rarely tumbles)
-// Uses a yellow-to-muted scale intentionally separate from the green/orange/red shield scale.
+// Tumble % color scale — distinct colors per tier, separate from the shield safety scale.
+// Low % = good (combos early) → High % = risky (won't tumble until late)
 function tumbleColor(pct) {
   if (pct === null || pct === undefined) return '#888899'
-  if (pct <= 40)  return '#F0E442'  // bright yellow  — tumbles very early, great combo tool
-  if (pct <= 80)  return '#c8b830'  // golden yellow  — tumbles at low %
-  if (pct <= 130) return '#9a8a20'  // dim gold       — mid-range, situational
-  if (pct <= 200) return '#666677'  // muted gray     — high %, hard to use
-  return '#444455'                  // very muted     — extreme threshold, rarely relevant
+  if (pct <= 40)  return '#00CED1'  // cyan          — tumbles very early, great combo tool
+  if (pct <= 80)  return '#F0E442'  // yellow        — tumbles at low %
+  if (pct <= 130) return '#DA70D6'  // orchid/purple — mid-range, situational
+  if (pct <= 200) return '#888899'  // muted gray    — high %, hard to use
+  return '#444455'                  // very muted    — extreme threshold, rarely relevant
 }
 
 function ShieldBadge({ value, color }) {
