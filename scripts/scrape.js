@@ -1,0 +1,244 @@
+const fetch = require('node-fetch');
+const cheerio = require('cheerio');
+const fs = require('fs');
+const path = require('path');
+
+const { characters, baseUrl } = require('../characters.json');
+const DATA_DIR = path.join(__dirname, '../data/characters');
+
+const HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+  'Accept-Language': 'en-US,en;q=0.5',
+  'Referer': 'https://dragdown.wiki/',
+};
+
+function parseShieldSafety(raw) {
+  if (!raw || raw.trim() === '—' || raw.trim() === '') return null;
+  const clean = raw.trim();
+  // "Stun: N" means the shield is stunned for N frames — positive advantage for the attacker
+  const stun = clean.match(/^Stun:\s*(\d+)$/i);
+  if (stun) { const v = parseInt(stun[1]); return { min: v, max: v, isStun: true }; }
+  const range = clean.match(/(-?\d+)\s*to\s*(-?\d+)/i);
+  if (range) return { min: parseInt(range[1]), max: parseInt(range[2]) };
+  const single = clean.match(/^(-?\d+)$/);
+  if (single) { const v = parseInt(single[1]); return { min: v, max: v }; }
+  return null;
+}
+
+function parseTumblePercent(raw) {
+  if (!raw || raw.trim() === '—' || raw.trim() === '') return null;
+  const clean = raw.replace(/%/g, '').trim();
+  const range = clean.match(/(\d+)\s*[-–]\s*(\d+)/);
+  if (range) return { min: parseInt(range[1]), max: parseInt(range[2]) };
+  const single = clean.match(/^(\d+)$/);
+  if (single) { const v = parseInt(single[1]); return { min: v, max: v }; }
+  return null;
+}
+
+// Slugify a hitbox name to match tabber panel IDs (e.g. "Arm (Weak)" → "Arm_(Weak)")
+function toTabId(name) {
+  return name.replace(/\s/g, '_');
+}
+
+// Parse the startup frame number from raw text like "10 [6+3]", "5", "Notes: ..."
+function parseStartup(raw) {
+  if (!raw) return null;
+  const m = raw.match(/^(\d+)/);
+  return m ? parseInt(m[1]) : null;
+}
+
+function parseMoves($) {
+  const moves = [];
+
+  $('.mw-heading3').each(function(_, headingDiv) {
+    const moveName = $(headingDiv).find('h3').text().trim();
+    if (!moveName) return;
+
+    // Find the attack-container immediately following this heading
+    const container = $(headingDiv).nextAll('.attack-container').first();
+    if (!container.length) return;
+
+    // Capture startup frames from the first table (Startup | Active | Endlag | IASA)
+    let startup = null;
+    const startupTable = container.find('table').first();
+    const startupHeaders = startupTable.find('tr').first().find('th').map(function(_, th) {
+      return $(th).clone().find('.tooltiptext').remove().end().text().trim().toLowerCase();
+    }).toArray();
+    const startupColIdx = startupHeaders.findIndex(h => h.startsWith('startup'));
+    if (startupColIdx >= 0) {
+      const dataRow = startupTable.find('tbody tr').last().find('td');
+      const raw = $(dataRow[startupColIdx]).clone().find('.tooltiptext').remove().end().text().trim();
+      startup = parseStartup(raw);
+    }
+
+    // Find the hitbox table — the one with a "Shield Safety" header
+    const hitboxTable = container.find('table').filter(function(_, tbl) {
+      return $(tbl).find('th').toArray().some(th => $(th).text().includes('Shield Safety'));
+    }).first();
+
+    // If no hitbox table, still record the move with just startup data (e.g. Grab)
+    if (!hitboxTable.length) {
+      if (startup !== null) moves.push({ move: moveName, startup, hitboxes: [] });
+      return;
+    }
+
+    // Map column headers to indices (strip tooltip text — just use first word/phrase match)
+    const rawHeaders = hitboxTable.find('tr').first().find('th').map(function(_, th) {
+      return $(th).text().trim();
+    }).toArray();
+
+    const colIdx = (keyword) => rawHeaders.findIndex(h => h.toLowerCase().includes(keyword.toLowerCase()));
+    const hitboxCol  = colIdx('hit');
+    const shieldCol  = colIdx('shield safety');
+    const tumbleCol  = colIdx('tumble');
+
+    if (shieldCol === -1) return;
+
+    // Parse hitbox rows — skip rows where the first cell is empty (those are blank spacer rows)
+    // "Unique:" rows are property modifiers for the preceding hitbox, not separate hitboxes.
+    const hitboxes = [];
+    hitboxTable.find('tbody tr').each(function(_, row) {
+      const cells = $(row).find('td').map(function(_, td) {
+        // Get only direct text, stripping tooltip spans
+        return $(td).clone().find('.tooltiptext').remove().end().text().trim();
+      }).toArray();
+
+      if (!cells.length || !cells[0]) return; // skip empty/spacer rows
+
+      const hitboxName = hitboxCol >= 0 ? cells[hitboxCol] : 'Hit ' + (hitboxes.length + 1);
+
+      // "Unique:" rows are informational metadata — skip them
+      if (hitboxName.startsWith('Unique:')) return;
+
+      const shieldRaw = shieldCol >= 0 ? cells[shieldCol] : '';
+      const tumbleRaw = tumbleCol >= 0 ? cells[tumbleCol] : '';
+
+      hitboxes.push({
+        hitbox:             hitboxName,
+        shieldSafety:       parseShieldSafety(shieldRaw),
+        shieldRaw,
+        tumblePercent:      parseTumblePercent(tumbleRaw),
+        tumbleRaw,
+        perCharacterTumble: {},
+      });
+    });
+
+    if (!hitboxes.length) return;
+
+    // Parse per-character tumble % from the "Stats for Nerds" collapsible
+    const nerdsCollapsible = container.find('[data-expandtext="Show Stats for Nerds"]').first();
+    if (nerdsCollapsible.length) {
+      // Collect all tabber panels once, keyed by their id
+      const allPanels = {};
+      nerdsCollapsible.find('.tabber__panel').each(function(_, el) {
+        const id = $(el).attr('id') || '';
+        allPanels[id.toLowerCase()] = $(el);
+      });
+
+      hitboxes.forEach(function(h) {
+        const tabId = ('tabber-' + toTabId(h.hitbox)).toLowerCase();
+        // Try exact match first
+        let panel = allPanels[tabId];
+        // Fuzzy: find any panel id that starts with tabId (some get a _2 suffix for duplicates)
+        if (!panel) {
+          const key = Object.keys(allPanels).find(k => k.startsWith(tabId));
+          if (key) panel = allPanels[key];
+        }
+        if (!panel) return;
+
+        panel.find('.tumble-cell').each(function(_, cell) {
+          const text = $(cell).text().trim();
+          const m = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
+          if (m) h.perCharacterTumble[m[1].trim()] = parseInt(m[2]);
+        });
+      });
+    }
+
+    moves.push({ move: moveName, startup, hitboxes });
+  });
+
+  return moves;
+}
+
+async function scrapeCharacter(character) {
+  const url = `${baseUrl}/${character.slug}`;
+  console.log(`Fetching ${character.name}...`);
+
+  let html;
+  try {
+    const res = await fetch(url, { headers: HEADERS });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    html = await res.text();
+  } catch (err) {
+    console.error(`  ERROR: ${err.message}`);
+    return null;
+  }
+
+  const $ = cheerio.load(html);
+  const moves = parseMoves($);
+
+  return {
+    character: character.name,
+    slug: character.slug,
+    scrapedAt: new Date().toISOString(),
+    moves,
+  };
+}
+
+function detectChanges(oldData, newData) {
+  if (!oldData) return { changed: true, summary: 'New character data' };
+  const oldStr = JSON.stringify(oldData.moves);
+  const newStr = JSON.stringify(newData.moves);
+  if (oldStr === newStr) return { changed: false };
+
+  const added   = newData.moves.filter(m => !oldData.moves.find(o => o.move === m.move)).map(m => m.move);
+  const removed = oldData.moves.filter(m => !newData.moves.find(n => n.move === m.move)).map(m => m.move);
+  const changed = newData.moves.filter(m => {
+    const old = oldData.moves.find(o => o.move === m.move);
+    return old && JSON.stringify(old.hitboxes) !== JSON.stringify(m.hitboxes);
+  }).map(m => m.move);
+
+  return {
+    changed: true,
+    summary: [
+      added.length   ? `Added: ${added.join(', ')}` : '',
+      removed.length ? `Removed: ${removed.join(', ')}` : '',
+      changed.length ? `Updated: ${changed.join(', ')}` : '',
+    ].filter(Boolean).join(' | '),
+  };
+}
+
+async function main() {
+  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+  const results = { timestamp: new Date().toISOString(), changes: [] };
+
+  for (const character of characters) {
+    const outPath = path.join(DATA_DIR, `${character.slug}.json`);
+    const oldData = fs.existsSync(outPath) ? JSON.parse(fs.readFileSync(outPath, 'utf8')) : null;
+
+    const newData = await scrapeCharacter(character);
+    if (!newData) {
+      results.changes.push({ character: character.name, status: 'error' });
+      continue;
+    }
+
+    const { changed, summary } = detectChanges(oldData, newData);
+    if (changed) {
+      fs.writeFileSync(outPath, JSON.stringify(newData, null, 2));
+      console.log(`  UPDATED: ${summary}`);
+      results.changes.push({ character: character.name, status: 'updated', summary });
+    } else {
+      console.log(`  No changes`);
+      results.changes.push({ character: character.name, status: 'unchanged' });
+    }
+
+    await new Promise(r => setTimeout(r, 1000));
+  }
+
+  fs.writeFileSync(path.join(__dirname, '../data/last-scrape.json'), JSON.stringify(results, null, 2));
+  console.log('\nScrape complete.');
+}
+
+main().catch(err => { console.error(err); process.exit(1); });

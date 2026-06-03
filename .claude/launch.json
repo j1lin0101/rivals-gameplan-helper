@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "roa2-app",
+      "runtimeExecutable": "/usr/local/opt/node/bin/node",
+      "runtimeArgs": ["/Users/jeremy/Documents/RivalsGameplanHelper/app/node_modules/.bin/vite", "--port", "5173"],
+      "port": 5173
+    }
+  ]
+}
