@@ -300,7 +300,7 @@ function CategoryAccordion({ category, rows, attackerName, defenderName }) {
             textTransform: 'uppercase',
             color: 'var(--muted)',
           }}>
-            <span>Status</span>
+            <span>Shield Safety</span>
             <span>Move</span>
             <span style={{ textAlign: 'center' }}>On Shield</span>
             <span style={{ textAlign: 'center' }}>Tumble %</span>
@@ -443,7 +443,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
         {/* Top row: player first, then opponent */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px' }}>
           {myData && (
-            <Section title={`${myChar}'s Safe Options`} accent="var(--accent)">
+            <Section title={`${myChar}'s Safe Options on Shield`} accent="var(--accent)">
               <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />
             </Section>
           )}
@@ -453,7 +453,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             </Section>
           )}
           {oppData && (
-            <Section title={`${oppChar}'s Safe Options`} accent="var(--accent2)">
+            <Section title={`${oppChar}'s Safe Options on Shield`} accent="var(--accent2)">
               <SafestOptionsList charData={oppData} defenderOOSOptions={myOOS} />
             </Section>
           )}
