@@ -27,7 +27,7 @@ export default function CharacterSelect({ label, accentColor, selected, onSelect
   const [characters, setCharacters] = useState([])
 
   useEffect(() => {
-    fetch('/characters.json')
+    fetch(`${import.meta.env.BASE_URL}characters.json`)
       .then(r => r.json())
       .then(d => setCharacters(d.characters.map(c => c.name)))
       .catch(console.error)

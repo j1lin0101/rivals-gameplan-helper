@@ -13,7 +13,7 @@ export function useCharacterData(name) {
     if (!name) return
     setLoading(true)
     setData(null)
-    fetch(`/data/${nameToSlug(name)}.json`)
+    fetch(`${import.meta.env.BASE_URL}data/${nameToSlug(name)}.json`)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json() })
       .then(d => { setData(d); setLoading(false) })
       .catch(e => { setError(e.message); setLoading(false) })
