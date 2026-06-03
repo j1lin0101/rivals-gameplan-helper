@@ -136,6 +136,18 @@ function parseMoves($) {
         allPanels[id.toLowerCase()] = $(el);
       });
 
+      // Build set of panel keys that match any hitbox name
+      const hitboxTabIds = new Set(hitboxes.map(function(h) {
+        return ('tabber-' + toTabId(h.hitbox)).toLowerCase();
+      }));
+
+      // Panels whose IDs don't match any hitbox name are "variant" panels
+      // (e.g. tabber-Uncharged, tabber-Full_Charge) — used as fallback when
+      // there is only one hitbox and no name-matched panel exists.
+      const variantPanels = Object.keys(allPanels).filter(function(k) {
+        return !Array.from(hitboxTabIds).some(function(id) { return k.startsWith(id); });
+      });
+
       hitboxes.forEach(function(h) {
         const tabId = ('tabber-' + toTabId(h.hitbox)).toLowerCase();
         // Try exact match first
@@ -144,6 +156,17 @@ function parseMoves($) {
         if (!panel) {
           const key = Object.keys(allPanels).find(k => k.startsWith(tabId));
           if (key) panel = allPanels[key];
+        }
+        // Fallback: if only one hitbox and panels are variant-named (e.g. Uncharged/Full_Charge),
+        // use the first variant panel that has non-zero tumble data
+        if (!panel && hitboxes.length === 1 && variantPanels.length > 0) {
+          const fallbackKey = variantPanels.find(function(k) {
+            return allPanels[k].find('.tumble-cell').toArray().some(function(cell) {
+              const m = $(cell).text().trim().match(/:\s*(\d+)%$/);
+              return m && parseInt(m[1]) > 0;
+            });
+          });
+          if (fallbackKey) panel = allPanels[fallbackKey];
         }
         if (!panel) return;
 

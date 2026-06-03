@@ -1,7 +1,7 @@
 {
   "character": "Olympia",
   "slug": "Olympia",
-  "scrapedAt": "2026-06-03T00:28:07.891Z",
+  "scrapedAt": "2026-06-03T17:40:18.308Z",
   "moves": [
     {
       "move": "Jab",
@@ -19,7 +19,24 @@
             "max": 20
           },
           "tumbleRaw": "15 - 20%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 15,
+            "OLYMPIA": 16,
+            "ABSA": 16,
+            "MAYPUL": 16,
+            "FLEET": 17,
+            "CLAIREN": 17,
+            "RANNO": 17,
+            "FORSBURN": 18,
+            "ORCANE": 18,
+            "ZETTERBURN": 18,
+            "SLADE": 18,
+            "LA REINA": 19,
+            "GALVAN": 19,
+            "ETALUS": 20,
+            "KRAGG": 20,
+            "LOXODONT": 20
+          }
         }
       ]
     },
@@ -801,7 +818,24 @@
             "max": 449
           },
           "tumbleRaw": "365 - 449%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 365,
+            "OLYMPIA": 380,
+            "ABSA": 384,
+            "MAYPUL": 388,
+            "FLEET": 395,
+            "CLAIREN": 399,
+            "RANNO": 406,
+            "FORSBURN": 416,
+            "ORCANE": 416,
+            "ZETTERBURN": 416,
+            "SLADE": 421,
+            "LA REINA": 429,
+            "GALVAN": 436,
+            "ETALUS": 440,
+            "KRAGG": 444,
+            "LOXODONT": 449
+          }
         }
       ]
     },
@@ -822,7 +856,24 @@
             "max": 32
           },
           "tumbleRaw": "24 - 32%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 24,
+            "OLYMPIA": 26,
+            "ABSA": 26,
+            "MAYPUL": 26,
+            "FLEET": 27,
+            "CLAIREN": 27,
+            "RANNO": 28,
+            "FORSBURN": 29,
+            "ORCANE": 29,
+            "ZETTERBURN": 29,
+            "SLADE": 29,
+            "LA REINA": 30,
+            "GALVAN": 31,
+            "ETALUS": 31,
+            "KRAGG": 32,
+            "LOXODONT": 32
+          }
         }
       ]
     },

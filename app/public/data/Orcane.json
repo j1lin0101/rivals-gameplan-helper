@@ -1,7 +1,7 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-03T00:27:58.696Z",
+  "scrapedAt": "2026-06-03T17:40:07.545Z",
   "moves": [
     {
       "move": "Jab",
@@ -308,7 +308,24 @@
             "max": 7
           },
           "tumbleRaw": "4 - 7%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 4,
+            "OLYMPIA": 5,
+            "ABSA": 5,
+            "MAYPUL": 5,
+            "FLEET": 5,
+            "CLAIREN": 5,
+            "RANNO": 5,
+            "FORSBURN": 6,
+            "ORCANE": 6,
+            "ZETTERBURN": 6,
+            "SLADE": 6,
+            "LA REINA": 6,
+            "GALVAN": 6,
+            "ETALUS": 7,
+            "KRAGG": 7,
+            "LOXODONT": 7
+          }
         }
       ]
     },
@@ -396,7 +413,24 @@
             "max": 5
           },
           "tumbleRaw": "3 - 5%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 3,
+            "OLYMPIA": 3,
+            "ABSA": 3,
+            "MAYPUL": 4,
+            "FLEET": 4,
+            "CLAIREN": 4,
+            "RANNO": 4,
+            "FORSBURN": 4,
+            "ORCANE": 4,
+            "ZETTERBURN": 4,
+            "SLADE": 5,
+            "LA REINA": 5,
+            "GALVAN": 5,
+            "ETALUS": 5,
+            "KRAGG": 5,
+            "LOXODONT": 5
+          }
         }
       ]
     },
