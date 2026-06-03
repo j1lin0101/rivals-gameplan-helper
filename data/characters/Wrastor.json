@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-03T17:57:44.765Z",
+  "scrapedAt": "2026-06-03T18:03:01.390Z",
   "moves": [
     {
       "move": "Jab",
@@ -500,7 +500,24 @@
             "max": 8
           },
           "tumbleRaw": "⛰️5 - 8%☁️0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 5,
+            "OLYMPIA": 5,
+            "ABSA": 5,
+            "MAYPUL": 6,
+            "FLEET": 6,
+            "CLAIREN": 6,
+            "RANNO": 6,
+            "FORSBURN": 7,
+            "ORCANE": 7,
+            "ZETTERBURN": 7,
+            "SLADE": 7,
+            "LA REINA": 7,
+            "GALVAN": 7,
+            "ETALUS": 8,
+            "KRAGG": 8,
+            "LOXODONT": 8
+          }
         }
       ]
     },
@@ -856,6 +873,7 @@
           "tumbleRaw": "⛰️45 - 57%☁️45 - 58%",
           "perCharacterTumble": {
             "WRASTOR": 45,
+            "OLYMPIA": 47,
             "ABSA": 48,
             "MAYPUL": 49,
             "FLEET": 50,
@@ -864,8 +882,12 @@
             "FORSBURN": 53,
             "ORCANE": 53,
             "ZETTERBURN": 53,
+            "SLADE": 53,
+            "LA REINA": 54,
+            "GALVAN": 55,
             "ETALUS": 56,
-            "KRAGG": 57
+            "KRAGG": 57,
+            "LOXODONT": 57
           }
         }
       ]

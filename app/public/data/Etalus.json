@@ -1,7 +1,7 @@
 {
   "character": "Etalus",
   "slug": "Etalus",
-  "scrapedAt": "2026-06-03T17:57:42.156Z",
+  "scrapedAt": "2026-06-03T18:02:58.830Z",
   "moves": [
     {
       "move": "Jab",
@@ -688,7 +688,24 @@
             "max": 16
           },
           "tumbleRaw": "⛰️12 - 16%☁️1 - 2%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 12,
+            "OLYMPIA": 12,
+            "ABSA": 12,
+            "MAYPUL": 13,
+            "FLEET": 13,
+            "CLAIREN": 13,
+            "RANNO": 14,
+            "FORSBURN": 14,
+            "ORCANE": 14,
+            "ZETTERBURN": 14,
+            "SLADE": 14,
+            "LA REINA": 15,
+            "GALVAN": 15,
+            "ETALUS": 15,
+            "KRAGG": 15,
+            "LOXODONT": 16
+          }
         }
       ]
     },
@@ -815,7 +832,24 @@
             "max": 46
           },
           "tumbleRaw": "⛰️36 - 46%☁️34 - 44%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 36,
+            "OLYMPIA": 38,
+            "ABSA": 38,
+            "MAYPUL": 39,
+            "FLEET": 40,
+            "CLAIREN": 40,
+            "RANNO": 41,
+            "FORSBURN": 42,
+            "ORCANE": 42,
+            "ZETTERBURN": 42,
+            "SLADE": 43,
+            "LA REINA": 44,
+            "GALVAN": 44,
+            "ETALUS": 45,
+            "KRAGG": 45,
+            "LOXODONT": 46
+          }
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-03T17:57:47.553Z",
+  "scrapedAt": "2026-06-03T18:03:03.815Z",
   "moves": [
     {
       "move": "Jab",
@@ -712,7 +712,24 @@
             "max": 32
           },
           "tumbleRaw": "⛰️25 - 32%☁️20 - 27%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 25,
+            "OLYMPIA": 26,
+            "ABSA": 26,
+            "MAYPUL": 27,
+            "FLEET": 27,
+            "CLAIREN": 28,
+            "RANNO": 28,
+            "FORSBURN": 29,
+            "ORCANE": 29,
+            "ZETTERBURN": 29,
+            "SLADE": 30,
+            "LA REINA": 31,
+            "GALVAN": 31,
+            "ETALUS": 32,
+            "KRAGG": 32,
+            "LOXODONT": 32
+          }
         }
       ]
     },

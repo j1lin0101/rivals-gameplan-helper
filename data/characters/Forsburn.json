@@ -1,7 +1,7 @@
 {
   "character": "Forsburn",
   "slug": "Forsburn",
-  "scrapedAt": "2026-06-03T17:57:38.096Z",
+  "scrapedAt": "2026-06-03T18:02:55.112Z",
   "moves": [
     {
       "move": "Jab",
@@ -827,7 +827,24 @@
             "max": 18
           },
           "tumbleRaw": "⛰️13 - 18%☁️5 - 8%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 13,
+            "OLYMPIA": 14,
+            "ABSA": 15,
+            "MAYPUL": 15,
+            "FLEET": 15,
+            "CLAIREN": 15,
+            "RANNO": 16,
+            "FORSBURN": 16,
+            "ORCANE": 16,
+            "ZETTERBURN": 16,
+            "SLADE": 17,
+            "LA REINA": 17,
+            "GALVAN": 18,
+            "ETALUS": 18,
+            "KRAGG": 18,
+            "LOXODONT": 18
+          }
         }
       ]
     },

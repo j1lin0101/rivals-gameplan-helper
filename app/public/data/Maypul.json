@@ -1,7 +1,7 @@
 {
   "character": "Maypul",
   "slug": "Maypul",
-  "scrapedAt": "2026-06-03T17:57:39.550Z",
+  "scrapedAt": "2026-06-03T18:02:56.356Z",
   "moves": [
     {
       "move": "Jab",
@@ -543,7 +543,24 @@
             "max": 60
           },
           "tumbleRaw": "⛰️47 - 60%☁️43 - 55%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 47,
+            "OLYMPIA": 50,
+            "ABSA": 50,
+            "MAYPUL": 51,
+            "FLEET": 52,
+            "CLAIREN": 53,
+            "RANNO": 54,
+            "FORSBURN": 55,
+            "ORCANE": 55,
+            "ZETTERBURN": 55,
+            "SLADE": 56,
+            "LA REINA": 57,
+            "GALVAN": 58,
+            "ETALUS": 59,
+            "KRAGG": 59,
+            "LOXODONT": 60
+          }
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "character": "La Reina",
   "slug": "La_Reina",
-  "scrapedAt": "2026-06-03T17:57:54.772Z",
+  "scrapedAt": "2026-06-03T18:03:10.309Z",
   "moves": [
     {
       "move": "Jab",
@@ -237,7 +237,24 @@
             "max": 23
           },
           "tumbleRaw": "⛰️17 - 23%☁️2 - 4%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 17,
+            "OLYMPIA": 18,
+            "ABSA": 19,
+            "MAYPUL": 19,
+            "FLEET": 19,
+            "CLAIREN": 20,
+            "RANNO": 20,
+            "FORSBURN": 21,
+            "ORCANE": 21,
+            "ZETTERBURN": 21,
+            "SLADE": 21,
+            "LA REINA": 22,
+            "GALVAN": 22,
+            "ETALUS": 23,
+            "KRAGG": 23,
+            "LOXODONT": 23
+          }
         }
       ]
     },

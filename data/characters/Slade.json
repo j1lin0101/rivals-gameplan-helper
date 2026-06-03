@@ -1,7 +1,7 @@
 {
   "character": "Slade",
   "slug": "Slade",
-  "scrapedAt": "2026-06-03T17:57:57.517Z",
+  "scrapedAt": "2026-06-03T18:03:12.736Z",
   "moves": [
     {
       "move": "Jab",
@@ -141,7 +141,24 @@
             "max": 122
           },
           "tumbleRaw": "⛰️99 - 122%☁️86 - 106%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 99,
+            "OLYMPIA": 103,
+            "ABSA": 104,
+            "MAYPUL": 105,
+            "FLEET": 107,
+            "CLAIREN": 108,
+            "RANNO": 110,
+            "FORSBURN": 113,
+            "ORCANE": 113,
+            "ZETTERBURN": 113,
+            "SLADE": 114,
+            "LA REINA": 117,
+            "GALVAN": 118,
+            "ETALUS": 120,
+            "KRAGG": 121,
+            "LOXODONT": 122
+          }
         },
         {
           "hitbox": "Hit 2",
@@ -862,7 +879,24 @@
             "max": 17
           },
           "tumbleRaw": "⛰️11 - 17%☁️5 - 8%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 11,
+            "OLYMPIA": 12,
+            "ABSA": 13,
+            "MAYPUL": 13,
+            "FLEET": 13,
+            "CLAIREN": 13,
+            "RANNO": 14,
+            "FORSBURN": 15,
+            "ORCANE": 15,
+            "ZETTERBURN": 15,
+            "SLADE": 15,
+            "LA REINA": 15,
+            "GALVAN": 16,
+            "ETALUS": 16,
+            "KRAGG": 16,
+            "LOXODONT": 17
+          }
         },
         {
           "hitbox": "Late Sword (Out)",
@@ -909,7 +943,24 @@
             "max": 31
           },
           "tumbleRaw": "⛰️24 - 31%☁️18 - 24%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 24,
+            "OLYMPIA": 26,
+            "ABSA": 26,
+            "MAYPUL": 26,
+            "FLEET": 27,
+            "CLAIREN": 27,
+            "RANNO": 28,
+            "FORSBURN": 29,
+            "ORCANE": 29,
+            "ZETTERBURN": 29,
+            "SLADE": 29,
+            "LA REINA": 30,
+            "GALVAN": 30,
+            "ETALUS": 31,
+            "KRAGG": 31,
+            "LOXODONT": 31
+          }
         }
       ]
     },
@@ -1637,7 +1688,24 @@
             "max": 66
           },
           "tumbleRaw": "⛰️52 - 66%☁️36 - 46%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 52,
+            "OLYMPIA": 55,
+            "ABSA": 55,
+            "MAYPUL": 56,
+            "FLEET": 57,
+            "CLAIREN": 58,
+            "RANNO": 59,
+            "FORSBURN": 61,
+            "ORCANE": 61,
+            "ZETTERBURN": 61,
+            "SLADE": 61,
+            "LA REINA": 63,
+            "GALVAN": 64,
+            "ETALUS": 64,
+            "KRAGG": 65,
+            "LOXODONT": 66
+          }
         },
         {
           "hitbox": "Reel In",

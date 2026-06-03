@@ -1,7 +1,7 @@
 {
   "character": "Galvan",
   "slug": "Galvan",
-  "scrapedAt": "2026-06-03T17:57:56.069Z",
+  "scrapedAt": "2026-06-03T18:03:11.487Z",
   "moves": [
     {
       "move": "Jab",
@@ -203,7 +203,24 @@
             "max": 31
           },
           "tumbleRaw": "⛰️23 - 31%☁️17 - 23%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 23,
+            "OLYMPIA": 25,
+            "ABSA": 25,
+            "MAYPUL": 26,
+            "FLEET": 26,
+            "CLAIREN": 26,
+            "RANNO": 27,
+            "FORSBURN": 28,
+            "ORCANE": 28,
+            "ZETTERBURN": 28,
+            "SLADE": 28,
+            "LA REINA": 29,
+            "GALVAN": 30,
+            "ETALUS": 30,
+            "KRAGG": 30,
+            "LOXODONT": 31
+          }
         },
         {
           "hitbox": "Sour",
@@ -421,7 +438,24 @@
             "max": 13
           },
           "tumbleRaw": "⛰️9 - 13%☁️0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 9,
+            "OLYMPIA": 10,
+            "ABSA": 10,
+            "MAYPUL": 10,
+            "FLEET": 11,
+            "CLAIREN": 11,
+            "RANNO": 11,
+            "FORSBURN": 12,
+            "ORCANE": 12,
+            "ZETTERBURN": 12,
+            "SLADE": 12,
+            "LA REINA": 12,
+            "GALVAN": 13,
+            "ETALUS": 13,
+            "KRAGG": 13,
+            "LOXODONT": 13
+          }
         }
       ]
     },
@@ -843,7 +877,24 @@
             "max": 44
           },
           "tumbleRaw": "⛰️34 - 44%☁️32 - 42%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 34,
+            "OLYMPIA": 36,
+            "ABSA": 37,
+            "MAYPUL": 37,
+            "FLEET": 38,
+            "CLAIREN": 38,
+            "RANNO": 39,
+            "FORSBURN": 40,
+            "ORCANE": 40,
+            "ZETTERBURN": 40,
+            "SLADE": 41,
+            "LA REINA": 42,
+            "GALVAN": 43,
+            "ETALUS": 43,
+            "KRAGG": 44,
+            "LOXODONT": 44
+          }
         },
         {
           "hitbox": "Late",
@@ -858,7 +909,22 @@
           },
           "tumbleRaw": "⛰️55 - 69%☁️54 - 68%",
           "perCharacterTumble": {
-            "ABSA": 58
+            "WRASTOR": 55,
+            "OLYMPIA": 58,
+            "ABSA": 58,
+            "MAYPUL": 59,
+            "FLEET": 60,
+            "CLAIREN": 61,
+            "RANNO": 62,
+            "FORSBURN": 64,
+            "ORCANE": 64,
+            "ZETTERBURN": 64,
+            "SLADE": 64,
+            "LA REINA": 66,
+            "GALVAN": 67,
+            "ETALUS": 68,
+            "KRAGG": 68,
+            "LOXODONT": 69
           }
         }
       ]

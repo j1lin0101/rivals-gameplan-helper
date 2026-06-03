@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-03T17:57:49.012Z",
+  "scrapedAt": "2026-06-03T18:03:05.204Z",
   "moves": [
     {
       "move": "Jab",
@@ -1108,7 +1108,24 @@
             "max": 21
           },
           "tumbleRaw": "⛰️15 - 21%☁️11 - 16%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 15,
+            "OLYMPIA": 16,
+            "ABSA": 16,
+            "MAYPUL": 16,
+            "FLEET": 17,
+            "CLAIREN": 17,
+            "RANNO": 18,
+            "FORSBURN": 18,
+            "ORCANE": 18,
+            "ZETTERBURN": 18,
+            "SLADE": 19,
+            "LA REINA": 19,
+            "GALVAN": 20,
+            "ETALUS": 20,
+            "KRAGG": 20,
+            "LOXODONT": 21
+          }
         },
         {
           "hitbox": "Blade Late",
@@ -1153,7 +1170,24 @@
             "max": 21
           },
           "tumbleRaw": "⛰️15 - 21%☁️12 - 17%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 15,
+            "OLYMPIA": 16,
+            "ABSA": 17,
+            "MAYPUL": 17,
+            "FLEET": 18,
+            "CLAIREN": 18,
+            "RANNO": 18,
+            "FORSBURN": 19,
+            "ORCANE": 19,
+            "ZETTERBURN": 19,
+            "SLADE": 19,
+            "LA REINA": 20,
+            "GALVAN": 21,
+            "ETALUS": 21,
+            "KRAGG": 21,
+            "LOXODONT": 21
+          }
         }
       ]
     },

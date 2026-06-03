@@ -175,8 +175,10 @@ function parseMoves($) {
           if (directCells.length > 0) {
             directCells.each(function(_, cell) {
               const text = $(cell).text().trim();
-              const m = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
-              if (m) h.perCharacterTumble[m[1].trim()] = parseInt(m[2]);
+              const simple = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
+              if (simple) { h.perCharacterTumble[simple[1].trim()] = parseInt(simple[2]); return; }
+              const ctx = text.match(/^([A-Z][A-Z\s]+):\s*.*?(\d+)%/);
+              if (ctx) h.perCharacterTumble[ctx[1].trim()] = parseInt(ctx[2]);
             });
             return;
           }
@@ -185,8 +187,13 @@ function parseMoves($) {
 
         panel.find('.tumble-cell').each(function(_, cell) {
           const text = $(cell).text().trim();
-          const m = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
-          if (m) h.perCharacterTumble[m[1].trim()] = parseInt(m[2]);
+          // Standard format:  "CLAIREN: 172%"
+          const simple = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
+          if (simple) { h.perCharacterTumble[simple[1].trim()] = parseInt(simple[2]); return; }
+          // Context format: "CLAIREN: ⛰️When grounded.42%☁️When airborne.35%"
+          // Use grounded value (⛰️) as the primary tumble threshold.
+          const ctx = text.match(/^([A-Z][A-Z\s]+):\s*.*?(\d+)%/);
+          if (ctx) h.perCharacterTumble[ctx[1].trim()] = parseInt(ctx[2]);
         });
       });
     }

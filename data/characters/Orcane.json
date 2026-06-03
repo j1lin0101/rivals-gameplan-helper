@@ -1,7 +1,7 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-03T17:57:43.456Z",
+  "scrapedAt": "2026-06-03T18:03:00.066Z",
   "moves": [
     {
       "move": "Jab",
@@ -728,7 +728,24 @@
             "max": 17
           },
           "tumbleRaw": "⛰️13 - 17%☁️2 - 3%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 13,
+            "OLYMPIA": 13,
+            "ABSA": 13,
+            "MAYPUL": 14,
+            "FLEET": 14,
+            "CLAIREN": 14,
+            "RANNO": 15,
+            "FORSBURN": 15,
+            "ORCANE": 15,
+            "ZETTERBURN": 15,
+            "SLADE": 15,
+            "LA REINA": 16,
+            "GALVAN": 16,
+            "ETALUS": 16,
+            "KRAGG": 16,
+            "LOXODONT": 17
+          }
         },
         {
           "hitbox": "Belly Late",
@@ -742,7 +759,24 @@
             "max": 48
           },
           "tumbleRaw": "⛰️38 - 48%☁️30 - 38%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 38,
+            "OLYMPIA": 40,
+            "ABSA": 41,
+            "MAYPUL": 41,
+            "FLEET": 42,
+            "CLAIREN": 43,
+            "RANNO": 43,
+            "FORSBURN": 45,
+            "ORCANE": 45,
+            "ZETTERBURN": 45,
+            "SLADE": 45,
+            "LA REINA": 46,
+            "GALVAN": 47,
+            "ETALUS": 47,
+            "KRAGG": 48,
+            "LOXODONT": 48
+          }
         }
       ]
     },
@@ -762,7 +796,24 @@
             "max": 133
           },
           "tumbleRaw": "⛰️107 - 133%☁️111 - 137%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 107,
+            "OLYMPIA": 112,
+            "ABSA": 113,
+            "MAYPUL": 115,
+            "FLEET": 116,
+            "CLAIREN": 118,
+            "RANNO": 120,
+            "FORSBURN": 123,
+            "ORCANE": 123,
+            "ZETTERBURN": 123,
+            "SLADE": 124,
+            "LA REINA": 127,
+            "GALVAN": 129,
+            "ETALUS": 130,
+            "KRAGG": 131,
+            "LOXODONT": 133
+          }
         }
       ]
     },

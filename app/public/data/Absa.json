@@ -1,7 +1,7 @@
 {
   "character": "Absa",
   "slug": "Absa",
-  "scrapedAt": "2026-06-03T17:57:40.788Z",
+  "scrapedAt": "2026-06-03T18:02:57.534Z",
   "moves": [
     {
       "move": "Jab",
@@ -659,7 +659,24 @@
             "max": 4
           },
           "tumbleRaw": "⛰️1 - 4%☁️0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 1,
+            "OLYMPIA": 2,
+            "ABSA": 2,
+            "MAYPUL": 2,
+            "FLEET": 2,
+            "CLAIREN": 3,
+            "RANNO": 3,
+            "FORSBURN": 3,
+            "ORCANE": 3,
+            "ZETTERBURN": 3,
+            "SLADE": 3,
+            "LA REINA": 4,
+            "GALVAN": 4,
+            "ETALUS": 4,
+            "KRAGG": 4,
+            "LOXODONT": 4
+          }
         },
         {
           "hitbox": "Late (Leg)",

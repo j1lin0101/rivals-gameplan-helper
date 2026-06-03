@@ -1,7 +1,7 @@
 {
   "character": "Loxodont",
   "slug": "Loxodont",
-  "scrapedAt": "2026-06-03T17:57:52.061Z",
+  "scrapedAt": "2026-06-03T18:03:07.785Z",
   "moves": [
     {
       "move": "Jab",
@@ -174,7 +174,24 @@
             "max": 20
           },
           "tumbleRaw": "⛰️14 - 20%☁️8 - 12%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 14,
+            "OLYMPIA": 15,
+            "ABSA": 16,
+            "MAYPUL": 16,
+            "FLEET": 16,
+            "CLAIREN": 17,
+            "RANNO": 17,
+            "FORSBURN": 18,
+            "ORCANE": 18,
+            "ZETTERBURN": 18,
+            "SLADE": 18,
+            "LA REINA": 19,
+            "GALVAN": 19,
+            "ETALUS": 20,
+            "KRAGG": 20,
+            "LOXODONT": 20
+          }
         },
         {
           "hitbox": "Outer (Sour)",
@@ -1048,7 +1065,24 @@
             "max": 6
           },
           "tumbleRaw": "⛰️3 - 6%☁️0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 3,
+            "OLYMPIA": 3,
+            "ABSA": 3,
+            "MAYPUL": 4,
+            "FLEET": 4,
+            "CLAIREN": 4,
+            "RANNO": 4,
+            "FORSBURN": 5,
+            "ORCANE": 5,
+            "ZETTERBURN": 5,
+            "SLADE": 5,
+            "LA REINA": 5,
+            "GALVAN": 5,
+            "ETALUS": 6,
+            "KRAGG": 6,
+            "LOXODONT": 6
+          }
         }
       ]
     },

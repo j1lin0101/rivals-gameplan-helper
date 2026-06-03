@@ -1,7 +1,7 @@
 {
   "character": "Kragg",
   "slug": "Kragg",
-  "scrapedAt": "2026-06-03T17:57:46.125Z",
+  "scrapedAt": "2026-06-03T18:03:02.585Z",
   "moves": [
     {
       "move": "Jab",
@@ -648,7 +648,24 @@
             "max": 11
           },
           "tumbleRaw": "⛰️7 - 11%☁️0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 7,
+            "OLYMPIA": 7,
+            "ABSA": 7,
+            "MAYPUL": 8,
+            "FLEET": 8,
+            "CLAIREN": 8,
+            "RANNO": 9,
+            "FORSBURN": 9,
+            "ORCANE": 9,
+            "ZETTERBURN": 9,
+            "SLADE": 9,
+            "LA REINA": 10,
+            "GALVAN": 10,
+            "ETALUS": 10,
+            "KRAGG": 10,
+            "LOXODONT": 11
+          }
         }
       ]
     },
