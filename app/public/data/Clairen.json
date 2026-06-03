@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-03T00:49:16.734Z",
+  "scrapedAt": "2026-06-03T17:57:49.012Z",
   "moves": [
     {
       "move": "Jab",
@@ -873,7 +873,24 @@
             "max": 41
           },
           "tumbleRaw": "32 - 41%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 32,
+            "OLYMPIA": 34,
+            "ABSA": 34,
+            "MAYPUL": 35,
+            "FLEET": 35,
+            "CLAIREN": 36,
+            "RANNO": 36,
+            "FORSBURN": 38,
+            "ORCANE": 38,
+            "ZETTERBURN": 38,
+            "SLADE": 38,
+            "LA REINA": 39,
+            "GALVAN": 40,
+            "ETALUS": 40,
+            "KRAGG": 41,
+            "LOXODONT": 41
+          }
         }
       ]
     },

@@ -1,7 +1,7 @@
 {
   "character": "Forsburn",
   "slug": "Forsburn",
-  "scrapedAt": "2026-06-03T17:40:02.295Z",
+  "scrapedAt": "2026-06-03T17:57:38.096Z",
   "moves": [
     {
       "move": "Jab",
@@ -394,7 +394,24 @@
             "max": 5
           },
           "tumbleRaw": "2 - 5%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 2,
+            "OLYMPIA": 2,
+            "ABSA": 2,
+            "MAYPUL": 2,
+            "FLEET": 3,
+            "CLAIREN": 3,
+            "RANNO": 3,
+            "FORSBURN": 4,
+            "ORCANE": 4,
+            "ZETTERBURN": 4,
+            "SLADE": 4,
+            "LA REINA": 4,
+            "GALVAN": 4,
+            "ETALUS": 4,
+            "KRAGG": 5,
+            "LOXODONT": 5
+          }
         }
       ]
     },
@@ -544,7 +561,24 @@
             "max": 42
           },
           "tumbleRaw": "33 - 42%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 33,
+            "OLYMPIA": 35,
+            "ABSA": 35,
+            "MAYPUL": 36,
+            "FLEET": 37,
+            "CLAIREN": 37,
+            "RANNO": 38,
+            "FORSBURN": 39,
+            "ORCANE": 39,
+            "ZETTERBURN": 39,
+            "SLADE": 39,
+            "LA REINA": 40,
+            "GALVAN": 41,
+            "ETALUS": 41,
+            "KRAGG": 42,
+            "LOXODONT": 42
+          }
         }
       ]
     },
@@ -1065,7 +1099,24 @@
             "max": 14
           },
           "tumbleRaw": "10 - 14%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 10,
+            "OLYMPIA": 11,
+            "ABSA": 11,
+            "MAYPUL": 11,
+            "FLEET": 12,
+            "CLAIREN": 12,
+            "RANNO": 12,
+            "FORSBURN": 13,
+            "ORCANE": 13,
+            "ZETTERBURN": 13,
+            "SLADE": 13,
+            "LA REINA": 13,
+            "GALVAN": 13,
+            "ETALUS": 14,
+            "KRAGG": 14,
+            "LOXODONT": 14
+          }
         }
       ]
     },
@@ -1201,7 +1252,24 @@
             "max": 0
           },
           "tumbleRaw": "0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 0,
+            "OLYMPIA": 0,
+            "ABSA": 0,
+            "MAYPUL": 0,
+            "FLEET": 0,
+            "CLAIREN": 0,
+            "RANNO": 0,
+            "FORSBURN": 0,
+            "ORCANE": 0,
+            "ZETTERBURN": 0,
+            "SLADE": 0,
+            "LA REINA": 0,
+            "GALVAN": 0,
+            "ETALUS": 0,
+            "KRAGG": 0,
+            "LOXODONT": 0
+          }
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-03T17:40:08.988Z",
+  "scrapedAt": "2026-06-03T17:57:44.765Z",
   "moves": [
     {
       "move": "Jab",
@@ -1212,7 +1212,24 @@
             "max": 16
           },
           "tumbleRaw": "12 - 16%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 12,
+            "OLYMPIA": 13,
+            "ABSA": 13,
+            "MAYPUL": 13,
+            "FLEET": 14,
+            "CLAIREN": 14,
+            "RANNO": 14,
+            "FORSBURN": 15,
+            "ORCANE": 15,
+            "ZETTERBURN": 15,
+            "SLADE": 15,
+            "LA REINA": 15,
+            "GALVAN": 15,
+            "ETALUS": 16,
+            "KRAGG": 16,
+            "LOXODONT": 16
+          }
         }
       ]
     },
@@ -1280,7 +1297,24 @@
             "max": 0
           },
           "tumbleRaw": "0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 0,
+            "OLYMPIA": 0,
+            "ABSA": 0,
+            "MAYPUL": 0,
+            "FLEET": 0,
+            "CLAIREN": 0,
+            "RANNO": 0,
+            "FORSBURN": 0,
+            "ORCANE": 0,
+            "ZETTERBURN": 0,
+            "SLADE": 0,
+            "LA REINA": 0,
+            "GALVAN": 0,
+            "ETALUS": 0,
+            "KRAGG": 0,
+            "LOXODONT": 0
+          }
         }
       ]
     },

@@ -129,10 +129,10 @@ function parseMoves($) {
     // Parse per-character tumble % from the "Stats for Nerds" collapsible
     const nerdsCollapsible = container.find('[data-expandtext="Show Stats for Nerds"]').first();
     if (nerdsCollapsible.length) {
-      // Collect all tabber panels once, keyed by their id
+      // Collect all tabber panels once, keyed by their id (decode HTML entities like &amp; → &)
       const allPanels = {};
       nerdsCollapsible.find('.tabber__panel').each(function(_, el) {
-        const id = $(el).attr('id') || '';
+        const id = ($(el).attr('id') || '').replace(/&amp;/g, '&');
         allPanels[id.toLowerCase()] = $(el);
       });
 
@@ -167,6 +167,19 @@ function parseMoves($) {
             });
           });
           if (fallbackKey) panel = allPanels[fallbackKey];
+        }
+        // Last-resort fallback: if still no panel and there's only one hitbox,
+        // check for tumble-cells directly in the nerds section (no tabber at all)
+        if (!panel && hitboxes.length === 1) {
+          const directCells = nerdsCollapsible.find('.tumble-cell').not('.tabber__panel .tumble-cell');
+          if (directCells.length > 0) {
+            directCells.each(function(_, cell) {
+              const text = $(cell).text().trim();
+              const m = text.match(/^([A-Z][A-Z\s]+):\s*(\d+)%$/);
+              if (m) h.perCharacterTumble[m[1].trim()] = parseInt(m[2]);
+            });
+            return;
+          }
         }
         if (!panel) return;
 

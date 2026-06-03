@@ -1,7 +1,7 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-03T17:40:07.545Z",
+  "scrapedAt": "2026-06-03T17:57:43.456Z",
   "moves": [
     {
       "move": "Jab",
@@ -783,7 +783,24 @@
             "max": 159
           },
           "tumbleRaw": "128 - 159%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 128,
+            "OLYMPIA": 134,
+            "ABSA": 135,
+            "MAYPUL": 137,
+            "FLEET": 139,
+            "CLAIREN": 141,
+            "RANNO": 143,
+            "FORSBURN": 147,
+            "ORCANE": 147,
+            "ZETTERBURN": 147,
+            "SLADE": 149,
+            "LA REINA": 152,
+            "GALVAN": 154,
+            "ETALUS": 156,
+            "KRAGG": 157,
+            "LOXODONT": 159
+          }
         }
       ]
     },
@@ -1235,7 +1252,24 @@
             "max": 0
           },
           "tumbleRaw": "0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 0,
+            "OLYMPIA": 0,
+            "ABSA": 0,
+            "MAYPUL": 0,
+            "FLEET": 0,
+            "CLAIREN": 0,
+            "RANNO": 0,
+            "FORSBURN": 0,
+            "ORCANE": 0,
+            "ZETTERBURN": 0,
+            "SLADE": 0,
+            "LA REINA": 0,
+            "GALVAN": 0,
+            "ETALUS": 0,
+            "KRAGG": 0,
+            "LOXODONT": 0
+          }
         }
       ]
     },
@@ -1255,7 +1289,24 @@
             "max": 0
           },
           "tumbleRaw": "0 - 0%",
-          "perCharacterTumble": {}
+          "perCharacterTumble": {
+            "WRASTOR": 0,
+            "OLYMPIA": 0,
+            "ABSA": 0,
+            "MAYPUL": 0,
+            "FLEET": 0,
+            "CLAIREN": 0,
+            "RANNO": 0,
+            "FORSBURN": 0,
+            "ORCANE": 0,
+            "ZETTERBURN": 0,
+            "SLADE": 0,
+            "LA REINA": 0,
+            "GALVAN": 0,
+            "ETALUS": 0,
+            "KRAGG": 0,
+            "LOXODONT": 0
+          }
         }
       ]
     }
