@@ -177,8 +177,8 @@ function TumbleBadge({ row, defenderName }) {
     const aBadge = makeBadge(aerialNum, aerialStr)
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'center' }}>
-        <span style={gBadge.style} title="Grounded">⛰ {gBadge.str}</span>
-        <span style={aBadge.style} title="Airborne">☁ {aBadge.str}</span>
+        <span style={gBadge.style}>Grounded {gBadge.str}</span>
+        <span style={aBadge.style}>Aerial {aBadge.str}</span>
       </div>
     )
   }
