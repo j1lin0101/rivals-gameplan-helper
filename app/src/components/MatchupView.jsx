@@ -189,35 +189,17 @@ function TumbleBadge({ row, defenderName }) {
 
 function MoveRow({ row, attackerName, defenderName }) {
   const statusColor = row.isSafe ? SAFE_COLOR : row.isRisky ? RISKY_COLOR : PUNISH_COLOR
-  const statusLabel = row.isSafe ? 'SAFE' : row.isRisky ? 'RISKY' : 'PUNISHABLE'
 
   return (
     <div style={{
       padding: '10px 16px',
       borderBottom: '1px solid var(--border)',
       display: 'grid',
-      gridTemplateColumns: '90px 1fr 120px 90px 1fr',
+      gridTemplateColumns: '1fr 120px 90px 1fr',
       gap: '12px',
       alignItems: 'start',
       fontSize: '0.82rem',
     }}>
-      {/* Status */}
-      <div>
-        <span style={{
-          display: 'inline-block',
-          padding: '2px 8px',
-          borderRadius: '4px',
-          background: statusColor + '22',
-          color: statusColor,
-          border: `1px solid ${statusColor}44`,
-          fontSize: '0.68rem',
-          fontWeight: 700,
-          letterSpacing: '0.05em',
-        }}>
-          {statusLabel}
-        </span>
-      </div>
-
       {/* Move + hitbox */}
       <div>
         <span style={{ fontWeight: 600 }}>{getDisplayName(attackerName, row.move)}</span>
@@ -268,9 +250,67 @@ function MoveRow({ row, attackerName, defenderName }) {
 
 function CategoryAccordion({ category, rows, attackerName, defenderName }) {
   const [open, setOpen] = useState(true)
+  const [sortBy, setSortBy] = useState('shield')   // 'move' | 'shield' | 'tumble'
+  const [sortDir, setSortDir] = useState(1)         // 1 = default asc/desc per column, flipped on click
+
   const safe      = rows.filter(r => r.isSafe).length
   const risky     = rows.filter(r => r.isRisky).length
   const punishable = rows.filter(r => r.isPunishable).length
+
+  function handleSort(col) {
+    if (sortBy === col) {
+      setSortDir(d => -d)
+    } else {
+      setSortBy(col)
+      // Default directions: move=asc(1), shield=desc best-first(-1), tumble=asc lowest-first(1)
+      setSortDir(col === 'shield' ? -1 : 1)
+    }
+  }
+
+  const sorted = useMemo(() => {
+    const defKey = defenderName ? defenderName.toUpperCase() : null
+    return [...rows].sort((a, b) => {
+      let cmp = 0
+      if (sortBy === 'move') {
+        cmp = a.move.localeCompare(b.move)
+      } else if (sortBy === 'shield') {
+        cmp = (a.shieldSafety?.max ?? -999) - (b.shieldSafety?.max ?? -999)
+      } else if (sortBy === 'tumble') {
+        const getT = r => {
+          if (defKey && r.perCharacterTumble?.[defKey] !== undefined) return r.perCharacterTumble[defKey]
+          if (r.tumblePercent) return Math.round((r.tumblePercent.min + r.tumblePercent.max) / 2)
+          return 9999
+        }
+        cmp = getT(a) - getT(b)
+      }
+      return cmp * sortDir
+    })
+  }, [rows, sortBy, sortDir, defenderName])
+
+  function SortHeader({ col, label, align }) {
+    const active = sortBy === col
+    const arrow = active ? (sortDir > 0 ? ' ▲' : ' ▼') : ''
+    return (
+      <button
+        onClick={() => handleSort(col)}
+        style={{
+          background: 'none',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          fontSize: '0.65rem',
+          fontWeight: 700,
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          color: active ? 'var(--text)' : 'var(--muted)',
+          textAlign: align || 'left',
+          width: '100%',
+        }}
+      >
+        {label}{arrow}
+      </button>
+    )
+  }
 
   return (
     <div style={{
@@ -319,21 +359,15 @@ function CategoryAccordion({ category, rows, attackerName, defenderName }) {
             padding: '8px 16px',
             borderBottom: '1px solid var(--border)',
             display: 'grid',
-            gridTemplateColumns: '90px 1fr 120px 90px 1fr',
+            gridTemplateColumns: '1fr 120px 90px 1fr',
             gap: '12px',
-            fontSize: '0.65rem',
-            fontWeight: 700,
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            color: 'var(--muted)',
           }}>
-            <span>Shield Safety</span>
-            <span>Move</span>
-            <span style={{ textAlign: 'center' }}>On Shield</span>
-            <span style={{ textAlign: 'center' }}>Tumble %</span>
-            <span>Punish Options</span>
+            <SortHeader col="move" label="Move" />
+            <SortHeader col="shield" label="On Shield" align="center" />
+            <SortHeader col="tumble" label="Tumble %" align="center" />
+            <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>Punish Options</span>
           </div>
-          {rows.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} />)}
+          {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} />)}
         </div>
       )}
     </div>
