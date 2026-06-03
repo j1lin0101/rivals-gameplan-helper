@@ -23,3 +23,52 @@ body {
 }
 
 #root { min-height: 100vh; display: flex; flex-direction: column; }
+
+/* ── Responsive: Character select screen ── */
+.char-select-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+@media (max-width: 860px) {
+  .char-select-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* ── Responsive: Character tile grid ── */
+.char-tile-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+@media (max-width: 480px) {
+  .char-tile-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 280px) {
+  .char-tile-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Responsive: Matchup top panels ── */
+.top-panels-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+/* Medium: group by character — player's 2 panels | opponent's 2 panels */
+@media (max-width: 1000px) {
+  .top-panels-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* Small: one panel per row */
+@media (max-width: 560px) {
+  .top-panels-grid {
+    grid-template-columns: 1fr;
+  }
+}

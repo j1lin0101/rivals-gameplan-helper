@@ -35,7 +35,7 @@ export default function App() {
       </header>
 
       <main style={{ flex: 1, padding: '32px', maxWidth: '1200px', width: '100%', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px' }}>
+        <div className="char-select-grid">
           <CharacterSelect
             label="Your Character"
             accentColor="var(--accent)"

@@ -526,7 +526,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
       <main style={{ flex: 1, padding: '24px 32px', display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1300px', width: '100%', margin: '0 auto' }}>
 
         {/* Top row: player first, then opponent */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '16px' }}>
+        <div className="top-panels-grid">
           {myData && (
             <Section title={`${myChar}'s Safe Options on Shield`} accent="var(--accent)">
               <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />

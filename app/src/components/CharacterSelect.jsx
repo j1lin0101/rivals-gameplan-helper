@@ -82,11 +82,7 @@ export default function CharacterSelect({ label, accentColor, selected, onSelect
         </div>
       )}
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '8px',
-      }}>
+      <div className="char-tile-grid">
         {characters.map(name => {
           const isSelected = selected === name
           const color = CHARACTER_COLORS[name] || '#444'
