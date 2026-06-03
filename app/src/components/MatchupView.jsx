@@ -7,6 +7,17 @@ const SAFE_COLOR  = 'var(--safe)'
 const RISKY_COLOR = 'var(--risky)'
 const PUNISH_COLOR = 'var(--punish)'
 
+// Tumble % color scale — yellow (low %, great for combos) → gray (high %, rarely tumbles)
+// Uses a yellow-to-muted scale intentionally separate from the green/orange/red shield scale.
+function tumbleColor(pct) {
+  if (pct === null || pct === undefined) return '#888899'
+  if (pct <= 40)  return '#F0E442'  // bright yellow  — tumbles very early, great combo tool
+  if (pct <= 80)  return '#c8b830'  // golden yellow  — tumbles at low %
+  if (pct <= 130) return '#9a8a20'  // dim gold       — mid-range, situational
+  if (pct <= 200) return '#666677'  // muted gray     — high %, hard to use
+  return '#444455'                  // very muted     — extreme threshold, rarely relevant
+}
+
 function ShieldBadge({ value, color }) {
   if (!value) return null
   const v = value.max
@@ -116,48 +127,63 @@ function OOSList({ charData }) {
 function TumbleBadge({ row, defenderName }) {
   const key = defenderName ? defenderName.toUpperCase() : null
 
-  // Grounded value
-  let grounded = null
+  // Grounded value (numeric for coloring, string for display)
+  let groundedNum = null
+  let groundedStr = null
   if (key && row.perCharacterTumble?.[key] !== undefined) {
-    grounded = `${row.perCharacterTumble[key]}%`
+    groundedNum = row.perCharacterTumble[key]
+    groundedStr = `${groundedNum}%`
   } else if (row.tumblePercent) {
     const { min, max } = row.tumblePercent
-    grounded = min === max ? `${min}%` : `${min}–${max}%`
+    groundedNum = Math.round((min + max) / 2)
+    groundedStr = min === max ? `${min}%` : `${min}–${max}%`
   }
 
   // Aerial value (only when distinct from grounded)
-  let aerial = null
+  let aerialNum = null
+  let aerialStr = null
   if (key && row.perCharacterTumbleAerial?.[key] !== undefined) {
-    aerial = `${row.perCharacterTumbleAerial[key]}%`
+    aerialNum = row.perCharacterTumbleAerial[key]
+    aerialStr = `${aerialNum}%`
   } else if (row.tumblePercent?.aerial) {
     const { min, max } = row.tumblePercent.aerial
-    aerial = min === max ? `${min}%` : `${min}–${max}%`
+    aerialNum = Math.round((min + max) / 2)
+    aerialStr = min === max ? `${min}%` : `${min}–${max}%`
   }
 
-  if (!grounded) return <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>—</span>
+  if (!groundedStr) return <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>—</span>
 
-  const badgeStyle = {
-    display: 'inline-block',
-    padding: '2px 8px',
-    borderRadius: '4px',
-    background: 'var(--border)',
-    color: 'var(--muted)',
-    border: '1px solid var(--border)',
-    fontSize: '0.75rem',
-    fontWeight: 700,
-    whiteSpace: 'nowrap',
+  const makeBadge = (num, str) => {
+    const color = tumbleColor(num)
+    return {
+      style: {
+        display: 'inline-block',
+        padding: '2px 8px',
+        borderRadius: '4px',
+        background: color + '22',
+        color,
+        border: `1px solid ${color}55`,
+        fontSize: '0.75rem',
+        fontWeight: 700,
+        whiteSpace: 'nowrap',
+      },
+      str,
+    }
   }
 
-  if (aerial && aerial !== grounded) {
+  const gBadge = makeBadge(groundedNum, groundedStr)
+
+  if (aerialStr && aerialStr !== groundedStr) {
+    const aBadge = makeBadge(aerialNum, aerialStr)
     return (
       <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'center' }}>
-        <span style={badgeStyle} title="Grounded">⛰ {grounded}</span>
-        <span style={badgeStyle} title="Airborne">☁ {aerial}</span>
+        <span style={gBadge.style} title="Grounded">⛰ {gBadge.str}</span>
+        <span style={aBadge.style} title="Airborne">☁ {aBadge.str}</span>
       </div>
     )
   }
 
-  return <span style={badgeStyle}>{grounded}</span>
+  return <span style={gBadge.style}>{gBadge.str}</span>
 }
 
 function MoveRow({ row, attackerName, defenderName }) {
