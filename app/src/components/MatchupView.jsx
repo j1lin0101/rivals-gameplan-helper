@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback } from 'react'
 import { useCharacterData } from '../hooks/useMatchupData'
-import { getSafestOptions, getOOSOptions, analyzeMatchup, CATEGORY_ORDER } from '../analysis/analysis'
+import { getSafestOptions, getOOSOptions, analyzeMatchup, CATEGORY_ORDER, getCategory } from '../analysis/analysis'
 import { getDisplayName } from '../analysis/nicknames'
 
 const SAFE_COLOR  = 'var(--safe)'
@@ -65,7 +65,8 @@ function Section({ title, accent, children }) {
 
 function SafestOptionsList({ charData, defenderOOSOptions }) {
   const options = useMemo(
-    () => getSafestOptions(charData, defenderOOSOptions).filter(o => (o.punishCount ?? 0) === 0),
+    () => getSafestOptions(charData, defenderOOSOptions)
+      .filter(o => (o.punishCount ?? 0) === 0 && getCategory(o.move) !== 'Misc'),
     [charData, defenderOOSOptions]
   )
   if (!options.length) return <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>No safe moves found.</p>
