@@ -113,12 +113,16 @@ body {
 .accordion-header-inner {
   display: contents; /* children participate in parent flex */
 }
+.accordion-counts {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  row-gap: 4px;
+}
 @media (max-width: 600px) {
   .accordion-counts {
-    display: flex;
-    flex-wrap: wrap;
     gap: 6px;
-    row-gap: 4px;
   }
 }
 
