@@ -500,7 +500,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
         }}>
           ← Back
         </button>
-        <div style={{ minWidth: 0 }}>
+        <div style={{ minWidth: 0, flex: 1 }}>
           <h1 style={{ fontSize: '1.1rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             <span style={{ color: 'var(--accent)' }}>{myChar}</span>
             <span style={{ color: 'var(--muted)', margin: '0 8px' }}>vs</span>
@@ -510,6 +510,19 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             Shield safety &amp; punish analysis · Shield release {matchupVsOpp?.shieldRelease}f · Jump squat 4f
           </p>
         </div>
+        <a
+          href="https://x.com/boi_jir0"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'var(--muted)', fontSize: '0.72rem', textDecoration: 'none',
+            flexShrink: 0, whiteSpace: 'nowrap',
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
+        >
+          by @boi_jiro
+        </a>
       </header>
 
       <main className="page-main">
