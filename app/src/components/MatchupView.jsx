@@ -58,7 +58,7 @@ function Section({ title, accent, children }) {
       }}>
         {title}
       </div>
-      <div style={{ padding: '12px 16px' }}>{children}</div>
+      <div style={{ padding: '10px 10px' }}>{children}</div>
     </div>
   )
 }
@@ -81,12 +81,12 @@ function SafestOptionsList({ charData, defenderOOSOptions }) {
               : `${o.shieldSafety.min} to ${v}`)
           : '—'
         return (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.83rem' }}>
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.83rem' }}>
             <span style={{
-              display: 'inline-block', padding: '1px 6px', borderRadius: '4px',
+              display: 'inline-block', padding: '1px 5px', borderRadius: '4px',
               background: tagColor + '22', color: tagColor,
               border: `1px solid ${tagColor}44`, fontSize: '0.68rem', fontWeight: 700,
-              whiteSpace: 'nowrap', minWidth: '56px', textAlign: 'center',
+              whiteSpace: 'nowrap', minWidth: '40px', textAlign: 'center',
             }}>{tagLabel}</span>
             <span style={{ fontWeight: 600 }}>{getDisplayName(charData.character, o.move)}</span>
             <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>[{o.hitbox}]</span>
