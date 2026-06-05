@@ -74,11 +74,12 @@ function SafestOptionsList({ charData, defenderOOSOptions }) {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
       {options.map((o, i) => {
         const tagColor = 'var(--safe)'
+        const fmt = n => `${n > 0 ? '+' : ''}${n}`
         const v = o.shieldSafety?.max
         const tagLabel = o.shieldSafety
           ? (o.shieldSafety.min === o.shieldSafety.max
-              ? `${v > 0 ? '+' : ''}${v}`
-              : `${o.shieldSafety.min} to ${v}`)
+              ? fmt(v)
+              : `${fmt(o.shieldSafety.min)} to ${fmt(v)}`)
           : '—'
         return (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.83rem' }}>
