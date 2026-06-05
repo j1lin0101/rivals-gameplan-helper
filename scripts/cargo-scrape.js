@@ -128,6 +128,35 @@ function calcShieldSafety(attack, hitActive, iasa, landingLag, customSS, isProje
 
   // Explicit override (not a formula placeholder)
   if (customSS && customSS !== '-' && customSS !== 'JAB' && customSS !== 'GALVAN') {
+    // "E{n}" → single endlag override → SS = ShieldStun − 1 − n
+    const singleE = customSS.match(/^E(\d+)$/i);
+    if (singleE) {
+      const ss = shieldStun - SHARED - parseInt(singleE[1], 10);
+      return { min: ss, max: ss };
+    }
+
+    // "E{n} to E{m}" or "E{n}-E{m}" → endlag range
+    const rangeE = customSS.match(/E(\d+)\s*(?:to|-)\s*E(\d+)/i);
+    if (rangeE) {
+      const e1 = parseInt(rangeE[1], 10);
+      const e2 = parseInt(rangeE[2], 10);
+      return { min: shieldStun - SHARED - Math.max(e1, e2), max: shieldStun - SHARED - Math.min(e1, e2) };
+    }
+
+    // "E{n} at best" → best-case endlag only (ongoing hitbox with a single best exit point)
+    const atBest = customSS.match(/E(\d+)\s+at\s+best/i);
+    if (atBest) {
+      const ss = shieldStun - SHARED - parseInt(atBest[1], 10);
+      return { min: ss, max: ss };
+    }
+
+    // Direct SS range: "{n} to {m}"
+    const directRange = customSS.match(/^(-?\d+)\s+to\s+(-?\d+)$/i);
+    if (directRange) {
+      return { min: parseInt(directRange[1], 10), max: parseInt(directRange[2], 10) };
+    }
+
+    // Direct SS single value: "{n}"
     const v = parseInt(customSS, 10);
     if (!isNaN(v)) return { min: v, max: v };
   }

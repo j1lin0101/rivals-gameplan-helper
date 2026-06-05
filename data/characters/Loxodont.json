@@ -1,7 +1,7 @@
 {
   "character": "Loxodont",
   "slug": "Loxodont",
-  "scrapedAt": "2026-06-05T20:32:00.374Z",
+  "scrapedAt": "2026-06-05T21:29:30.968Z",
   "moves": [
     {
       "move": "Jab",
@@ -375,6 +375,108 @@
             "SLADE": 0,
             "WRASTOR": 0,
             "ZETTERBURN": 0
+          },
+          "perCharacterTumbleAerial": {}
+        }
+      ]
+    },
+    {
+      "move": "Dash Attack",
+      "startup": 16,
+      "hitboxes": [
+        {
+          "hitbox": "No Lava Pool: Early",
+          "shieldSafety": {
+            "min": -18,
+            "max": -16
+          },
+          "shieldRaw": "-18 to -16",
+          "tumblePercent": {
+            "min": 30,
+            "max": 39
+          },
+          "tumbleRaw": "30 - 39%",
+          "perCharacterTumble": {
+            "ABSA": 32,
+            "CLAIREN": 34,
+            "ETALUS": 38,
+            "FLEET": 34,
+            "FORSBURN": 36,
+            "GALVAN": 38,
+            "KRAGG": 39,
+            "LA REINA": 37,
+            "LOXODONT": 39,
+            "MAYPUL": 33,
+            "OLYMPIA": 32,
+            "ORCANE": 36,
+            "RANNO": 35,
+            "SLADE": 36,
+            "WRASTOR": 30,
+            "ZETTERBURN": 36
+          },
+          "perCharacterTumbleAerial": {}
+        },
+        {
+          "hitbox": "No Lava Pool: Late",
+          "shieldSafety": {
+            "min": -18,
+            "max": -18
+          },
+          "shieldRaw": "-18",
+          "tumblePercent": {
+            "min": 54,
+            "max": 67
+          },
+          "tumbleRaw": "54 - 67%",
+          "perCharacterTumble": {
+            "ABSA": 57,
+            "CLAIREN": 59,
+            "ETALUS": 65,
+            "FLEET": 58,
+            "FORSBURN": 62,
+            "GALVAN": 65,
+            "KRAGG": 66,
+            "LA REINA": 64,
+            "LOXODONT": 67,
+            "MAYPUL": 57,
+            "OLYMPIA": 56,
+            "ORCANE": 62,
+            "RANNO": 60,
+            "SLADE": 62,
+            "WRASTOR": 54,
+            "ZETTERBURN": 62
+          },
+          "perCharacterTumbleAerial": {}
+        },
+        {
+          "hitbox": "No Lava Pool: Lava",
+          "shieldSafety": {
+            "min": -19,
+            "max": -18
+          },
+          "shieldRaw": "-19 to -18",
+          "tumblePercent": {
+            "min": 96,
+            "max": 119
+          },
+          "tumbleRaw": "96 - 119%",
+          "perCharacterTumble": {
+            "ABSA": 102,
+            "CLAIREN": 106,
+            "ETALUS": 117,
+            "FLEET": 105,
+            "FORSBURN": 111,
+            "GALVAN": 116,
+            "KRAGG": 118,
+            "LA REINA": 114,
+            "LOXODONT": 119,
+            "MAYPUL": 103,
+            "OLYMPIA": 101,
+            "ORCANE": 111,
+            "RANNO": 108,
+            "SLADE": 112,
+            "WRASTOR": 96,
+            "ZETTERBURN": 111
           },
           "perCharacterTumbleAerial": {}
         }

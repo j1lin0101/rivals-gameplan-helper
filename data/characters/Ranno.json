@@ -1,7 +1,7 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-05T20:31:59.058Z",
+  "scrapedAt": "2026-06-05T21:29:29.469Z",
   "moves": [
     {
       "move": "Jab",
@@ -1234,10 +1234,10 @@
         {
           "hitbox": "On Hit: Hit 3",
           "shieldSafety": {
-            "min": -4,
-            "max": -4
+            "min": -6,
+            "max": -5
           },
-          "shieldRaw": "-4",
+          "shieldRaw": "-6 to -5",
           "tumblePercent": {
             "min": 37,
             "max": 46

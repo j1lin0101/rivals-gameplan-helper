@@ -1,7 +1,7 @@
 {
   "character": "Slade",
   "slug": "Slade",
-  "scrapedAt": "2026-06-05T20:32:02.238Z",
+  "scrapedAt": "2026-06-05T21:29:32.742Z",
   "moves": [
     {
       "move": "Jab",
@@ -934,12 +934,10 @@
         {
           "hitbox": "Earthen: Landing Sweet",
           "shieldSafety": {
-            "min": 5,
-            "max": 5,
-            "isStun": true,
-            "isProjectile": false
+            "min": -27,
+            "max": -25
           },
-          "shieldRaw": "Stun: 5",
+          "shieldRaw": "-27 to -25",
           "tumblePercent": {
             "min": 10,
             "max": 14
@@ -968,12 +966,10 @@
         {
           "hitbox": "Earthen: Landing Sour",
           "shieldSafety": {
-            "min": 4,
-            "max": 4,
-            "isStun": true,
-            "isProjectile": false
+            "min": -28,
+            "max": -26
           },
-          "shieldRaw": "Stun: 4",
+          "shieldRaw": "-28 to -26",
           "tumblePercent": {
             "min": 33,
             "max": 41

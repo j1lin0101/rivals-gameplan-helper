@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-05T20:31:58.158Z",
+  "scrapedAt": "2026-06-05T21:29:28.576Z",
   "moves": [
     {
       "move": "Jab",
@@ -539,10 +539,10 @@
         {
           "hitbox": "Stomp",
           "shieldSafety": {
-            "min": -16,
-            "max": -16
+            "min": -10,
+            "max": -10
           },
-          "shieldRaw": "-16",
+          "shieldRaw": "-10",
           "tumblePercent": {
             "min": 5,
             "max": 8
@@ -1222,10 +1222,10 @@
         {
           "hitbox": "Command Grab (Airborne): Hitgrab (On Shield)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -19,
+            "max": -19
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-19",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1234,12 +1234,10 @@
         {
           "hitbox": "Command Grab (Airborne): Landing Hit",
           "shieldSafety": {
-            "min": 6,
-            "max": 6,
-            "isStun": true,
-            "isProjectile": false
+            "min": -19,
+            "max": -19
           },
-          "shieldRaw": "Stun: 6",
+          "shieldRaw": "-19",
           "tumblePercent": {
             "min": 8,
             "max": 12
@@ -1268,10 +1266,10 @@
         {
           "hitbox": "Command Grab (Grounded): Hitgrab (On Shield)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -19,
+            "max": -19
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-19",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},

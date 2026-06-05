@@ -1,7 +1,7 @@
 {
   "character": "Zetterburn",
   "slug": "Zetterburn",
-  "scrapedAt": "2026-06-05T20:31:55.514Z",
+  "scrapedAt": "2026-06-05T21:29:25.827Z",
   "moves": [
     {
       "move": "Jab",
@@ -1180,9 +1180,9 @@
           "hitbox": "Airborne: Landing Hit",
           "shieldSafety": {
             "min": -29,
-            "max": -29
+            "max": -27
           },
-          "shieldRaw": "-29",
+          "shieldRaw": "-29 to -27",
           "tumblePercent": {
             "min": 0,
             "max": 0

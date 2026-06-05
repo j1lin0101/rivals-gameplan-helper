@@ -1,7 +1,7 @@
 {
   "character": "La Reina",
   "slug": "La_Reina",
-  "scrapedAt": "2026-06-05T20:32:01.303Z",
+  "scrapedAt": "2026-06-05T21:29:31.878Z",
   "moves": [
     {
       "move": "Jab",
@@ -218,10 +218,10 @@
         {
           "hitbox": "Early (Onstage)",
           "shieldSafety": {
-            "min": -19,
+            "min": -25,
             "max": -19
           },
-          "shieldRaw": "-19",
+          "shieldRaw": "-25 to -19",
           "tumblePercent": {
             "min": 20,
             "max": 26
@@ -250,12 +250,10 @@
         {
           "hitbox": "Late (Offstage)",
           "shieldSafety": {
-            "min": 7,
-            "max": 7,
-            "isStun": true,
-            "isProjectile": false
+            "min": -16,
+            "max": -16
           },
-          "shieldRaw": "Stun: 7",
+          "shieldRaw": "-16",
           "tumblePercent": {
             "min": 17,
             "max": 23
@@ -307,12 +305,10 @@
         {
           "hitbox": "Throw: Slam",
           "shieldSafety": {
-            "min": 10,
-            "max": 10,
-            "isStun": true,
-            "isProjectile": false
+            "min": -2,
+            "max": -2
           },
-          "shieldRaw": "Stun: 10",
+          "shieldRaw": "-2",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -656,8 +652,11 @@
         },
         {
           "hitbox": "Slam: Slam KB",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -7,
+            "max": -7
+          },
+          "shieldRaw": "-7",
           "tumblePercent": {
             "min": 8,
             "max": 13
@@ -887,12 +886,10 @@
         {
           "hitbox": "Forward/Back Throw: Slam",
           "shieldSafety": {
-            "min": 9,
-            "max": 9,
-            "isStun": true,
-            "isProjectile": false
+            "min": -3,
+            "max": -3
           },
-          "shieldRaw": "Stun: 9",
+          "shieldRaw": "-3",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -927,12 +924,10 @@
         {
           "hitbox": "Slam",
           "shieldSafety": {
-            "min": 8,
-            "max": 8,
-            "isStun": true,
-            "isProjectile": false
+            "min": -8,
+            "max": -8
           },
-          "shieldRaw": "Stun: 8",
+          "shieldRaw": "-8",
           "tumblePercent": {
             "min": 0,
             "max": 0
