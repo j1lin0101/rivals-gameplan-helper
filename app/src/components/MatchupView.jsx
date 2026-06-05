@@ -563,7 +563,7 @@ function HelpModal({ onClose }) {
             "The percent that sends an opponent into tumble. On floorhug, this can knock down."
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
-            Lower % = the move sends into tumble earlier, making it a better combo starter. The color tiers used here:
+            Lower % = the move sends into tumble earlier, making it a safer move on hit and more effective combo starter and extender. The color tiers used here:
           </p>
           <ul style={{ fontSize: '0.82rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '4px' }}>
             <li><span style={{ color: '#00CED1', fontWeight: 600 }}>Early KD</span> — tumble at ≤40%</li>
