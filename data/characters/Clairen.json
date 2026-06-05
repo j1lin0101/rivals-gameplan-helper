@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-05T00:23:34.319Z",
+  "scrapedAt": "2026-06-05T20:37:10.316Z",
   "moves": [
     {
       "move": "Jab",
@@ -1485,7 +1485,7 @@
     },
     {
       "move": "Forward Special - Plasma Echo",
-      "startup": null,
+      "startup": 26,
       "hitboxes": [
         {
           "hitbox": "On Hit: Cross (Sour)",
@@ -1557,7 +1557,7 @@
     },
     {
       "move": "Up Special - Plasma Slash",
-      "startup": null,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Early Multihit (Base)",
@@ -1940,7 +1940,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Blade",
@@ -2010,7 +2010,7 @@
     },
     {
       "move": "Ledge  Special",
-      "startup": null,
+      "startup": 33,
       "hitboxes": [
         {
           "hitbox": "Slash (Grounded)",
@@ -2072,7 +2072,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Hit 1 Blade (Front)",
@@ -2206,7 +2206,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 25,
       "hitboxes": [
         {
           "hitbox": "Blade",

@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-05T00:23:30.317Z",
+  "scrapedAt": "2026-06-05T20:37:06.668Z",
   "moves": [
     {
       "move": "Jab",
@@ -1442,7 +1442,7 @@
     },
     {
       "move": "Down Throw",
-      "startup": null,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "Throw",
@@ -1457,7 +1457,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 22,
       "hitboxes": [
         {
           "hitbox": "Kick",
@@ -1495,7 +1495,7 @@
     },
     {
       "move": "Ledge  Special",
-      "startup": null,
+      "startup": 36,
       "hitboxes": [
         {
           "hitbox": "Dive",
@@ -1548,7 +1548,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Kicks",
@@ -1586,7 +1586,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Minimum: Multihit",

@@ -1,7 +1,7 @@
 {
   "character": "Maypul",
   "slug": "Maypul",
-  "scrapedAt": "2026-06-05T00:23:24.682Z",
+  "scrapedAt": "2026-06-05T20:37:01.554Z",
   "moves": [
     {
       "move": "Jab",
@@ -181,7 +181,7 @@
     },
     {
       "move": "Dash Attack",
-      "startup": null,
+      "startup": 9,
       "hitboxes": [
         {
           "hitbox": "Hit 1 Back",
@@ -733,7 +733,7 @@
     },
     {
       "move": "Down Air",
-      "startup": null,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Root",
@@ -771,15 +771,16 @@
     },
     {
       "move": "Neutral Special - Seed Toss",
-      "startup": null,
+      "startup": 7,
       "hitboxes": [
         {
           "hitbox": "Seed (Special)",
           "shieldSafety": {
-            "min": -13,
-            "max": -13
+            "min": 1,
+            "max": 1,
+            "isStun": true
           },
-          "shieldRaw": "-13",
+          "shieldRaw": "Stun: 1",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -788,10 +789,11 @@
         {
           "hitbox": "Seed (Item)",
           "shieldSafety": {
-            "min": -13,
-            "max": -13
+            "min": 1,
+            "max": 1,
+            "isStun": true
           },
-          "shieldRaw": "-13",
+          "shieldRaw": "Stun: 1",
           "tumblePercent": {
             "min": 194,
             "max": 194
@@ -804,7 +806,7 @@
     },
     {
       "move": "Forward Special - Leaftasm",
-      "startup": null,
+      "startup": 9,
       "hitboxes": [
         {
           "hitbox": "Grounded: Dash",
@@ -1226,7 +1228,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 26,
       "hitboxes": [
         {
           "hitbox": "Lattack",
@@ -1264,7 +1266,7 @@
     },
     {
       "move": "Ledge  Special - Terry",
-      "startup": null,
+      "startup": 21,
       "hitboxes": [
         {
           "hitbox": "Summoning Terry: Terry",
@@ -1318,7 +1320,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Gattack",
@@ -1356,7 +1358,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 40,
       "hitboxes": [
         {
           "hitbox": "Grounded (Standard): Dive",
@@ -1451,6 +1453,11 @@
           "perCharacterTumbleAerial": {}
         }
       ]
+    },
+    {
+      "move": "Tether",
+      "startup": 15,
+      "hitboxes": []
     }
   ]
 }

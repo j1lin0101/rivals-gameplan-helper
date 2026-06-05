@@ -1,11 +1,11 @@
 {
   "character": "Galvan",
   "slug": "Galvan",
-  "scrapedAt": "2026-06-05T00:23:40.770Z",
+  "scrapedAt": "2026-06-05T20:37:17.877Z",
   "moves": [
     {
       "move": "Jab",
-      "startup": null,
+      "startup": 8,
       "hitboxes": [
         {
           "hitbox": "Multijab: Multihit",
@@ -1091,10 +1091,11 @@
         {
           "hitbox": "Magnet: Magnet",
           "shieldSafety": {
-            "min": -20,
-            "max": -20
+            "min": 2,
+            "max": 2,
+            "isStun": true
           },
-          "shieldRaw": "-20",
+          "shieldRaw": "Stun: 2",
           "tumblePercent": {
             "min": 75,
             "max": 92
@@ -1124,7 +1125,7 @@
     },
     {
       "move": "Forward Special - Drill Rush",
-      "startup": null,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Multihit Normal",
@@ -1462,7 +1463,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Swing",
@@ -1500,7 +1501,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": null,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "Hit: Throw",
@@ -1521,7 +1522,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Sweep",
@@ -1559,7 +1560,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 36,
       "hitboxes": [
         {
           "hitbox": "Multihit Low",

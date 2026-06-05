@@ -1,11 +1,11 @@
 {
   "character": "Absa",
   "slug": "Absa",
-  "scrapedAt": "2026-06-05T00:23:26.048Z",
+  "scrapedAt": "2026-06-05T20:37:02.751Z",
   "moves": [
     {
       "move": "Jab",
-      "startup": null,
+      "startup": 5,
       "hitboxes": [
         {
           "hitbox": "Jab 1: Jab 1",
@@ -804,7 +804,7 @@
     },
     {
       "move": "Neutral Special",
-      "startup": null,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Uncharged",
@@ -874,7 +874,7 @@
     },
     {
       "move": "Forward Special",
-      "startup": null,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Uncharged",
@@ -950,7 +950,7 @@
     },
     {
       "move": "Down Special",
-      "startup": null,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Tick Tick",
@@ -1122,7 +1122,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 27,
       "hitboxes": [
         {
           "hitbox": "Kick",
@@ -1160,7 +1160,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": null,
+      "startup": 25,
       "hitboxes": [
         {
           "hitbox": "Cloud",
@@ -1198,7 +1198,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 20,
       "hitboxes": [
         {
           "hitbox": "Sweep",
@@ -1236,7 +1236,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 51,
       "hitboxes": [
         {
           "hitbox": "Lightning (Up)",

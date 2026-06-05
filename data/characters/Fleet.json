@@ -1,7 +1,7 @@
 {
   "character": "Fleet",
   "slug": "Fleet",
-  "scrapedAt": "2026-06-05T00:23:35.563Z",
+  "scrapedAt": "2026-06-05T20:37:11.521Z",
   "moves": [
     {
       "move": "Jab",
@@ -379,10 +379,11 @@
         {
           "hitbox": "Late",
           "shieldSafety": {
-            "min": -29,
-            "max": -29
+            "min": 4,
+            "max": 4,
+            "isStun": true
           },
-          "shieldRaw": "-29",
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 61,
             "max": 76
@@ -1148,7 +1149,7 @@
     },
     {
       "move": "Forward Special - Jet Stream Shot",
-      "startup": null,
+      "startup": 28,
       "hitboxes": [
         {
           "hitbox": "Arrow Early",
@@ -1230,7 +1231,7 @@
     },
     {
       "move": "Up Special - Wind Launch",
-      "startup": null,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Rising",
@@ -1323,10 +1324,11 @@
         {
           "hitbox": "On Whiff: Arrow",
           "shieldSafety": {
-            "min": -38,
-            "max": -38
+            "min": 5,
+            "max": 5,
+            "isStun": true
           },
-          "shieldRaw": "-38",
+          "shieldRaw": "Stun: 5",
           "tumblePercent": {
             "min": 5,
             "max": 8
@@ -1338,10 +1340,11 @@
         {
           "hitbox": "On Hit: Arrow",
           "shieldSafety": {
-            "min": -38,
-            "max": -38
+            "min": 5,
+            "max": 5,
+            "isStun": true
           },
-          "shieldRaw": "-38",
+          "shieldRaw": "Stun: 5",
           "tumblePercent": {
             "min": 5,
             "max": 8
@@ -1526,7 +1529,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 29,
       "hitboxes": [
         {
           "hitbox": "Swing",
@@ -1564,7 +1567,7 @@
     },
     {
       "move": "Ledge  Special",
-      "startup": null,
+      "startup": 33,
       "hitboxes": [
         {
           "hitbox": "Arrow",
@@ -1603,7 +1606,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Sweep",
@@ -1641,7 +1644,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Meat",

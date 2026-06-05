@@ -1,7 +1,7 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-05T00:23:32.902Z",
+  "scrapedAt": "2026-06-05T20:37:09.101Z",
   "moves": [
     {
       "move": "Jab",
@@ -1280,15 +1280,16 @@
     },
     {
       "move": "Neutral Special - Poison Darts",
-      "startup": null,
+      "startup": 9,
       "hitboxes": [
         {
           "hitbox": "Dart Throw: Dart",
           "shieldSafety": {
-            "min": -30,
-            "max": -24
+            "min": 1,
+            "max": 1,
+            "isStun": true
           },
-          "shieldRaw": "-30 to -24",
+          "shieldRaw": "Stun: 1",
           "tumblePercent": {
             "min": 777,
             "max": 777
@@ -1300,8 +1301,13 @@
       ]
     },
     {
+      "move": "Forward Special - Tongue Pull",
+      "startup": 21,
+      "hitboxes": []
+    },
+    {
       "move": "Up Special - Poison Lunge",
-      "startup": null,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Lunge: Early",
@@ -1500,6 +1506,11 @@
       ]
     },
     {
+      "move": "Down Special - Toxic Trap",
+      "startup": 25,
+      "hitboxes": []
+    },
+    {
       "move": "Grab",
       "startup": 8,
       "hitboxes": []
@@ -1693,7 +1704,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Kick",
@@ -1728,6 +1739,11 @@
           "perCharacterTumbleAerial": {}
         }
       ]
+    },
+    {
+      "move": "Getup Special",
+      "startup": 30,
+      "hitboxes": []
     }
   ]
 }

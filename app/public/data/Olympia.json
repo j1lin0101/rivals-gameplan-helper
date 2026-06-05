@@ -1,7 +1,7 @@
 {
   "character": "Olympia",
   "slug": "Olympia",
-  "scrapedAt": "2026-06-05T00:23:38.191Z",
+  "scrapedAt": "2026-06-05T20:37:15.436Z",
   "moves": [
     {
       "move": "Jab",
@@ -990,15 +990,16 @@
     },
     {
       "move": "Neutral Special - Gem Field",
-      "startup": null,
+      "startup": 12,
       "hitboxes": [
         {
           "hitbox": "Throw Gem: Projectile",
           "shieldSafety": {
-            "min": -15,
-            "max": -15
+            "min": 3,
+            "max": 3,
+            "isStun": true
           },
-          "shieldRaw": "-15",
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 365,
             "max": 449
@@ -1099,7 +1100,7 @@
     },
     {
       "move": "Forward Special - Radiant Grab",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Air Slam: Slam",
@@ -1500,7 +1501,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Kick",
@@ -1538,7 +1539,7 @@
     },
     {
       "move": "Ledge  Special - Zircon Straight",
-      "startup": null,
+      "startup": 37,
       "hitboxes": [
         {
           "hitbox": "Punch",
@@ -1576,7 +1577,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Getup Attack",
@@ -1614,7 +1615,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Crystal",

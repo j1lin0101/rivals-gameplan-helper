@@ -1,7 +1,7 @@
 {
   "character": "La Reina",
   "slug": "La_Reina",
-  "scrapedAt": "2026-06-05T00:23:39.488Z",
+  "scrapedAt": "2026-06-05T20:37:16.659Z",
   "moves": [
     {
       "move": "Jab",
@@ -213,7 +213,7 @@
     },
     {
       "move": "Dash Attack",
-      "startup": null,
+      "startup": 12,
       "hitboxes": [
         {
           "hitbox": "Early (Onstage)",
@@ -738,10 +738,11 @@
         {
           "hitbox": "Throw Chair: Chair",
           "shieldSafety": {
-            "min": -15,
-            "max": -13
+            "min": 4,
+            "max": 4,
+            "isStun": true
           },
-          "shieldRaw": "-15 to -13",
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 23,
             "max": 29
@@ -1136,7 +1137,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Lattack",
@@ -1174,7 +1175,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": null,
+      "startup": 30,
       "hitboxes": [
         {
           "hitbox": "Table",
@@ -1224,7 +1225,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Getup Attack",
@@ -1262,7 +1263,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 20,
       "hitboxes": [
         {
           "hitbox": "Throw: Slam",

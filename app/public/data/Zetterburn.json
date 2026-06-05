@@ -1,7 +1,7 @@
 {
   "character": "Zetterburn",
   "slug": "Zetterburn",
-  "scrapedAt": "2026-06-05T00:23:22.128Z",
+  "scrapedAt": "2026-06-05T20:36:59.000Z",
   "moves": [
     {
       "move": "Jab",
@@ -1035,7 +1035,7 @@
     },
     {
       "move": "Forward Special - Fire Ball",
-      "startup": null,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Mane",
@@ -1055,10 +1055,11 @@
         {
           "hitbox": "Fireball",
           "shieldSafety": {
-            "min": -19,
-            "max": -19
+            "min": 1,
+            "max": 1,
+            "isStun": true
           },
-          "shieldRaw": "-19",
+          "shieldRaw": "Stun: 1",
           "tumblePercent": {
             "min": 188,
             "max": 232
@@ -1088,7 +1089,7 @@
     },
     {
       "move": "Up Special - Fire Lion",
-      "startup": null,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Multihit",
@@ -1363,7 +1364,7 @@
     },
     {
       "move": "Ledge Attack",
-      "startup": null,
+      "startup": 25,
       "hitboxes": [
         {
           "hitbox": "Swipe",
@@ -1401,7 +1402,7 @@
     },
     {
       "move": "Ledge  Special",
-      "startup": null,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "Fire",
@@ -1439,7 +1440,7 @@
     },
     {
       "move": "Getup Attack",
-      "startup": null,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Swipe",
@@ -1477,7 +1478,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": null,
+      "startup": 37,
       "hitboxes": [
         {
           "hitbox": "Puddle",
