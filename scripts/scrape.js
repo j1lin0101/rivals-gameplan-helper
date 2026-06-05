@@ -103,9 +103,16 @@ function parseContainer($, container, startupRef, totalHitboxesSoFar) {
     }).toArray();
     const startupColIdx = startupHeaders.findIndex(h => h.startsWith('startup'));
     if (startupColIdx >= 0) {
-      const dataRow = startupTable.find('tbody tr').last().find('td');
-      const raw = $(dataRow[startupColIdx]).clone().find('.tooltiptext').remove().end().text().trim();
-      startupRef.value = parseStartup(raw);
+      // Use the first tbody row with enough cells — the last row may be a Notes/colspan row
+      let dataRow = null;
+      startupTable.find('tbody tr').each(function(_, tr) {
+        const tds = $(tr).find('td');
+        if (!dataRow && tds.length >= startupHeaders.length) dataRow = tds;
+      });
+      if (dataRow) {
+        const raw = $(dataRow[startupColIdx]).clone().find('.tooltiptext').remove().end().text().trim();
+        startupRef.value = parseStartup(raw);
+      }
     }
   }
 
