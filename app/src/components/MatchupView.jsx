@@ -560,7 +560,7 @@ function HelpModal({ onClose }) {
             Tumble %
           </h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6 }}>
-            "The percent that sends an opponent into tumble. On floorhug, this can knock down. Ranges listed show when the lightest character and the heaviest character are knocked down."
+            "The percent that sends an opponent into tumble. On floorhug, this can knock down."
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
             Lower % = the move sends into tumble earlier, making it a better combo starter. The color tiers used here:
