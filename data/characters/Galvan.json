@@ -1,14 +1,14 @@
 {
   "character": "Galvan",
   "slug": "Galvan",
-  "scrapedAt": "2026-06-03T19:44:23.323Z",
+  "scrapedAt": "2026-06-05T00:23:40.770Z",
   "moves": [
     {
       "move": "Jab",
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Multihit",
+          "hitbox": "Multijab: Multihit",
           "shieldSafety": {
             "min": -32,
             "max": -30
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final",
+          "hitbox": "Multijab: Final",
           "shieldSafety": {
             "min": -24,
             "max": -23
@@ -52,7 +52,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -19,
             "max": -18
@@ -84,7 +84,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -14,
             "max": -13
@@ -1089,7 +1089,7 @@
       "startup": 19,
       "hitboxes": [
         {
-          "hitbox": "Magnet",
+          "hitbox": "Magnet: Magnet",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1222,7 +1222,7 @@
       "startup": 10,
       "hitboxes": [
         {
-          "hitbox": "Multihit",
+          "hitbox": "Regular: Multihit",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1238,7 +1238,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final",
+          "hitbox": "Regular: Final",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1254,7 +1254,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Multihit",
+          "hitbox": "UFO Spawn: Multihit",
           "shieldSafety": {
             "min": -30,
             "max": -28
@@ -1269,7 +1269,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final",
+          "hitbox": "UFO Spawn: Final",
           "shieldSafety": {
             "min": -27,
             "max": -25
@@ -1290,7 +1290,7 @@
       "startup": 21,
       "hitboxes": [
         {
-          "hitbox": "Ground Slam",
+          "hitbox": "Grounded Grab (Hit): Ground Slam",
           "shieldSafety": {
             "min": -8,
             "max": -8
@@ -1302,7 +1302,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Spike",
+          "hitbox": "Airborne Grab (Hit Player): Spike",
           "shieldSafety": {
             "min": -8,
             "max": -6
@@ -1321,7 +1321,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Spike",
+          "hitbox": "Airborne Grab (Hit Floor): Spike",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1504,7 +1504,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Throw",
+          "hitbox": "Hit: Throw",
           "shieldSafety": {
             "min": -23,
             "max": -23

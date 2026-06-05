@@ -1,14 +1,14 @@
 {
   "character": "Kragg",
   "slug": "Kragg",
-  "scrapedAt": "2026-06-03T19:44:14.467Z",
+  "scrapedAt": "2026-06-05T00:23:31.559Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -17,
             "max": -16
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 3",
+          "hitbox": "Jab 3: Jab 3",
           "shieldSafety": {
             "min": -24,
             "max": -22
@@ -52,7 +52,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -761,7 +761,7 @@
       "startup": 8,
       "hitboxes": [
         {
-          "hitbox": "Neutral",
+          "hitbox": "Rock Throw: Neutral",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -794,7 +794,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Forward",
+          "hitbox": "Rock Throw: Forward",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -827,7 +827,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Up",
+          "hitbox": "Rock Throw: Up",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -860,7 +860,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Down",
+          "hitbox": "Rock Throw: Down",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -873,7 +873,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Shard",
+          "hitbox": "Rock Throw: Shard",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -906,7 +906,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Neutral",
+          "hitbox": "Cargo Throw: Neutral",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -932,7 +932,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Forward",
+          "hitbox": "Cargo Throw: Forward",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -958,7 +958,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Up",
+          "hitbox": "Cargo Throw: Up",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -984,7 +984,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Down",
+          "hitbox": "Cargo Throw: Down",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -999,7 +999,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Roll",
+          "hitbox": "Roll: Roll",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1038,7 +1038,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Grounded",
+          "hitbox": "Pillar: Grounded",
           "shieldSafety": {
             "min": 5,
             "max": 5,
@@ -1054,7 +1054,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Aerial",
+          "hitbox": "Pillar: Aerial",
           "shieldSafety": {
             "min": 5,
             "max": 5,
@@ -1076,7 +1076,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "First Spike",
+          "hitbox": "Grounded (Earth Spikes): First Spike",
           "shieldSafety": {
             "min": -18,
             "max": -9
@@ -1088,8 +1088,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Second Spike",
-          "shieldSafety": null,
+          "hitbox": "Grounded (Earth Spikes): Second Spike",
+          "shieldSafety": {
+            "min": -8,
+            "max": 1
+          },
           "shieldRaw": "-8 to +1",
           "tumblePercent": null,
           "tumbleRaw": "Never",
@@ -1097,8 +1100,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final Spike",
-          "shieldSafety": null,
+          "hitbox": "Grounded (Earth Spikes): Final Spike",
+          "shieldSafety": {
+            "min": 3,
+            "max": 12
+          },
           "shieldRaw": "+3 to +12",
           "tumblePercent": {
             "min": 0,
@@ -1126,7 +1132,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Spike",
+          "hitbox": "Airborne (Dunk): Spike",
           "shieldSafety": {
             "min": -13,
             "max": -11

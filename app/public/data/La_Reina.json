@@ -1,14 +1,14 @@
 {
   "character": "La Reina",
   "slug": "La_Reina",
-  "scrapedAt": "2026-06-03T19:44:22.143Z",
+  "scrapedAt": "2026-06-05T00:23:39.488Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -19,
             "max": -18
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Multijab",
+          "hitbox": "Multijab: Multijab",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -304,7 +304,7 @@
       "startup": 17,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Throw: Slam",
           "shieldSafety": {
             "min": -2,
             "max": -2
@@ -325,7 +325,7 @@
       "startup": 13,
       "hitboxes": [
         {
-          "hitbox": "Punch",
+          "hitbox": "Throw: Punch",
           "shieldSafety": {
             "min": -13,
             "max": -13
@@ -556,7 +556,7 @@
       "startup": 11,
       "hitboxes": [
         {
-          "hitbox": "Hitgrab (On Shield)",
+          "hitbox": "Hitgrab: Hitgrab (On Shield)",
           "shieldSafety": {
             "min": -3,
             "max": -3
@@ -568,8 +568,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Knee",
-          "shieldSafety": null,
+          "hitbox": "Throw: Knee",
+          "shieldSafety": {
+            "min": 2,
+            "max": 2
+          },
           "shieldRaw": "+2",
           "tumblePercent": {
             "min": 20,
@@ -586,7 +589,7 @@
       "startup": 13,
       "hitboxes": [
         {
-          "hitbox": "Hitgrab (On Shield)",
+          "hitbox": "Grab: Hitgrab (On Shield)",
           "shieldSafety": {
             "min": -4,
             "max": -4
@@ -598,7 +601,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Slam KB",
+          "hitbox": "Slam: Slam KB",
           "shieldSafety": {
             "min": -7,
             "max": -7
@@ -669,7 +672,7 @@
       "startup": 25,
       "hitboxes": [
         {
-          "hitbox": "Swing Early",
+          "hitbox": "Throw Chair: Swing Early",
           "shieldSafety": {
             "min": -10,
             "max": -9
@@ -701,7 +704,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Swing Late",
+          "hitbox": "Throw Chair: Swing Late",
           "shieldSafety": {
             "min": -12,
             "max": -12
@@ -733,7 +736,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Chair",
+          "hitbox": "Throw Chair: Chair",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -766,7 +769,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Chair",
+          "hitbox": "Recall: Chair",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -805,7 +808,7 @@
       "startup": 24,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Forward/Back Throw: Slam",
           "shieldSafety": {
             "min": -3,
             "max": -3
@@ -820,7 +823,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Downward",
+          "hitbox": "Down Throw: Downward",
           "shieldSafety": {
             "min": -8,
             "max": -8
@@ -838,7 +841,7 @@
       "startup": 18,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Slam: Slam",
           "shieldSafety": {
             "min": -8,
             "max": -8
@@ -876,7 +879,7 @@
       "startup": 16,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Summon Chair: Slam",
           "shieldSafety": {
             "min": -12,
             "max": -10
@@ -891,7 +894,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Roll",
+          "hitbox": "Roll: Roll",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -930,7 +933,7 @@
       "startup": 11,
       "hitboxes": [
         {
-          "hitbox": "Pummel",
+          "hitbox": "Pummel 1: Pummel",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -943,7 +946,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Pummel",
+          "hitbox": "Pummel 2: Pummel",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -956,7 +959,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Pummel",
+          "hitbox": "Pummel 3: Pummel",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -975,7 +978,7 @@
       "startup": 11,
       "hitboxes": [
         {
-          "hitbox": "Pummel",
+          "hitbox": "Pummel 1: Pummel",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -988,7 +991,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Pummel",
+          "hitbox": "Pummel 2: Pummel",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1001,7 +1004,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Pummel 3: Landing",
           "shieldSafety": {
             "min": 14,
             "max": 14,
@@ -1263,7 +1266,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Throw: Slam",
           "shieldSafety": {
             "min": -23,
             "max": -23

@@ -1,14 +1,14 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-03T19:44:13.238Z",
+  "scrapedAt": "2026-06-05T00:23:30.317Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 5,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -16,
             "max": -15
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 3",
+          "hitbox": "Jab 3: Jab 3",
           "shieldSafety": {
             "min": -21,
             "max": -20
@@ -1059,7 +1059,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Multihit Top",
+          "hitbox": "Max Charge: Multihit Top",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1072,7 +1072,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Multihit Bottom",
+          "hitbox": "Max Charge: Multihit Bottom",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1085,7 +1085,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final",
+          "hitbox": "Max Charge: Final",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1124,7 +1124,7 @@
       "startup": 8,
       "hitboxes": [
         {
-          "hitbox": "Tornado",
+          "hitbox": "Slipstream: Tornado",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1248,7 +1248,7 @@
       "startup": 19,
       "hitboxes": [
         {
-          "hitbox": "Hitgrab (On Shield)",
+          "hitbox": "Command Grab (Grounded): Hitgrab (On Shield)",
           "shieldSafety": {
             "min": -19,
             "max": -19
@@ -1260,7 +1260,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hitgrab (On Shield)",
+          "hitbox": "Command Grab (Airborne): Hitgrab (On Shield)",
           "shieldSafety": {
             "min": -19,
             "max": -19
@@ -1272,7 +1272,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing Hit",
+          "hitbox": "Command Grab (Airborne): Landing Hit",
           "shieldSafety": {
             "min": -19,
             "max": -19
@@ -1304,7 +1304,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Throw",
+          "hitbox": "Command Throw: Throw",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -1589,7 +1589,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Multihit",
+          "hitbox": "Minimum: Multihit",
           "shieldSafety": {
             "min": -38,
             "max": -35
@@ -1601,7 +1601,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final Hit",
+          "hitbox": "Minimum: Final Hit",
           "shieldSafety": {
             "min": -33,
             "max": -30
@@ -1633,7 +1633,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Multihit",
+          "hitbox": "Maximum: Multihit",
           "shieldSafety": {
             "min": -44,
             "max": -41
@@ -1645,7 +1645,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final Hit",
+          "hitbox": "Maximum: Final Hit",
           "shieldSafety": {
             "min": -39,
             "max": -36

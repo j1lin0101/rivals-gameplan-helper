@@ -1,14 +1,14 @@
 {
   "character": "Etalus",
   "slug": "Etalus",
-  "scrapedAt": "2026-06-03T19:44:10.698Z",
+  "scrapedAt": "2026-06-05T00:23:27.566Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Jab 1: Hit 1",
           "shieldSafety": {
             "min": -17,
             "max": -16
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Jab 2: Hit 2",
           "shieldSafety": {
             "min": -17,
             "max": -16
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3 Upper",
+          "hitbox": "Jab 3: Hit 3 Upper",
           "shieldSafety": {
             "min": -19,
             "max": -17
@@ -64,7 +64,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3 Lower",
+          "hitbox": "Jab 3: Hit 3 Lower",
           "shieldSafety": {
             "min": -20,
             "max": -20
@@ -214,7 +214,7 @@
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Hit 1: Hit 1",
           "shieldSafety": {
             "min": -14,
             "max": -12
@@ -246,7 +246,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Hit 2: Hit 2",
           "shieldSafety": {
             "min": -18,
             "max": -16
@@ -356,7 +356,7 @@
       "startup": 18,
       "hitboxes": [
         {
-          "hitbox": "Hit 1 Front",
+          "hitbox": "Regular: Hit 1 Front",
           "shieldSafety": {
             "min": -42,
             "max": -37
@@ -368,7 +368,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Back",
+          "hitbox": "Regular: Hit 1 Back",
           "shieldSafety": {
             "min": -42,
             "max": -37
@@ -380,7 +380,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Regular: Hit 2",
           "shieldSafety": {
             "min": -33,
             "max": -31
@@ -412,7 +412,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Back",
+          "hitbox": "Armored: Hit 1 Back",
           "shieldSafety": {
             "min": -42,
             "max": -37
@@ -424,7 +424,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Front",
+          "hitbox": "Armored: Hit 1 Front",
           "shieldSafety": {
             "min": -42,
             "max": -37
@@ -436,7 +436,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Armored: Hit 2",
           "shieldSafety": {
             "min": -33,
             "max": -31
@@ -468,7 +468,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Ice Shards",
+          "hitbox": "Armored: Ice Shards",
           "shieldSafety": {
             "min": -36,
             "max": -22
@@ -506,7 +506,7 @@
       "startup": 19,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Regular: Hit 1",
           "shieldSafety": {
             "min": -42,
             "max": -41
@@ -521,7 +521,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Regular: Hit 2",
           "shieldSafety": {
             "min": -32,
             "max": -29
@@ -553,7 +553,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Armor: Hit 1",
           "shieldSafety": {
             "min": -42,
             "max": -41
@@ -568,7 +568,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Armor: Hit 2",
           "shieldSafety": {
             "min": -32,
             "max": -29
@@ -600,7 +600,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Ice Shards",
+          "hitbox": "Armor: Ice Shards",
           "shieldSafety": {
             "min": -35,
             "max": -21
@@ -638,7 +638,7 @@
       "startup": 15,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Regular: Hit 1",
           "shieldSafety": {
             "min": -39,
             "max": -38
@@ -650,7 +650,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Inner",
+          "hitbox": "Regular: Inner",
           "shieldSafety": {
             "min": -37,
             "max": -36
@@ -682,7 +682,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Mid",
+          "hitbox": "Regular: Mid",
           "shieldSafety": {
             "min": -33,
             "max": -32
@@ -714,7 +714,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tipper",
+          "hitbox": "Regular: Tipper",
           "shieldSafety": {
             "min": -32,
             "max": -31
@@ -746,7 +746,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Armor: Hit 1",
           "shieldSafety": {
             "min": -39,
             "max": -38
@@ -758,7 +758,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Inner",
+          "hitbox": "Armor: Hit 2 Inner",
           "shieldSafety": {
             "min": -37,
             "max": -36
@@ -790,7 +790,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Mid",
+          "hitbox": "Armor: Hit 2 Mid",
           "shieldSafety": {
             "min": -33,
             "max": -32
@@ -822,7 +822,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Tipper",
+          "hitbox": "Armor: Hit 2 Tipper",
           "shieldSafety": {
             "min": -32,
             "max": -31
@@ -854,7 +854,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Ice Shards",
+          "hitbox": "Armor: Ice Shards",
           "shieldSafety": {
             "min": -37,
             "max": -23
@@ -962,7 +962,7 @@
       "startup": 5,
       "hitboxes": [
         {
-          "hitbox": "Fist (Strong)",
+          "hitbox": "Punch: Fist (Strong)",
           "shieldSafety": {
             "min": -2,
             "max": -2
@@ -994,7 +994,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Arm (Weak)",
+          "hitbox": "Punch: Arm (Weak)",
           "shieldSafety": {
             "min": -4,
             "max": -4
@@ -1070,7 +1070,7 @@
       "startup": 9,
       "hitboxes": [
         {
-          "hitbox": "Hitgrab (On Shield)",
+          "hitbox": "Hitgrab: Hitgrab (On Shield)",
           "shieldSafety": {
             "min": -4,
             "max": -4
@@ -1082,7 +1082,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Throw",
+          "hitbox": "Throw: Throw",
           "shieldSafety": null,
           "shieldRaw": "N/A",
           "tumblePercent": null,
@@ -1337,7 +1337,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Falling",
+          "hitbox": "Airborne: Falling",
           "shieldSafety": {
             "min": 9,
             "max": 9,
@@ -1370,7 +1370,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Airborne: Landing",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1403,7 +1403,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Rising",
+          "hitbox": "Grounded: Rising",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1419,7 +1419,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Falling",
+          "hitbox": "Grounded: Falling",
           "shieldSafety": {
             "min": 9,
             "max": 9,
@@ -1452,7 +1452,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Grounded: Landing",
           "shieldSafety": {
             "min": 6,
             "max": 6,

@@ -1,14 +1,14 @@
 {
   "character": "Absa",
   "slug": "Absa",
-  "scrapedAt": "2026-06-03T19:44:09.335Z",
+  "scrapedAt": "2026-06-05T00:23:26.048Z",
   "moves": [
     {
       "move": "Jab",
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -10,
             "max": -8
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -10,
             "max": -8
@@ -38,7 +38,7 @@
       "startup": 9,
       "hitboxes": [
         {
-          "hitbox": "Body (Inner)",
+          "hitbox": "Regular (Hit 1): Body (Inner)",
           "shieldSafety": {
             "min": -17,
             "max": -14
@@ -57,8 +57,8 @@
             "FLEET": 36,
             "CLAIREN": 36,
             "RANNO": 37,
-            "FORSBURN": 38,
             "ORCANE": 38,
+            "FORSBURN": 38,
             "ZETTERBURN": 38,
             "SLADE": 38,
             "LA REINA": 39,
@@ -70,7 +70,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tip (Outer)",
+          "hitbox": "Regular (Hit 1): Tip (Outer)",
           "shieldSafety": {
             "min": -17,
             "max": -14
@@ -89,8 +89,8 @@
             "FLEET": 36,
             "CLAIREN": 36,
             "RANNO": 37,
-            "FORSBURN": 38,
             "ORCANE": 38,
+            "FORSBURN": 38,
             "ZETTERBURN": 38,
             "SLADE": 38,
             "LA REINA": 39,
@@ -102,7 +102,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Whip",
+          "hitbox": "Whip (Hit 2): Whip",
           "shieldSafety": {
             "min": -23,
             "max": -22
@@ -121,8 +121,8 @@
             "FLEET": 125,
             "CLAIREN": 126,
             "RANNO": 128,
-            "FORSBURN": 132,
             "ORCANE": 132,
+            "FORSBURN": 132,
             "ZETTERBURN": 132,
             "SLADE": 133,
             "LA REINA": 136,
@@ -159,8 +159,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -191,8 +191,8 @@
             "FLEET": 42,
             "CLAIREN": 43,
             "RANNO": 43,
-            "FORSBURN": 45,
             "ORCANE": 45,
+            "FORSBURN": 45,
             "ZETTERBURN": 45,
             "SLADE": 45,
             "LA REINA": 46,
@@ -229,8 +229,8 @@
             "FLEET": 42,
             "CLAIREN": 43,
             "RANNO": 44,
-            "FORSBURN": 45,
             "ORCANE": 45,
+            "FORSBURN": 45,
             "ZETTERBURN": 45,
             "SLADE": 45,
             "LA REINA": 47,
@@ -267,8 +267,8 @@
             "FLEET": 49,
             "CLAIREN": 49,
             "RANNO": 50,
-            "FORSBURN": 52,
             "ORCANE": 52,
+            "FORSBURN": 52,
             "ZETTERBURN": 52,
             "SLADE": 52,
             "LA REINA": 53,
@@ -299,8 +299,8 @@
             "FLEET": 46,
             "CLAIREN": 46,
             "RANNO": 47,
-            "FORSBURN": 49,
             "ORCANE": 49,
+            "FORSBURN": 49,
             "ZETTERBURN": 49,
             "SLADE": 49,
             "LA REINA": 50,
@@ -337,8 +337,8 @@
             "FLEET": 7,
             "CLAIREN": 7,
             "RANNO": 7,
-            "FORSBURN": 8,
             "ORCANE": 8,
+            "FORSBURN": 8,
             "ZETTERBURN": 8,
             "SLADE": 8,
             "LA REINA": 8,
@@ -387,8 +387,8 @@
             "FLEET": 4,
             "CLAIREN": 4,
             "RANNO": 4,
-            "FORSBURN": 5,
             "ORCANE": 5,
+            "FORSBURN": 5,
             "ZETTERBURN": 5,
             "SLADE": 5,
             "LA REINA": 5,
@@ -437,8 +437,8 @@
             "FLEET": 12,
             "CLAIREN": 12,
             "RANNO": 12,
-            "FORSBURN": 12,
             "ORCANE": 12,
+            "FORSBURN": 12,
             "ZETTERBURN": 12,
             "SLADE": 13,
             "LA REINA": 13,
@@ -487,8 +487,8 @@
             "FLEET": 45,
             "CLAIREN": 45,
             "RANNO": 46,
-            "FORSBURN": 47,
             "ORCANE": 47,
+            "FORSBURN": 47,
             "ZETTERBURN": 47,
             "SLADE": 48,
             "LA REINA": 49,
@@ -507,7 +507,10 @@
       "hitboxes": [
         {
           "hitbox": "Early (Hoof)",
-          "shieldSafety": null,
+          "shieldSafety": {
+            "min": 0,
+            "max": 0
+          },
           "shieldRaw": "+0",
           "tumblePercent": {
             "min": 7,
@@ -522,8 +525,8 @@
             "FLEET": 9,
             "CLAIREN": 9,
             "RANNO": 10,
-            "FORSBURN": 10,
             "ORCANE": 10,
+            "FORSBURN": 10,
             "ZETTERBURN": 10,
             "SLADE": 10,
             "LA REINA": 11,
@@ -554,8 +557,8 @@
             "FLEET": 46,
             "CLAIREN": 46,
             "RANNO": 47,
-            "FORSBURN": 49,
             "ORCANE": 49,
+            "FORSBURN": 49,
             "ZETTERBURN": 49,
             "SLADE": 49,
             "LA REINA": 50,
@@ -592,8 +595,8 @@
             "FLEET": 9,
             "CLAIREN": 9,
             "RANNO": 10,
-            "FORSBURN": 10,
             "ORCANE": 10,
+            "FORSBURN": 10,
             "ZETTERBURN": 10,
             "SLADE": 10,
             "LA REINA": 11,
@@ -624,8 +627,8 @@
             "FLEET": 46,
             "CLAIREN": 46,
             "RANNO": 47,
-            "FORSBURN": 49,
             "ORCANE": 49,
+            "FORSBURN": 49,
             "ZETTERBURN": 49,
             "SLADE": 49,
             "LA REINA": 50,
@@ -662,8 +665,8 @@
             "FLEET": 1,
             "CLAIREN": 1,
             "RANNO": 1,
-            "FORSBURN": 1,
             "ORCANE": 1,
+            "FORSBURN": 1,
             "ZETTERBURN": 1,
             "SLADE": 2,
             "LA REINA": 2,
@@ -694,8 +697,8 @@
             "FLEET": 13,
             "CLAIREN": 14,
             "RANNO": 14,
-            "FORSBURN": 15,
             "ORCANE": 15,
+            "FORSBURN": 15,
             "ZETTERBURN": 15,
             "SLADE": 15,
             "LA REINA": 15,
@@ -736,8 +739,8 @@
             "FLEET": 2,
             "CLAIREN": 3,
             "RANNO": 3,
-            "FORSBURN": 3,
             "ORCANE": 3,
+            "FORSBURN": 3,
             "ZETTERBURN": 3,
             "SLADE": 3,
             "LA REINA": 4,
@@ -754,8 +757,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -785,8 +788,8 @@
             "FLEET": 29,
             "CLAIREN": 29,
             "RANNO": 30,
-            "FORSBURN": 31,
             "ORCANE": 31,
+            "FORSBURN": 31,
             "ZETTERBURN": 31,
             "SLADE": 31,
             "LA REINA": 32,
@@ -823,8 +826,8 @@
             "FLEET": 65,
             "CLAIREN": 66,
             "RANNO": 67,
-            "FORSBURN": 69,
             "ORCANE": 69,
+            "FORSBURN": 69,
             "ZETTERBURN": 69,
             "SLADE": 69,
             "LA REINA": 71,
@@ -836,7 +839,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Charged",
+          "hitbox": "Charged: Charged",
           "shieldSafety": {
             "min": -30,
             "max": -27
@@ -855,8 +858,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -893,8 +896,8 @@
             "FLEET": 65,
             "CLAIREN": 66,
             "RANNO": 67,
-            "FORSBURN": 69,
             "ORCANE": 69,
+            "FORSBURN": 69,
             "ZETTERBURN": 69,
             "SLADE": 69,
             "LA REINA": 71,
@@ -912,7 +915,7 @@
       "startup": 14,
       "hitboxes": [
         {
-          "hitbox": "Blip",
+          "hitbox": "Double Blip: Blip",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -928,7 +931,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Blip",
+          "hitbox": "Single Blip (Short): Blip",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -951,7 +954,10 @@
       "hitboxes": [
         {
           "hitbox": "Tick Tick",
-          "shieldSafety": null,
+          "shieldSafety": {
+            "min": 74,
+            "max": 77
+          },
           "shieldRaw": "+74 to +77",
           "tumblePercent": {
             "min": 13,
@@ -962,8 +968,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tick Tock",
-          "shieldSafety": null,
+          "hitbox": "Charged: Tick Tock",
+          "shieldSafety": {
+            "min": 16,
+            "max": 19
+          },
           "shieldRaw": "+16 to +19",
           "tumblePercent": {
             "min": 13,
@@ -1135,8 +1144,8 @@
             "FLEET": 12,
             "CLAIREN": 12,
             "RANNO": 12,
-            "FORSBURN": 13,
             "ORCANE": 13,
+            "FORSBURN": 13,
             "ZETTERBURN": 13,
             "SLADE": 13,
             "LA REINA": 13,
@@ -1173,8 +1182,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -1211,8 +1220,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -1249,8 +1258,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,
@@ -1296,8 +1305,8 @@
             "FLEET": 0,
             "CLAIREN": 0,
             "RANNO": 0,
-            "FORSBURN": 0,
             "ORCANE": 0,
+            "FORSBURN": 0,
             "ZETTERBURN": 0,
             "SLADE": 0,
             "LA REINA": 0,

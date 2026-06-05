@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-03T19:44:17.009Z",
+  "scrapedAt": "2026-06-05T00:23:34.319Z",
   "moves": [
     {
       "move": "Jab",
@@ -1275,7 +1275,7 @@
       "startup": 11,
       "hitboxes": [
         {
-          "hitbox": "Blade (Level 1)",
+          "hitbox": "Level 1: Blade (Level 1)",
           "shieldSafety": {
             "min": -23,
             "max": -22
@@ -1307,7 +1307,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tipper (Level 1)",
+          "hitbox": "Level 1: Tipper (Level 1)",
           "shieldSafety": {
             "min": -20,
             "max": -19
@@ -1339,7 +1339,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Blade (Level 2)",
+          "hitbox": "Level 2: Blade (Level 2)",
           "shieldSafety": {
             "min": -35,
             "max": -34
@@ -1371,7 +1371,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tipper (Level 2)",
+          "hitbox": "Level 2: Tipper (Level 2)",
           "shieldSafety": {
             "min": -29,
             "max": -28
@@ -1403,7 +1403,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Blade (Level 3)",
+          "hitbox": "Level 3: Blade (Level 3)",
           "shieldSafety": {
             "min": -35,
             "max": -34
@@ -1435,7 +1435,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Tipper (Level 3)",
+          "hitbox": "Level 3: Tipper (Level 3)",
           "shieldSafety": {
             "min": -28,
             "max": -27
@@ -1467,7 +1467,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Laser",
+          "hitbox": "Finisher: Laser",
           "shieldSafety": {
             "min": -69,
             "max": -68
@@ -1488,7 +1488,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Cross (Sour)",
+          "hitbox": "On Hit: Cross (Sour)",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1521,7 +1521,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Center (Sweetspot)",
+          "hitbox": "On Hit: Center (Sweetspot)",
           "shieldSafety": {
             "min": 10,
             "max": 10,
@@ -1710,7 +1710,7 @@
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Hit 1 & 2",
+          "hitbox": "Trigger: Hit 1 & 2",
           "shieldSafety": {
             "min": -11,
             "max": -8
@@ -1722,7 +1722,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3",
+          "hitbox": "Trigger: Hit 3",
           "shieldSafety": {
             "min": -7,
             "max": -4

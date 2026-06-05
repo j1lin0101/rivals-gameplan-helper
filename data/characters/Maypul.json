@@ -1,14 +1,14 @@
 {
   "character": "Maypul",
   "slug": "Maypul",
-  "scrapedAt": "2026-06-03T19:44:08.100Z",
+  "scrapedAt": "2026-06-05T00:23:24.682Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 5,
       "hitboxes": [
         {
-          "hitbox": "Jab KB",
+          "hitbox": "Jab 1: Jab KB",
           "shieldSafety": {
             "min": -14,
             "max": -13
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab KB",
+          "hitbox": "Jab 2: Jab KB",
           "shieldSafety": {
             "min": -19,
             "max": -18
@@ -809,7 +809,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Dash",
+          "hitbox": "Grounded: Dash",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -825,7 +825,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dash",
+          "hitbox": "Aerial: Dash",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -952,7 +952,7 @@
       "startup": 30,
       "hitboxes": [
         {
-          "hitbox": "Bite",
+          "hitbox": "Lily Bite (No Hitstun): Bite",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -968,7 +968,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Bite",
+          "hitbox": "Lily Bite (Hitstun): Bite",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -984,7 +984,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Wrap",
+          "hitbox": "Lily Wrap: Wrap",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1269,7 +1269,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Terry",
+          "hitbox": "Summoning Terry: Terry",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1285,7 +1285,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Terry",
+          "hitbox": "Seed at Terry: Terry",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1301,7 +1301,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Terry",
+          "hitbox": "Parrying Terry (Perry): Terry",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1361,7 +1361,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Dive",
+          "hitbox": "Grounded (Standard): Dive",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1374,7 +1374,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Grounded (Standard): Landing",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1407,7 +1407,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dive",
+          "hitbox": "Airborne: Dive",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1420,7 +1420,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Airborne: Landing",
           "shieldSafety": {
             "min": 4,
             "max": 4,

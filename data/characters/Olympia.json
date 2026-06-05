@@ -1,14 +1,14 @@
 {
   "character": "Olympia",
   "slug": "Olympia",
-  "scrapedAt": "2026-06-03T19:44:20.886Z",
+  "scrapedAt": "2026-06-05T00:23:38.191Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Hit 3",
+          "hitbox": "Jab 3: Hit 3",
           "shieldSafety": {
             "min": -22,
             "max": -18
@@ -23,7 +23,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Jab 2: Hit 2",
           "shieldSafety": {
             "min": -16,
             "max": -14
@@ -35,7 +35,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Jab 1: Hit 1",
           "shieldSafety": {
             "min": -15,
             "max": -13
@@ -993,7 +993,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Projectile",
+          "hitbox": "Throw Gem: Projectile",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1009,7 +1009,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Crystalize",
+          "hitbox": "Gem Pop: Crystalize",
           "shieldSafety": {
             "min": -11,
             "max": -10
@@ -1021,7 +1021,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Exit Crystal",
+          "hitbox": "Gem Pop: Exit Crystal",
           "shieldSafety": {
             "min": -45,
             "max": -45
@@ -1053,7 +1053,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dash",
+          "hitbox": "Gem Dash: Dash",
           "shieldSafety": {
             "min": -15,
             "max": -6
@@ -1065,7 +1065,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit Crystal",
+          "hitbox": "Gem Dash: Hit Crystal",
           "shieldSafety": {
             "min": -3,
             "max": -1
@@ -1103,7 +1103,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Air Slam: Slam",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1119,7 +1119,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Slam",
+          "hitbox": "Landing Slam: Slam",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1135,7 +1135,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Crystalize",
+          "hitbox": "Airborne Gem Toss: Crystalize",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1148,7 +1148,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Exit Crystal",
+          "hitbox": "Airborne Gem Toss: Exit Crystal",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1181,7 +1181,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Crystalize",
+          "hitbox": "Gem Landing: Crystalize",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1194,7 +1194,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Exit Crystal",
+          "hitbox": "Gem Landing: Exit Crystal",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1301,7 +1301,7 @@
       "startup": 46,
       "hitboxes": [
         {
-          "hitbox": "Charged",
+          "hitbox": "Full Charge: Charged",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1314,7 +1314,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Pop",
+          "hitbox": "Full Charge: Pop",
           "shieldSafety": {
             "min": 1,
             "max": 1,

@@ -1,14 +1,14 @@
 {
   "character": "Forsburn",
   "slug": "Forsburn",
-  "scrapedAt": "2026-06-03T19:44:06.534Z",
+  "scrapedAt": "2026-06-05T00:23:23.432Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -17,
             "max": -16
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 3",
+          "hitbox": "Jab 3: Jab 3",
           "shieldSafety": {
             "min": -20,
             "max": -18
@@ -354,7 +354,7 @@
       "startup": 15,
       "hitboxes": [
         {
-          "hitbox": "Cloak Inner",
+          "hitbox": "Cape: Cloak Inner",
           "shieldSafety": {
             "min": -28,
             "max": -26
@@ -366,7 +366,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Cloak Mid",
+          "hitbox": "Cape: Cloak Mid",
           "shieldSafety": {
             "min": -28,
             "max": -26
@@ -378,7 +378,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Cloak Outer",
+          "hitbox": "Cape: Cloak Outer",
           "shieldSafety": {
             "min": -28,
             "max": -26
@@ -390,7 +390,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dagger",
+          "hitbox": "Dagger: Dagger",
           "shieldSafety": {
             "min": -24,
             "max": -22
@@ -428,7 +428,7 @@
       "startup": 15,
       "hitboxes": [
         {
-          "hitbox": "Cloak Inner",
+          "hitbox": "Cape: Cloak Inner",
           "shieldSafety": {
             "min": -25,
             "max": -20
@@ -443,7 +443,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Cloak Outer Low",
+          "hitbox": "Cape: Cloak Outer Low",
           "shieldSafety": {
             "min": -25,
             "max": -20
@@ -458,7 +458,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Cloak Outer High",
+          "hitbox": "Cape: Cloak Outer High",
           "shieldSafety": {
             "min": -25,
             "max": -20
@@ -470,7 +470,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dagger",
+          "hitbox": "Dagger: Dagger",
           "shieldSafety": {
             "min": -22,
             "max": -20
@@ -1013,7 +1013,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Dagger",
+          "hitbox": "Dagger Throw: Dagger",
           "shieldSafety": {
             "min": -30,
             "max": -24
@@ -1045,8 +1045,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Pop",
-          "shieldSafety": null,
+          "hitbox": "Pop: Pop",
+          "shieldSafety": {
+            "min": 3,
+            "max": 6
+          },
           "shieldRaw": "+3 to +6",
           "tumblePercent": {
             "min": 182,
@@ -1074,8 +1077,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Inner (Strong)",
-          "shieldSafety": null,
+          "hitbox": "Superclone Combust: Inner (Strong)",
+          "shieldSafety": {
+            "min": -3,
+            "max": 1
+          },
           "shieldRaw": "-3 to +1",
           "tumblePercent": {
             "min": 14,
@@ -1103,8 +1109,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Outer (Weak)",
-          "shieldSafety": null,
+          "hitbox": "Superclone Combust: Outer (Weak)",
+          "shieldSafety": {
+            "min": -4,
+            "max": 0
+          },
           "shieldRaw": "-4 to +0",
           "tumblePercent": {
             "min": 28,
@@ -1138,7 +1147,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Uspecial",
+          "hitbox": "Regular: Uspecial",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1177,7 +1186,7 @@
       "startup": 9,
       "hitboxes": [
         {
-          "hitbox": "Inner (Strong)",
+          "hitbox": "Combust: Inner (Strong)",
           "shieldSafety": {
             "min": -16,
             "max": -12
@@ -1209,7 +1218,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Outer (Weak)",
+          "hitbox": "Combust: Outer (Weak)",
           "shieldSafety": {
             "min": -19,
             "max": -15
@@ -1400,7 +1409,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Travel",
+          "hitbox": "Throw Clone: Travel",
           "shieldSafety": {
             "min": -45,
             "max": -36
@@ -1415,7 +1424,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Explosion",
+          "hitbox": "Throw Clone: Explosion",
           "shieldSafety": {
             "min": -32,
             "max": -29
@@ -1447,7 +1456,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Travel",
+          "hitbox": "Throw Self: Travel",
           "shieldSafety": {
             "min": -34,
             "max": -25
@@ -1462,7 +1471,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing",
+          "hitbox": "Throw Self: Landing",
           "shieldSafety": {
             "min": -23,
             "max": -21

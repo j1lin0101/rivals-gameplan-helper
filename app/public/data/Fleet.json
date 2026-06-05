@@ -1,14 +1,14 @@
 {
   "character": "Fleet",
   "slug": "Fleet",
-  "scrapedAt": "2026-06-03T19:44:18.328Z",
+  "scrapedAt": "2026-06-05T00:23:35.563Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -13,
             "max": -12
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -15,
             "max": -13
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Arrow (Sour)",
+          "hitbox": "Jab 3: Arrow (Sour)",
           "shieldSafety": {
             "min": -20,
             "max": -17
@@ -64,7 +64,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Arrowhead (Sweet)",
+          "hitbox": "Jab 3: Arrowhead (Sweet)",
           "shieldSafety": {
             "min": -20,
             "max": -17
@@ -416,7 +416,7 @@
       "startup": 21,
       "hitboxes": [
         {
-          "hitbox": "Early",
+          "hitbox": "Regular: Early",
           "shieldSafety": {
             "min": -21,
             "max": -20
@@ -448,7 +448,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Mid",
+          "hitbox": "Regular: Mid",
           "shieldSafety": {
             "min": -22,
             "max": -18
@@ -480,8 +480,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late",
-          "shieldSafety": null,
+          "hitbox": "Regular: Late",
+          "shieldSafety": {
+            "min": -19,
+            "max": 43
+          },
           "shieldRaw": "-19 to +43",
           "tumblePercent": {
             "min": 14,
@@ -509,7 +512,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Early",
+          "hitbox": "Fully Charged: Early",
           "shieldSafety": {
             "min": -21,
             "max": -20
@@ -541,7 +544,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Mid",
+          "hitbox": "Fully Charged: Mid",
           "shieldSafety": {
             "min": -22,
             "max": -18
@@ -573,8 +576,11 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late",
-          "shieldSafety": null,
+          "hitbox": "Fully Charged: Late",
+          "shieldSafety": {
+            "min": -19,
+            "max": 43
+          },
           "shieldRaw": "-19 to +43",
           "tumblePercent": {
             "min": 14,
@@ -602,7 +608,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Falling",
+          "hitbox": "Fully Charged: Falling",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1107,7 +1113,7 @@
       "startup": 8,
       "hitboxes": [
         {
-          "hitbox": "Wind Chime",
+          "hitbox": "Wind Chime: Wind Chime",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1211,7 +1217,10 @@
         },
         {
           "hitbox": "Tornado",
-          "shieldSafety": null,
+          "shieldSafety": {
+            "min": 27,
+            "max": 86
+          },
           "shieldRaw": "+27 to +86",
           "tumblePercent": null,
           "tumbleRaw": "Never",
@@ -1313,7 +1322,7 @@
       "startup": 31,
       "hitboxes": [
         {
-          "hitbox": "Arrow",
+          "hitbox": "On Whiff: Arrow",
           "shieldSafety": {
             "min": 5,
             "max": 5,
@@ -1329,7 +1338,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Arrow",
+          "hitbox": "On Hit: Arrow",
           "shieldSafety": {
             "min": 5,
             "max": 5,

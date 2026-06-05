@@ -1,14 +1,14 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-03T19:44:15.721Z",
+  "scrapedAt": "2026-06-05T00:23:32.902Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 4,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -11,
             "max": -10
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -13,
             "max": -12
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab Final",
+          "hitbox": "Jab 3: Jab Final",
           "shieldSafety": {
             "min": -16,
             "max": -15
@@ -44,7 +44,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Rapid Jab",
+          "hitbox": "Rapid Jab: Rapid Jab",
           "shieldSafety": {
             "min": -17,
             "max": -15
@@ -354,7 +354,7 @@
       "startup": 15,
       "hitboxes": [
         {
-          "hitbox": "Arm (Strong)",
+          "hitbox": "Regular: Arm (Strong)",
           "shieldSafety": {
             "min": -30,
             "max": -27
@@ -386,7 +386,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Body (Weak)",
+          "hitbox": "Regular: Body (Weak)",
           "shieldSafety": {
             "min": -32,
             "max": -31
@@ -418,7 +418,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Arm (Strong)",
+          "hitbox": "Fully Charged: Arm (Strong)",
           "shieldSafety": {
             "min": -30,
             "max": -27
@@ -450,7 +450,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Body (Weak)",
+          "hitbox": "Fully Charged: Body (Weak)",
           "shieldSafety": {
             "min": -32,
             "max": -31
@@ -482,7 +482,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Palm Projectile",
+          "hitbox": "Fully Charged: Palm Projectile",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -860,7 +860,10 @@
         },
         {
           "hitbox": "Heel (Spike)",
-          "shieldSafety": null,
+          "shieldSafety": {
+            "min": 0,
+            "max": 0
+          },
           "shieldRaw": "+0",
           "tumblePercent": {
             "min": 25,
@@ -1219,7 +1222,7 @@
       "startup": 16,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "On Hit: Hit 1",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1232,7 +1235,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "On Hit: Hit 2",
           "shieldSafety": {
             "min": 7,
             "max": 7,
@@ -1245,7 +1248,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3",
+          "hitbox": "On Hit: Hit 3",
           "shieldSafety": null,
           "shieldRaw": "-6--5",
           "tumblePercent": {
@@ -1280,7 +1283,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Dart",
+          "hitbox": "Dart Throw: Dart",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1302,7 +1305,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Early",
+          "hitbox": "Lunge: Early",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1335,7 +1338,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late",
+          "hitbox": "Lunge: Late",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -1368,7 +1371,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Divekick",
+          "hitbox": "Divekick: Divekick",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1401,7 +1404,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing Hit",
+          "hitbox": "Divekick: Landing Hit",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1434,7 +1437,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dart",
+          "hitbox": "Needle Storm: Dart",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1450,7 +1453,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Vortex Multihit",
+          "hitbox": "Needle Storm: Vortex Multihit",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1463,7 +1466,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Vortex Final",
+          "hitbox": "Needle Storm: Vortex Final",
           "shieldSafety": {
             "min": 1,
             "max": 1,

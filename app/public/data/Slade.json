@@ -1,14 +1,14 @@
 {
   "character": "Slade",
   "slug": "Slade",
-  "scrapedAt": "2026-06-03T19:44:24.625Z",
+  "scrapedAt": "2026-06-05T00:23:42.067Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 6,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -15,
             "max": -13
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -17,
             "max": -15
@@ -35,7 +35,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Rapid Jab",
+          "hitbox": "Multijab: Rapid Jab",
           "shieldSafety": {
             "min": -14,
             "max": -13
@@ -911,7 +911,7 @@
       "startup": 13,
       "hitboxes": [
         {
-          "hitbox": "Early Sword (Out)",
+          "hitbox": "Regular: Early Sword (Out)",
           "shieldSafety": {
             "min": 10,
             "max": 10,
@@ -944,7 +944,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Early Body (Spike)",
+          "hitbox": "Regular: Early Body (Spike)",
           "shieldSafety": {
             "min": 9,
             "max": 9,
@@ -998,7 +998,7 @@
           }
         },
         {
-          "hitbox": "Late Sword (Out)",
+          "hitbox": "Regular: Late Sword (Out)",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -1031,7 +1031,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late Body (Spike)",
+          "hitbox": "Regular: Late Body (Spike)",
           "shieldSafety": {
             "min": 5,
             "max": 5,
@@ -1085,7 +1085,7 @@
           }
         },
         {
-          "hitbox": "Dive",
+          "hitbox": "Earthen: Dive",
           "shieldSafety": {
             "min": 7,
             "max": 7,
@@ -1139,7 +1139,7 @@
           }
         },
         {
-          "hitbox": "Landing Sweet",
+          "hitbox": "Earthen: Landing Sweet",
           "shieldSafety": null,
           "shieldRaw": "-27--25",
           "tumblePercent": {
@@ -1168,7 +1168,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing Sour",
+          "hitbox": "Earthen: Landing Sour",
           "shieldSafety": null,
           "shieldRaw": "-28--26",
           "tumblePercent": {
@@ -1215,24 +1215,7 @@
             "max": 179
           },
           "tumbleRaw": "146 - 179%",
-          "perCharacterTumble": {
-            "WRASTOR": 146,
-            "OLYMPIA": 152,
-            "ABSA": 153,
-            "MAYPUL": 155,
-            "FLEET": 158,
-            "CLAIREN": 160,
-            "RANNO": 162,
-            "FORSBURN": 166,
-            "ORCANE": 166,
-            "ZETTERBURN": 166,
-            "SLADE": 168,
-            "LA REINA": 172,
-            "GALVAN": 174,
-            "ETALUS": 176,
-            "KRAGG": 178,
-            "LOXODONT": 179
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1248,24 +1231,7 @@
             "max": 106
           },
           "tumbleRaw": "86 - 106%",
-          "perCharacterTumble": {
-            "WRASTOR": 86,
-            "OLYMPIA": 90,
-            "ABSA": 91,
-            "MAYPUL": 92,
-            "FLEET": 93,
-            "CLAIREN": 94,
-            "RANNO": 96,
-            "FORSBURN": 99,
-            "ORCANE": 99,
-            "ZETTERBURN": 99,
-            "SLADE": 100,
-            "LA REINA": 102,
-            "GALVAN": 103,
-            "ETALUS": 104,
-            "KRAGG": 105,
-            "LOXODONT": 106
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1281,24 +1247,7 @@
             "max": 178
           },
           "tumbleRaw": "145 - 178%",
-          "perCharacterTumble": {
-            "WRASTOR": 145,
-            "OLYMPIA": 151,
-            "ABSA": 152,
-            "MAYPUL": 154,
-            "FLEET": 157,
-            "CLAIREN": 159,
-            "RANNO": 161,
-            "FORSBURN": 165,
-            "ORCANE": 165,
-            "ZETTERBURN": 165,
-            "SLADE": 167,
-            "LA REINA": 171,
-            "GALVAN": 173,
-            "ETALUS": 175,
-            "KRAGG": 177,
-            "LOXODONT": 178
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1314,24 +1263,7 @@
             "max": 62
           },
           "tumbleRaw": "49 - 62%",
-          "perCharacterTumble": {
-            "WRASTOR": 49,
-            "OLYMPIA": 52,
-            "ABSA": 52,
-            "MAYPUL": 53,
-            "FLEET": 54,
-            "CLAIREN": 55,
-            "RANNO": 55,
-            "FORSBURN": 57,
-            "ORCANE": 57,
-            "ZETTERBURN": 57,
-            "SLADE": 58,
-            "LA REINA": 59,
-            "GALVAN": 60,
-            "ETALUS": 61,
-            "KRAGG": 61,
-            "LOXODONT": 62
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1347,24 +1279,7 @@
             "max": 62
           },
           "tumbleRaw": "49 - 62%",
-          "perCharacterTumble": {
-            "WRASTOR": 49,
-            "OLYMPIA": 52,
-            "ABSA": 52,
-            "MAYPUL": 53,
-            "FLEET": 54,
-            "CLAIREN": 55,
-            "RANNO": 55,
-            "FORSBURN": 57,
-            "ORCANE": 57,
-            "ZETTERBURN": 57,
-            "SLADE": 58,
-            "LA REINA": 59,
-            "GALVAN": 60,
-            "ETALUS": 61,
-            "KRAGG": 61,
-            "LOXODONT": 62
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1380,24 +1295,7 @@
             "max": 179
           },
           "tumbleRaw": "146 - 179%",
-          "perCharacterTumble": {
-            "WRASTOR": 146,
-            "OLYMPIA": 152,
-            "ABSA": 153,
-            "MAYPUL": 155,
-            "FLEET": 158,
-            "CLAIREN": 160,
-            "RANNO": 162,
-            "FORSBURN": 166,
-            "ORCANE": 166,
-            "ZETTERBURN": 166,
-            "SLADE": 168,
-            "LA REINA": 172,
-            "GALVAN": 174,
-            "ETALUS": 176,
-            "KRAGG": 178,
-            "LOXODONT": 179
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1413,24 +1311,7 @@
             "max": 66
           },
           "tumbleRaw": "53 - 66%",
-          "perCharacterTumble": {
-            "WRASTOR": 53,
-            "OLYMPIA": 55,
-            "ABSA": 56,
-            "MAYPUL": 57,
-            "FLEET": 58,
-            "CLAIREN": 58,
-            "RANNO": 59,
-            "FORSBURN": 61,
-            "ORCANE": 61,
-            "ZETTERBURN": 61,
-            "SLADE": 61,
-            "LA REINA": 63,
-            "GALVAN": 64,
-            "ETALUS": 64,
-            "KRAGG": 65,
-            "LOXODONT": 66
-          },
+          "perCharacterTumble": {},
           "perCharacterTumbleAerial": {}
         },
         {
@@ -1473,7 +1354,7 @@
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Hit 1 Inner",
+          "hitbox": "Hit 1: Hit 1 Inner",
           "shieldSafety": {
             "min": -22,
             "max": -20
@@ -1505,7 +1386,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Outer",
+          "hitbox": "Hit 1: Hit 1 Outer",
           "shieldSafety": {
             "min": -22,
             "max": -20
@@ -1537,7 +1418,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2F Inner",
+          "hitbox": "Hit 2 Forward: Hit 2F Inner",
           "shieldSafety": {
             "min": -23,
             "max": -21
@@ -1569,7 +1450,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2F Outer",
+          "hitbox": "Hit 2 Forward: Hit 2F Outer",
           "shieldSafety": {
             "min": -23,
             "max": -21
@@ -1601,7 +1482,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2D Inner",
+          "hitbox": "Hit 2 Down: Hit 2D Inner",
           "shieldSafety": {
             "min": -16,
             "max": -15
@@ -1633,7 +1514,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2D Outer",
+          "hitbox": "Hit 2 Down: Hit 2D Outer",
           "shieldSafety": {
             "min": -16,
             "max": -15
@@ -1665,7 +1546,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3F",
+          "hitbox": "Hit 3 Forward: Hit 3F",
           "shieldSafety": {
             "min": -22,
             "max": -19
@@ -1680,7 +1561,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3D",
+          "hitbox": "Hit 3 Down: Hit 3D",
           "shieldSafety": {
             "min": -25,
             "max": -22
@@ -1733,7 +1614,7 @@
           }
         },
         {
-          "hitbox": "Hit 3D Ground",
+          "hitbox": "Hit 3 Down: Hit 3D Ground",
           "shieldSafety": {
             "min": -25,
             "max": -22
@@ -1786,7 +1667,7 @@
           }
         },
         {
-          "hitbox": "Hit 4F",
+          "hitbox": "Hit 4 Forward: Hit 4F",
           "shieldSafety": {
             "min": -25,
             "max": -22
@@ -1801,7 +1682,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4D Multi",
+          "hitbox": "Hit 4 Down: Hit 4D Multi",
           "shieldSafety": {
             "min": -29,
             "max": -27
@@ -1813,7 +1694,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4D Final",
+          "hitbox": "Hit 4 Down: Hit 4D Final",
           "shieldSafety": {
             "min": -23,
             "max": -21
@@ -1845,7 +1726,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4B",
+          "hitbox": "Hit 4 Back: Hit 4B",
           "shieldSafety": {
             "min": -22,
             "max": -20
@@ -1860,7 +1741,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4U",
+          "hitbox": "Hit 4 Up: Hit 4U",
           "shieldSafety": {
             "min": -22,
             "max": -18
@@ -1881,7 +1762,7 @@
       "startup": 10,
       "hitboxes": [
         {
-          "hitbox": "Early",
+          "hitbox": "Grounded: Early",
           "shieldSafety": {
             "min": -71,
             "max": -66
@@ -1913,7 +1794,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late",
+          "hitbox": "Grounded: Late",
           "shieldSafety": {
             "min": -71,
             "max": -38
@@ -1945,7 +1826,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Outer",
+          "hitbox": "Airborne: Hit 1 Outer",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1958,7 +1839,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Inner High",
+          "hitbox": "Airborne: Hit 1 Inner High",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1971,7 +1852,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1 Inner Low",
+          "hitbox": "Airborne: Hit 1 Inner Low",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1984,7 +1865,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Outer",
+          "hitbox": "Airborne: Hit 2 Outer",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1997,7 +1878,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Inner High",
+          "hitbox": "Airborne: Hit 2 Inner High",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2010,7 +1891,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2 Inner Low",
+          "hitbox": "Airborne: Hit 2 Inner Low",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2023,7 +1904,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3 Outer",
+          "hitbox": "Airborne: Hit 3 Outer",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2036,7 +1917,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3 Inner High",
+          "hitbox": "Airborne: Hit 3 Inner High",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2049,7 +1930,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 3 Inner Low",
+          "hitbox": "Airborne: Hit 3 Inner Low",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2062,7 +1943,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4 Outer",
+          "hitbox": "Airborne: Hit 4 Outer",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2075,7 +1956,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4 Inner High",
+          "hitbox": "Airborne: Hit 4 Inner High",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2088,7 +1969,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 4 Inner Low",
+          "hitbox": "Airborne: Hit 4 Inner Low",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -2101,7 +1982,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Final",
+          "hitbox": "Airborne: Final",
           "shieldSafety": {
             "min": 3,
             "max": 3,
@@ -2140,7 +2021,7 @@
       "startup": 16,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Chest Drop: Slam",
           "shieldSafety": {
             "min": -26,
             "max": -24
@@ -2172,7 +2053,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Falling",
+          "hitbox": "Chest Drop: Falling",
           "shieldSafety": {
             "min": 6,
             "max": 6,
@@ -2205,7 +2086,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Opening",
+          "hitbox": "Fire & Destroy: Opening",
           "shieldSafety": {
             "min": 1,
             "max": 1,

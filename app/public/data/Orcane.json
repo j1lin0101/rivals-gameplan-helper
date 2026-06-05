@@ -1,14 +1,14 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-03T19:44:11.945Z",
+  "scrapedAt": "2026-06-05T00:23:28.919Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 5,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -17,
             "max": -16
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 3",
+          "hitbox": "Jab 3: Jab 3",
           "shieldSafety": {
             "min": -16,
             "max": -14
@@ -350,7 +350,7 @@
       "startup": 14,
       "hitboxes": [
         {
-          "hitbox": "Jet",
+          "hitbox": "No Puddle: Jet",
           "shieldSafety": {
             "min": -26,
             "max": -23
@@ -365,7 +365,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jet (Puddle)",
+          "hitbox": "Puddle: Jet (Puddle)",
           "shieldSafety": {
             "min": -26,
             "max": -23
@@ -386,7 +386,7 @@
       "startup": 20,
       "hitboxes": [
         {
-          "hitbox": "Early",
+          "hitbox": "No Puddle: Early",
           "shieldSafety": {
             "min": -26,
             "max": -24
@@ -418,7 +418,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late",
+          "hitbox": "No Puddle: Late",
           "shieldSafety": {
             "min": -25,
             "max": -21
@@ -450,7 +450,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Early (Puddle)",
+          "hitbox": "Puddle: Early (Puddle)",
           "shieldSafety": {
             "min": -30,
             "max": -28
@@ -482,7 +482,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late (Puddle)",
+          "hitbox": "Puddle: Late (Puddle)",
           "shieldSafety": {
             "min": -30,
             "max": -26
@@ -520,7 +520,7 @@
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Normal",
+          "hitbox": "No Puddle: Normal",
           "shieldSafety": {
             "min": -38,
             "max": -35
@@ -535,7 +535,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Puddle",
+          "hitbox": "Puddle: Puddle",
           "shieldSafety": {
             "min": -34,
             "max": -31
@@ -573,7 +573,7 @@
       "startup": 4,
       "hitboxes": [
         {
-          "hitbox": "Early (Strong)",
+          "hitbox": "Regular: Early (Strong)",
           "shieldSafety": {
             "min": -4,
             "max": -4
@@ -605,7 +605,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late (Weak)",
+          "hitbox": "Regular: Late (Weak)",
           "shieldSafety": {
             "min": -5,
             "max": -5
@@ -637,7 +637,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Early (Strong)",
+          "hitbox": "Bounce: Early (Strong)",
           "shieldSafety": {
             "min": -4,
             "max": -4
@@ -669,7 +669,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late (Weak)",
+          "hitbox": "Bounce: Late (Weak)",
           "shieldSafety": {
             "min": -5,
             "max": -5
@@ -1232,7 +1232,7 @@
       "startup": 16,
       "hitboxes": [
         {
-          "hitbox": "Early (Strong)",
+          "hitbox": "Create Puddle / Teleport to Puddle (Grounded): Early (Strong)",
           "shieldSafety": {
             "min": -41,
             "max": -35
@@ -1264,7 +1264,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late (Weak)",
+          "hitbox": "Create Puddle / Teleport to Puddle (Grounded): Late (Weak)",
           "shieldSafety": {
             "min": -35,
             "max": -28
@@ -1296,7 +1296,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Early (Strong)",
+          "hitbox": "Teleport to Puddle (Airborne): Early (Strong)",
           "shieldSafety": {
             "min": -41,
             "max": -35
@@ -1328,7 +1328,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Late (Weak)",
+          "hitbox": "Teleport to Puddle (Airborne): Late (Weak)",
           "shieldSafety": {
             "min": -35,
             "max": -28
@@ -1366,7 +1366,7 @@
       "startup": null,
       "hitboxes": [
         {
-          "hitbox": "Droplet",
+          "hitbox": "Droplet Spawn: Droplet",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1399,7 +1399,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Bubble",
+          "hitbox": "Bubble Pop: Bubble",
           "shieldSafety": {
             "min": 2,
             "max": 2,
@@ -1456,7 +1456,7 @@
       "startup": 31,
       "hitboxes": [
         {
-          "hitbox": "Throw",
+          "hitbox": "Puddle: Throw",
           "shieldSafety": {
             "min": 9,
             "max": 9,
@@ -1469,7 +1469,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Throw",
+          "hitbox": "No Puddle: Throw",
           "shieldSafety": {
             "min": 5,
             "max": 5,

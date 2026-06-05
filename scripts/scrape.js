@@ -19,9 +19,9 @@ function parseShieldSafety(raw) {
   // "Stun: N" means the shield is stunned for N frames — positive advantage for the attacker
   const stun = clean.match(/^Stun:\s*(\d+)$/i);
   if (stun) { const v = parseInt(stun[1]); return { min: v, max: v, isStun: true }; }
-  const range = clean.match(/(-?\d+)\s*to\s*(-?\d+)/i);
+  const range = clean.match(/([+-]?\d+)\s*to\s*([+-]?\d+)/i);
   if (range) return { min: parseInt(range[1]), max: parseInt(range[2]) };
-  const single = clean.match(/^(-?\d+)$/);
+  const single = clean.match(/^([+-]?\d+)$/);
   if (single) { const v = parseInt(single[1]); return { min: v, max: v }; }
   return null;
 }
@@ -109,10 +109,16 @@ function parseContainer($, container, startupRef, totalHitboxesSoFar) {
     }
   }
 
+  // The nerds collapsible must be excluded when searching for primary hitbox tables,
+  // because its detailed shield tables also have "Shield Safety" and "Damage" columns.
+  const nerdsEl = container.find('[data-expandtext="Show Stats for Nerds"]').first();
+
   // Find ALL primary hitbox tables — identified by having both "Shield Safety" AND "Damage"
-  // columns. This excludes the detailed stats-for-nerds shield breakdown tables, which lack
-  // a "Damage" column. Moves like Jab have one primary hitbox table per hit, all in one container.
+  // columns, and NOT inside the nerds section.
+  // Moves like Jab have one primary table per hit; charge-level moves (Loxodont Strongs) have
+  // one primary table per charge level inside variant tabber panels.
   const hitboxTables = container.find('table').filter(function(_, tbl) {
+    if (nerdsEl.length && $.contains(nerdsEl[0], tbl)) return false;
     const headers = $(tbl).find('th').toArray().map(function(th) {
       return $(th).text().trim().toLowerCase();
     });
@@ -121,34 +127,56 @@ function parseContainer($, container, startupRef, totalHitboxesSoFar) {
 
   if (!hitboxTables.length) return [];
 
-  const hitboxes = [];
-  hitboxTables.each(function(_, tbl) {
+  // Check if all primary tables live inside tabber panels (charge-level variant layout).
+  // If so, prefix each hitbox name with its charge level label so variants stay distinct.
+  const tableParentPanels = hitboxTables.toArray().map(tbl => $(tbl).closest('.tabber__panel'));
+  const allInVariantTabber = tableParentPanels.every(p => p.length > 0);
+
+  /**
+   * Given a tabber panel element, resolve its display label from the parent tabber's header.
+   * Falls back to slugging the panel ID if no matching tab link is found.
+   */
+  function getPanelLabel(panel) {
+    const panelId = '#' + (panel.attr('id') || '');
+    const tabber  = panel.closest('.tabber');
+    const label   = tabber.find('.tabber__tab').filter(function(_, t) {
+      return $(t).attr('href') === panelId;
+    }).text().trim();
+    if (label) return label;
+    // Fallback: derive from panel id ("tabber-Lava_(Level_1_Charge)_2" → "Lava (Level 1 Charge)")
+    return (panel.attr('id') || '')
+      .replace(/^tabber-/, '').replace(/_\d+$/, '').replace(/_/g, ' ')
+      .replace(/\( /g, '(').replace(/ \)/g, ')');
+  }
+
+  /** Returns true for labels that represent the base/uncharged state (no prefix needed). */
+  function isBaseVariant(label) {
+    return /^attack$/i.test(label) || /^no.charge/i.test(label) || /^uncharged$/i.test(label);
+  }
+
+  /** Parse hitboxes from a single <table> element, optionally prefixing names. */
+  function parseHitboxTable(tbl, prefix, hitboxesSoFar) {
     const rawHeaders = $(tbl).find('tr').first().find('th').map(function(_, th) {
       return $(th).text().trim();
     }).toArray();
-
-    const colIdx = (keyword) => rawHeaders.findIndex(h => h.toLowerCase().includes(keyword.toLowerCase()));
+    const colIdx   = (kw) => rawHeaders.findIndex(h => h.toLowerCase().includes(kw.toLowerCase()));
     const hitboxCol = colIdx('hit');
     const shieldCol = colIdx('shield safety');
     const tumbleCol = colIdx('tumble');
+    if (shieldCol === -1) return [];
 
-    if (shieldCol === -1) return;
-
+    const rows = [];
     $(tbl).find('tbody tr').each(function(_, row) {
       const cells = $(row).find('td').map(function(_, td) {
         return $(td).clone().find('.tooltiptext').remove().end().text().trim();
       }).toArray();
-
       if (!cells.length || !cells[0]) return;
-
-      const hitboxName = hitboxCol >= 0 ? cells[hitboxCol] : 'Hit ' + (totalHitboxesSoFar + hitboxes.length + 1);
-      if (hitboxName.startsWith('Unique:')) return;
-
+      const baseName = hitboxCol >= 0 ? cells[hitboxCol] : 'Hit ' + (totalHitboxesSoFar + hitboxesSoFar.length + rows.length + 1);
+      if (baseName.startsWith('Unique:')) return;
       const shieldRaw = shieldCol >= 0 ? cells[shieldCol] : '';
       const tumbleRaw = tumbleCol >= 0 ? cells[tumbleCol] : '';
-
-      hitboxes.push({
-        hitbox:                   hitboxName,
+      rows.push({
+        hitbox:                   prefix + baseName,
         shieldSafety:             parseShieldSafety(shieldRaw),
         shieldRaw,
         tumblePercent:            parseTumblePercent(tumbleRaw),
@@ -157,12 +185,32 @@ function parseContainer($, container, startupRef, totalHitboxesSoFar) {
         perCharacterTumbleAerial: {},
       });
     });
-  });
+    return rows;
+  }
+
+  const hitboxes = [];
+  if (allInVariantTabber) {
+    // Charge-level / variant move: each tabber panel = one variant
+    hitboxTables.each(function(ti, tbl) {
+      const panel  = tableParentPanels[ti];
+      const label  = getPanelLabel(panel);
+      const prefix = isBaseVariant(label) ? '' : label + ': ';
+      const rows   = parseHitboxTable(tbl, prefix, hitboxes);
+      rows.forEach(function(r) { hitboxes.push(r); });
+    });
+  } else {
+    // Standard move (no variants): collect all hitboxes directly
+    hitboxTables.each(function(_, tbl) {
+      const rows = parseHitboxTable(tbl, '', hitboxes);
+      rows.forEach(function(r) { hitboxes.push(r); });
+    });
+  }
 
   if (!hitboxes.length) return [];
 
   // Parse per-character tumble % from the "Stats for Nerds" collapsible in THIS container
-  const nerdsCollapsible = container.find('[data-expandtext="Show Stats for Nerds"]').first();
+  // For variant moves, the hitbox name includes a "Label: " prefix — strip it when matching panels.
+  const nerdsCollapsible = nerdsEl.length ? nerdsEl : $();
   if (nerdsCollapsible.length) {
     const allPanels = {};
     nerdsCollapsible.find('.tabber__panel').each(function(_, el) {
@@ -179,7 +227,9 @@ function parseContainer($, container, startupRef, totalHitboxesSoFar) {
     });
 
     hitboxes.forEach(function(h) {
-      const tabId = ('tabber-' + toTabId(h.hitbox)).toLowerCase();
+      // Strip any variant prefix ("Lava (Level 1 Charge): ") before matching panel IDs
+      const baseName = h.hitbox.includes(': ') ? h.hitbox.split(': ').slice(1).join(': ') : h.hitbox;
+      const tabId = ('tabber-' + toTabId(baseName)).toLowerCase();
       let panel = allPanels[tabId];
       if (!panel) {
         const key = Object.keys(allPanels).find(k => k.startsWith(tabId));

@@ -1,14 +1,14 @@
 {
   "character": "Zetterburn",
   "slug": "Zetterburn",
-  "scrapedAt": "2026-06-03T19:44:05.173Z",
+  "scrapedAt": "2026-06-05T00:23:22.128Z",
   "moves": [
     {
       "move": "Jab",
       "startup": 5,
       "hitboxes": [
         {
-          "hitbox": "Jab 1",
+          "hitbox": "Jab 1: Jab 1",
           "shieldSafety": {
             "min": -13,
             "max": -12
@@ -20,7 +20,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 2",
+          "hitbox": "Jab 2: Jab 2",
           "shieldSafety": {
             "min": -15,
             "max": -14
@@ -32,7 +32,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Jab 3",
+          "hitbox": "Jab 3: Jab 3",
           "shieldSafety": {
             "min": -14,
             "max": -13
@@ -350,7 +350,7 @@
       "startup": 17,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "No Consume: Hit 1",
           "shieldSafety": {
             "min": -32,
             "max": -30
@@ -362,7 +362,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "No Consume: Hit 2",
           "shieldSafety": {
             "min": -25,
             "max": -24
@@ -374,7 +374,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Consume: Hit 1",
           "shieldSafety": {
             "min": -33,
             "max": -31
@@ -386,7 +386,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Consume: Hit 2",
           "shieldSafety": {
             "min": -26,
             "max": -25
@@ -398,7 +398,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Consume",
+          "hitbox": "Consume: Consume",
           "shieldSafety": {
             "min": -26,
             "max": -24
@@ -416,7 +416,7 @@
       "startup": 10,
       "hitboxes": [
         {
-          "hitbox": "Uppercut",
+          "hitbox": "No Consume: Uppercut",
           "shieldSafety": {
             "min": -27,
             "max": -25
@@ -448,7 +448,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Uppercut",
+          "hitbox": "Consume: Uppercut",
           "shieldSafety": {
             "min": -28,
             "max": -26
@@ -480,7 +480,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Consume",
+          "hitbox": "Consume: Consume",
           "shieldSafety": {
             "min": -30,
             "max": -28
@@ -518,7 +518,7 @@
       "startup": 7,
       "hitboxes": [
         {
-          "hitbox": "Hit 1",
+          "hitbox": "No Consume: Hit 1",
           "shieldSafety": {
             "min": -39,
             "max": -38
@@ -530,7 +530,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "No Consume: Hit 2",
           "shieldSafety": {
             "min": -27,
             "max": -26
@@ -542,7 +542,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 1",
+          "hitbox": "Consume: Hit 1",
           "shieldSafety": {
             "min": -40,
             "max": -39
@@ -554,7 +554,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Hit 2",
+          "hitbox": "Consume: Hit 2",
           "shieldSafety": {
             "min": -28,
             "max": -27
@@ -566,7 +566,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Consume",
+          "hitbox": "Consume: Consume",
           "shieldSafety": {
             "min": -26,
             "max": -24
@@ -1016,7 +1016,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Charged",
+          "hitbox": "Full Charge: Charged",
           "shieldSafety": {
             "min": 8,
             "max": 8,
@@ -1144,7 +1144,7 @@
       "startup": 23,
       "hitboxes": [
         {
-          "hitbox": "Slam",
+          "hitbox": "Grounded: Slam",
           "shieldSafety": {
             "min": -29,
             "max": -27
@@ -1159,7 +1159,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dive (On Airborne)",
+          "hitbox": "Airborne: Dive (On Airborne)",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1175,7 +1175,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Dive (On Grounded)",
+          "hitbox": "Airborne: Dive (On Grounded)",
           "shieldSafety": {
             "min": 1,
             "max": 1,
@@ -1188,7 +1188,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Landing Hit",
+          "hitbox": "Airborne: Landing Hit",
           "shieldSafety": {
             "min": -29,
             "max": -27
@@ -1269,7 +1269,7 @@
       "startup": 32,
       "hitboxes": [
         {
-          "hitbox": "Throw",
+          "hitbox": "No Consume: Throw",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1282,7 +1282,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Throw",
+          "hitbox": "Consume: Throw",
           "shieldSafety": {
             "min": 4,
             "max": 4,
@@ -1295,7 +1295,7 @@
           "perCharacterTumbleAerial": {}
         },
         {
-          "hitbox": "Consume",
+          "hitbox": "Consume: Consume",
           "shieldSafety": {
             "min": 5,
             "max": 5,
