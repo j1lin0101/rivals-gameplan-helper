@@ -712,6 +712,17 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
           </a>
         </span>
         <span>
+          All frame data and definitions sourced from{' '}
+          <a
+            href="https://dragdown.wiki/wiki/RoA2"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--accent)', textDecoration: 'none' }}
+          >
+            dragdown.wiki
+          </a>.
+        </span>
+        <span>
           Have a bug fix, feature suggestion, or general feedback? Please feel free to fill out{' '}
           <a
             href="https://forms.gle/7uZnA3EzMN2k19WA9"
