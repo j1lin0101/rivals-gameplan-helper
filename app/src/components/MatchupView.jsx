@@ -84,11 +84,11 @@ function SafestOptionsList({ charData, defenderOOSOptions }) {
         return (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.83rem' }}>
             <span style={{
-              display: 'inline-block', padding: '2px 6px', borderRadius: '4px',
+              display: 'inline-block', padding: '2px 4px', borderRadius: '4px',
               background: tagColor + '22', color: tagColor,
-              border: `1px solid ${tagColor}44`, fontSize: '0.72rem', fontWeight: 700,
-              width: '52px', flexShrink: 0, textAlign: 'center',
-              whiteSpace: 'nowrap', overflow: 'hidden',
+              border: `1px solid ${tagColor}44`, fontSize: '0.65rem', fontWeight: 700,
+              width: '72px', flexShrink: 0, textAlign: 'center',
+              whiteSpace: 'nowrap', overflow: 'visible',
             }}>{tagLabel}</span>
             <span style={{ fontWeight: 600 }}>{getDisplayName(charData.character, o.move)}</span>
             <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>[{o.hitbox}]</span>
