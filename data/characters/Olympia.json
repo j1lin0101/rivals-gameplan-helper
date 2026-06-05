@@ -1263,9 +1263,8 @@
         {
           "hitbox": "Final",
           "shieldSafety": {
-            "min": 5,
-            "max": 5,
-            "isStun": true
+            "min": -25,
+            "max": -22
           },
           "shieldRaw": "Stun: 5",
           "tumblePercent": {

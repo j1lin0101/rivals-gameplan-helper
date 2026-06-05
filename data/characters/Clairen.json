@@ -1490,9 +1490,8 @@
         {
           "hitbox": "On Hit: Cross (Sour)",
           "shieldSafety": {
-            "min": 6,
-            "max": 6,
-            "isStun": true
+            "min": -20,
+            "max": -18
           },
           "shieldRaw": "Stun: 6",
           "tumblePercent": {
@@ -1523,9 +1522,8 @@
         {
           "hitbox": "On Hit: Center (Sweetspot)",
           "shieldSafety": {
-            "min": 10,
-            "max": 10,
-            "isStun": true
+            "min": -16,
+            "max": -14
           },
           "shieldRaw": "Stun: 10",
           "tumblePercent": {
@@ -1640,9 +1638,8 @@
         {
           "hitbox": "Final Blade",
           "shieldSafety": {
-            "min": 4,
-            "max": 4,
-            "isStun": true
+            "min": -30,
+            "max": -26
           },
           "shieldRaw": "Stun: 4",
           "tumblePercent": {
@@ -1673,9 +1670,8 @@
         {
           "hitbox": "Final Tipper",
           "shieldSafety": {
-            "min": 7,
-            "max": 7,
-            "isStun": true
+            "min": -27,
+            "max": -23
           },
           "shieldRaw": "Stun: 7",
           "tumblePercent": {

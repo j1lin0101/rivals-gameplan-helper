@@ -1235,9 +1235,8 @@
         {
           "hitbox": "Rising",
           "shieldSafety": {
-            "min": 3,
-            "max": 3,
-            "isStun": true
+            "min": -60,
+            "max": -59
           },
           "shieldRaw": "Stun: 3",
           "tumblePercent": {
@@ -1251,9 +1250,8 @@
         {
           "hitbox": "Travel",
           "shieldSafety": {
-            "min": 7,
-            "max": 7,
-            "isStun": true
+            "min": -36,
+            "max": -23
           },
           "shieldRaw": "Stun: 7",
           "tumblePercent": {
@@ -1284,9 +1282,8 @@
         {
           "hitbox": "Launch",
           "shieldSafety": {
-            "min": 9,
-            "max": 9,
-            "isStun": true
+            "min": -35,
+            "max": -35
           },
           "shieldRaw": "Stun: 9",
           "tumblePercent": {

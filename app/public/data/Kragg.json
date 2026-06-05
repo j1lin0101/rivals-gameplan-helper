@@ -1035,9 +1035,8 @@
         {
           "hitbox": "Pillar: Grounded",
           "shieldSafety": {
-            "min": 5,
-            "max": 5,
-            "isStun": true
+            "min": -36,
+            "max": -25
           },
           "shieldRaw": "Stun: 5",
           "tumblePercent": {
@@ -1051,9 +1050,8 @@
         {
           "hitbox": "Pillar: Aerial",
           "shieldSafety": {
-            "min": 5,
-            "max": 5,
-            "isStun": true
+            "min": -36,
+            "max": -25
           },
           "shieldRaw": "Stun: 5",
           "tumblePercent": {

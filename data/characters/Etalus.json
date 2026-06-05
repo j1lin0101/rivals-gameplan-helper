@@ -1278,9 +1278,8 @@
         {
           "hitbox": "Ice",
           "shieldSafety": {
-            "min": 6,
-            "max": 6,
-            "isStun": true
+            "min": -27,
+            "max": -26
           },
           "shieldRaw": "Stun: 6",
           "tumblePercent": {

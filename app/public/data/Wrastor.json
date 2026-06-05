@@ -1145,9 +1145,8 @@
         {
           "hitbox": "Scraw (Sweetspot)",
           "shieldSafety": {
-            "min": 11,
-            "max": 11,
-            "isStun": true
+            "min": -27,
+            "max": -27
           },
           "shieldRaw": "Stun: 11",
           "tumblePercent": {
@@ -1178,9 +1177,8 @@
         {
           "hitbox": "Rising Early",
           "shieldSafety": {
-            "min": 5,
-            "max": 5,
-            "isStun": true
+            "min": -32,
+            "max": -25
           },
           "shieldRaw": "Stun: 5",
           "tumblePercent": {
@@ -1211,9 +1209,8 @@
         {
           "hitbox": "Rising Late",
           "shieldSafety": {
-            "min": 4,
-            "max": 4,
-            "isStun": true
+            "min": -33,
+            "max": -26
           },
           "shieldRaw": "Stun: 4",
           "tumblePercent": {

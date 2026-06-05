@@ -1306,9 +1306,8 @@
         {
           "hitbox": "Lunge: Early",
           "shieldSafety": {
-            "min": 3,
-            "max": 3,
-            "isStun": true
+            "min": -38,
+            "max": -23
           },
           "shieldRaw": "Stun: 3",
           "tumblePercent": {
@@ -1339,9 +1338,8 @@
         {
           "hitbox": "Lunge: Late",
           "shieldSafety": {
-            "min": 3,
-            "max": 3,
-            "isStun": true
+            "min": -38,
+            "max": -23
           },
           "shieldRaw": "Stun: 3",
           "tumblePercent": {
@@ -1372,9 +1370,8 @@
         {
           "hitbox": "Divekick: Divekick",
           "shieldSafety": {
-            "min": 4,
-            "max": 4,
-            "isStun": true
+            "min": -75,
+            "max": -28
           },
           "shieldRaw": "Stun: 4",
           "tumblePercent": {
