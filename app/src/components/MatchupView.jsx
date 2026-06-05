@@ -519,19 +519,6 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             Shield safety &amp; punish analysis · Shield release {matchupVsOpp?.shieldRelease}f · Jump squat 4f
           </p>
         </div>
-        <a
-          href="https://x.com/boi_jir0"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            color: 'var(--muted)', fontSize: '0.72rem', textDecoration: 'none',
-            flexShrink: 0, whiteSpace: 'nowrap',
-          }}
-          onMouseEnter={e => e.currentTarget.style.color = 'var(--accent)'}
-          onMouseLeave={e => e.currentTarget.style.color = 'var(--muted)'}
-        >
-          by @boi_jiro
-        </a>
       </header>
 
       <main className="page-main">
@@ -571,6 +558,24 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
         )}
 
       </main>
+
+      <footer style={{
+        borderTop: '1px solid var(--border)',
+        padding: '14px 32px',
+        textAlign: 'center',
+        fontSize: '0.78rem',
+        color: 'var(--muted)',
+      }}>
+        Created by{' '}
+        <a
+          href="https://x.com/boi_jir0"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}
+        >
+          @boi_jiro
+        </a>
+      </footer>
     </div>
   )
 }
