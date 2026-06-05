@@ -534,6 +534,26 @@ function HelpModal({ onClose }) {
 
         <div style={{ height: '1px', background: 'var(--border)' }} />
 
+        {/* Safe / Risky / Punishable */}
+        <div>
+          <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
+            Safe / Risky / Punishable
+          </h3>
+          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6 }}>
+            Each move is classified by how many of the opponent's OOS options can punish it in this specific matchup:
+          </p>
+          <ul style={{ fontSize: '0.85rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '6px' }}>
+            <li><span style={{ color: 'var(--safe)', fontWeight: 600 }}>Safe</span> — 0 OOS options can punish it.</li>
+            <li><span style={{ color: 'var(--risky)', fontWeight: 600 }}>Risky</span> — 1–3 OOS options can punish it.</li>
+            <li><span style={{ color: 'var(--punish)', fontWeight: 600 }}>Punishable</span> — 4 or more OOS options can punish it.</li>
+          </ul>
+          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
+            These ratings are matchup-specific — a move may be safe against one character but risky against another with faster OOS options.
+          </p>
+        </div>
+
+        <div style={{ height: '1px', background: 'var(--border)' }} />
+
         {/* Tumble % */}
         <div>
           <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
@@ -553,26 +573,6 @@ function HelpModal({ onClose }) {
           <p style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '8px', fontStyle: 'italic' }}>
             Definition sourced from{' '}
             <a href="https://dragdown.wiki/wiki/RoA2" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>dragdown.wiki</a>
-          </p>
-        </div>
-
-        <div style={{ height: '1px', background: 'var(--border)' }} />
-
-        {/* Safe / Risky / Punishable */}
-        <div>
-          <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
-            Safe / Risky / Punishable
-          </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6 }}>
-            Each move is classified by how many of the opponent's OOS options can punish it in this specific matchup:
-          </p>
-          <ul style={{ fontSize: '0.85rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '6px' }}>
-            <li><span style={{ color: 'var(--safe)', fontWeight: 600 }}>Safe</span> — 0 OOS options can punish it.</li>
-            <li><span style={{ color: 'var(--risky)', fontWeight: 600 }}>Risky</span> — 1–3 OOS options can punish it.</li>
-            <li><span style={{ color: 'var(--punish)', fontWeight: 600 }}>Punishable</span> — 4 or more OOS options can punish it.</li>
-          </ul>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
-            These ratings are matchup-specific — a move may be safe against one character but risky against another with faster OOS options.
           </p>
         </div>
       </div>
