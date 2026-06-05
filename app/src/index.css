@@ -115,13 +115,17 @@ body {
 }
 .accordion-counts {
   display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: flex-end;
+}
+.accordion-counts-row {
+  display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 10px;
-  row-gap: 4px;
 }
 @media (max-width: 600px) {
-  .accordion-counts {
+  .accordion-counts-row {
     gap: 6px;
   }
 }

@@ -357,13 +357,20 @@ function CategoryAccordion({ category, rows, attackerName, defenderName }) {
           {category}
         </span>
         <div className="accordion-counts">
-          <span style={{ color: SAFE_COLOR, fontSize: '0.72rem' }}>{safe} safe</span>
-          <span style={{ color: RISKY_COLOR, fontSize: '0.72rem' }}>{risky} risky</span>
-          <span style={{ color: PUNISH_COLOR, fontSize: '0.72rem' }}>{punishable} punishable</span>
-          <span style={{ width: '1px', height: '12px', background: 'var(--border)', margin: '0 2px' }} />
-          {tumbleCounts.early  > 0 && <span style={{ color: TUMBLE_EARLY_COLOR,  fontSize: '0.72rem' }}>{tumbleCounts.early} early KD</span>}
-          {tumbleCounts.medium > 0 && <span style={{ color: TUMBLE_MEDIUM_COLOR, fontSize: '0.72rem' }}>{tumbleCounts.medium} mid KD</span>}
-          {tumbleCounts.high   > 0 && <span style={{ color: TUMBLE_HIGH_COLOR,   fontSize: '0.72rem' }}>{tumbleCounts.high} high KD</span>}
+          {/* Row 1: shield safety */}
+          <div className="accordion-counts-row">
+            <span style={{ color: SAFE_COLOR, fontSize: '0.72rem' }}>{safe} safe</span>
+            <span style={{ color: RISKY_COLOR, fontSize: '0.72rem' }}>{risky} risky</span>
+            <span style={{ color: PUNISH_COLOR, fontSize: '0.72rem' }}>{punishable} punishable</span>
+          </div>
+          {/* Row 2: KD tiers (only if any exist) */}
+          {(tumbleCounts.early > 0 || tumbleCounts.medium > 0 || tumbleCounts.high > 0) && (
+            <div className="accordion-counts-row">
+              {tumbleCounts.early  > 0 && <span style={{ color: TUMBLE_EARLY_COLOR,  fontSize: '0.72rem' }}>{tumbleCounts.early} early KD</span>}
+              {tumbleCounts.medium > 0 && <span style={{ color: TUMBLE_MEDIUM_COLOR, fontSize: '0.72rem' }}>{tumbleCounts.medium} mid KD</span>}
+              {tumbleCounts.high   > 0 && <span style={{ color: TUMBLE_HIGH_COLOR,   fontSize: '0.72rem' }}>{tumbleCounts.high} high KD</span>}
+            </div>
+          )}
         </div>
         <span style={{ color: 'var(--muted)', fontSize: '0.7rem', marginLeft: '4px', flexShrink: 0 }}>
           {open ? '▲' : '▼'}
