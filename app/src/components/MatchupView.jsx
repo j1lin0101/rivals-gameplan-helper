@@ -518,7 +518,7 @@ function HelpModal({ onClose }) {
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
             A <span style={{ color: 'var(--safe)', fontWeight: 600 }}>positive value</span> means the attacker can act before the opponent can, making the move safe.
-            A <span style={{ color: 'var(--punish)', fontWeight: 600 }}>negative value</span> means the defender acts first, opening a window to punish out of shield (OOS).
+            A <span style={{ color: 'var(--punish)', fontWeight: 600 }}>negative value</span> means the defender acts first, opening a window to punish.
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
             OOS options have a built-in delay before they can come out: grounded moves require <strong>7 frames</strong> of shield release, aerials and Up Strong buffer during <strong>jump squat (4 frames)</strong>, and grab has no overhead. The OOS startup shown is the total frames from shield hit to the move landing.
