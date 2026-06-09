@@ -43,7 +43,7 @@ const PROJECTILE_COLOR = '#7B68EE'
 const PROJ_TOOLTIP = "This hitbox is flagged as a projectile by the game and wiki, though it may not behave like a traditional projectile. Distance greatly impacts safety and follow-up potential, so we show raw shield stun instead of a frame advantage."
 
 const STUN_COLOR = '#E69F00'
-const STUN_TOOLTIP = "This is an ongoing or falling hitbox whose frame advantage can't be expressed as a fixed number. We show raw shield stun instead."
+const STUN_TOOLTIP = "This move has special properties (e.g. active for many frames while falling, can be jump-cancelled, or hits during landing) that make a fixed shield safety value unreliable. We show raw shield stun so you can assess the situation yourself."
 
 function ProjectileBadge({ stun }) {
   const [visible, setVisible] = useState(false)
