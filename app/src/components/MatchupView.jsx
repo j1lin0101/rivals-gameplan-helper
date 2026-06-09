@@ -163,7 +163,14 @@ function Section({ title, accent, children }) {
 function SafestOptionsList({ charData, defenderOOSOptions }) {
   const options = useMemo(
     () => getSafestOptions(charData, defenderOOSOptions)
-      .filter(o => (o.punishCount ?? 0) === 0 && getCategory(o.move) !== 'Misc' && !o.shieldSafety?.isStun),
+      .filter(o => {
+        if (getCategory(o.move) === 'Misc') return false
+        if (o.shieldSafety?.isStun) return false
+        // Always show moves that are positive on shield
+        if (o.shieldSafety?.max > 0) return true
+        // For negative moves, only show if nothing can punish them
+        return (o.punishCount ?? 0) === 0
+      }),
     [charData, defenderOOSOptions]
   )
   if (!options.length) return <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>No safe moves found.</p>
