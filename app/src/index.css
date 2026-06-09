@@ -157,6 +157,14 @@ body {
   .col-headers { display: none; }
 }
 
+/* ── OOS Filter Bar ── */
+.oos-filter-desktop { display: flex; flex-direction: column; gap: 6px; }
+.oos-filter-mobile  { display: none; }
+@media (max-width: 600px) {
+  .oos-filter-desktop { display: none; }
+  .oos-filter-mobile  { display: block; }
+}
+
 /* ── Responsive: Move row ── */
 .move-row {
   padding: 10px 16px;

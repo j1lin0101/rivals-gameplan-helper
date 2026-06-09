@@ -210,7 +210,16 @@ function getOOSOptions(characterData) {
   });
 
   options.sort(function(a, b) { return a.oosStartup - b.oosStartup; });
-  return options.filter(function(o) { return o.oosStartup <= 12; });
+  return options;
+}
+
+/**
+ * Returns only the OOS options that are 12f or faster — used for the display panel
+ * and filter chips. analyzeMatchup uses the full getOOSOptions so punish counts
+ * reflect all moves that can realistically punish, not just the fastest ones.
+ */
+function getDisplayOOSOptions(characterData) {
+  return getOOSOptions(characterData).filter(function(o) { return o.oosStartup <= 12; });
 }
 
 /**
@@ -316,6 +325,7 @@ export {
   getAllShieldSafeties,
   getSafestOptions,
   getOOSOptions,
+  getDisplayOOSOptions,
   getBestOOSOption,
   analyzeMatchup,
   getTumbleVsOpponent,

@@ -1,6 +1,6 @@
-import { useMemo, useState, useCallback } from 'react'
+import { useMemo, useState, useCallback, useEffect, useRef } from 'react'
 import { useCharacterData } from '../hooks/useMatchupData'
-import { getSafestOptions, getOOSOptions, analyzeMatchup, CATEGORY_ORDER, getCategory } from '../analysis/analysis'
+import { getSafestOptions, getOOSOptions, getDisplayOOSOptions, analyzeMatchup, CATEGORY_ORDER, getCategory } from '../analysis/analysis'
 import { getDisplayName } from '../analysis/nicknames'
 
 const SAFE_COLOR  = 'var(--safe)'
@@ -258,7 +258,7 @@ function SafestOptionsList({ charData, defenderOOSOptions }) {
 }
 
 function OOSList({ charData }) {
-  const options = useMemo(() => getOOSOptions(charData), [charData])
+  const options = useMemo(() => getDisplayOOSOptions(charData), [charData])
   if (!options.length) return <p style={{ color: 'var(--muted)', fontSize: '0.85rem' }}>No OOS data.</p>
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -351,7 +351,7 @@ function TumbleBadge({ row, defenderName }) {
   return <span style={gBadge.style}>{gBadge.str}</span>
 }
 
-function MoveRow({ row, attackerName, defenderName }) {
+function MoveRow({ row, attackerName, defenderName, oosFilter }) {
   const statusColor = row.isSafe ? SAFE_COLOR : row.isRisky ? RISKY_COLOR : PUNISH_COLOR
 
   return (
@@ -382,7 +382,10 @@ function MoveRow({ row, attackerName, defenderName }) {
       <div>
         {row.punishes && row.punishes.length > 0 ? (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-            {row.punishes.map((p, i) => (
+            {(oosFilter && oosFilter.size > 0
+              ? row.punishes.filter(p => oosFilter.has(p.move))
+              : row.punishes
+            ).map((p, i) => (
               <span key={i} style={{
                 padding: '1px 7px',
                 borderRadius: '4px',
@@ -416,7 +419,7 @@ function getTumbleNum(row, defKey) {
   return null
 }
 
-function CategoryAccordion({ category, rows, attackerName, defenderName }) {
+function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilter }) {
   const [open, setOpen] = useState(true)
   const [sortBy, setSortBy] = useState('shield')   // 'move' | 'shield' | 'tumble'
   const [sortDir, setSortDir] = useState(1)         // 1 = default asc/desc per column, flipped on click
@@ -549,31 +552,214 @@ function CategoryAccordion({ category, rows, attackerName, defenderName }) {
             <SortHeader col="tumble" label="Tumble %" align="center" />
             <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>Punish Options</span>
           </div>
-          {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} />)}
+          {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} oosFilter={oosFilter} />)}
         </div>
       )}
     </div>
   )
 }
 
-function BreakdownTable({ matchup, categoryFilter }) {
+/* ── OOS Filter Bar ── */
+const OOS_FILTER_GROUPS = ['Aerials', 'Normals', 'Strongs', 'Specials', 'Misc']
+
+function OOSFilterBar({ defenderOOS, oosFilter, setOosFilter, defenderName, relevantOOSMoves }) {
+  const [modalOpen, setModalOpen] = useState(false)
+  const modalRef = useRef(null)
+
+  // Close modal on outside click
+  useEffect(() => {
+    if (!modalOpen) return
+    function handleClick(e) {
+      if (modalRef.current && !modalRef.current.contains(e.target)) setModalOpen(false)
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [modalOpen])
+
+  function toggle(moveName) {
+    setOosFilter(prev => {
+      const next = new Set(prev)
+      if (next.has(moveName)) next.delete(moveName)
+      else next.add(moveName)
+      return next
+    })
+  }
+
+  function clearAll() { setOosFilter(new Set()) }
+
+  const activeCount = oosFilter.size
+
+  // Group options by move category (Wavedash handled separately)
+  const grouped = useMemo(() => {
+    const map = {}
+    OOS_FILTER_GROUPS.forEach(g => { map[g] = [] })
+    defenderOOS.forEach(opt => {
+      if (opt.move === 'Wavedash') return
+      const cat = getCategory(opt.move)
+      if (map[cat]) map[cat].push(opt)
+      else map['Misc'].push(opt)
+    })
+    return map
+  }, [defenderOOS])
+
+  const wavedashOpt = defenderOOS.find(o => o.move === 'Wavedash')
+
+  function renderGroup(groupName, opts, inModal = false) {
+    if (!opts.length) return null
+    const visibleOpts = relevantOOSMoves ? opts.filter(o => relevantOOSMoves.has(o.move)) : opts
+    if (!visibleOpts.length) return null
+    const groupActive = opts.filter(o => oosFilter.has(o.move)).length
+    return (
+      <div key={groupName} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        {/* Group label */}
+        <span style={{
+          fontSize: inModal ? '0.75rem' : '0.68rem',
+          fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.07em',
+          color: groupActive > 0 ? 'var(--accent2)' : 'var(--muted)',
+          paddingTop: inModal ? '8px' : '2px',
+        }}>
+          {groupName}
+          {groupActive > 0 && (
+            <span style={{ marginLeft: '6px', background: 'var(--accent2)', color: '#fff', borderRadius: '10px', padding: '1px 6px', fontSize: '0.62rem' }}>
+              {groupActive}
+            </span>
+          )}
+        </span>
+        {/* Chips / items */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: inModal ? '8px' : '6px', paddingLeft: '4px', paddingBottom: '4px' }}>
+          {opts.filter(opt => !relevantOOSMoves || relevantOOSMoves.has(opt.move)).map(opt => {
+            const active = oosFilter.has(opt.move)
+            return inModal ? (
+              <label key={opt.move} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', width: '100%', padding: '6px 0', borderBottom: '1px solid var(--border)' }}>
+                <input
+                  type="checkbox"
+                  checked={active}
+                  onChange={() => toggle(opt.move)}
+                  style={{ width: '18px', height: '18px', accentColor: 'var(--accent2)', cursor: 'pointer', flexShrink: 0 }}
+                />
+                <span style={{ flex: 1, fontSize: '0.88rem', color: 'var(--text)' }}>{opt.label}</span>
+                <span style={{ fontSize: '0.78rem', color: 'var(--muted)', fontWeight: 600 }}>{opt.oosStartup}f</span>
+              </label>
+            ) : (
+              <button
+                key={opt.move}
+                onClick={() => toggle(opt.move)}
+                style={{
+                  padding: '2px 9px',
+                  borderRadius: '12px',
+                  border: `1px solid ${active ? 'var(--accent2)' : 'var(--border)'}`,
+                  background: active ? 'rgba(204,121,167,0.18)' : 'var(--surface)',
+                  color: active ? 'var(--accent2)' : 'var(--muted)',
+                  fontSize: '0.72rem', fontWeight: 600, cursor: 'pointer',
+                  transition: 'all 0.15s', whiteSpace: 'nowrap',
+                }}
+              >
+                {opt.label} <span style={{ opacity: 0.7 }}>{opt.oosStartup}f</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <>
+      {/* Desktop: grouped chips */}
+      <div className="oos-filter-desktop">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
+          <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.07em' }}>
+            {defenderName}'s Punish Options
+          </span>
+          {activeCount > 0 && (
+            <button onClick={clearAll} style={{ fontSize: '0.7rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+              Clear ({activeCount})
+            </button>
+          )}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+          {OOS_FILTER_GROUPS.map(g => renderGroup(g, grouped[g] || [], false))}
+          {wavedashOpt && renderGroup('Wavedash', [wavedashOpt], false)}
+        </div>
+      </div>
+
+      {/* Mobile: button + bottom-sheet modal */}
+      <div className="oos-filter-mobile">
+        <button
+          onClick={() => setModalOpen(true)}
+          style={{
+            display: 'flex', alignItems: 'center', gap: '6px',
+            padding: '6px 14px', borderRadius: '8px',
+            border: `1px solid ${activeCount > 0 ? 'var(--accent2)' : 'var(--border)'}`,
+            background: activeCount > 0 ? 'rgba(204,121,167,0.18)' : 'var(--surface)',
+            color: activeCount > 0 ? 'var(--accent2)' : 'var(--text)',
+            fontSize: '0.8rem', fontWeight: 600, cursor: 'pointer',
+          }}
+        >
+          {defenderName}'s Punish Options
+          {activeCount > 0 && (
+            <span style={{ background: 'var(--accent2)', color: '#fff', borderRadius: '10px', padding: '1px 7px', fontSize: '0.7rem' }}>
+              {activeCount}
+            </span>
+          )}
+        </button>
+      </div>
+
+      {/* Bottom-sheet modal */}
+      {modalOpen && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 1000, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+          <div ref={modalRef} style={{ background: 'var(--surface)', borderRadius: '16px 16px 0 0', padding: '20px 24px 32px', width: '100%', maxWidth: '480px', maxHeight: '80vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>{defenderName}'s Punish Options</span>
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+                {activeCount > 0 && (
+                  <button onClick={clearAll} style={{ fontSize: '0.75rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Clear all</button>
+                )}
+                <button onClick={() => setModalOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '1.2rem', cursor: 'pointer', lineHeight: 1 }}>✕</button>
+              </div>
+            </div>
+            {OOS_FILTER_GROUPS.map(g => renderGroup(g, grouped[g] || [], true))}
+            {wavedashOpt && renderGroup('Wavedash', [wavedashOpt], true)}
+            <button
+              onClick={() => setModalOpen(false)}
+              style={{ marginTop: '12px', padding: '12px', borderRadius: '10px', background: 'var(--accent2)', border: 'none', color: '#fff', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
+function BreakdownTable({ matchup, categoryFilter, oosFilter }) {
   const { breakdown } = matchup
   const visibleCategories = categoryFilter && categoryFilter !== 'All'
     ? [categoryFilter]
     : CATEGORY_ORDER
 
+  // Filter rows by selected OOS punish options (empty set = show all)
+  function applyOosFilter(rows) {
+    if (!oosFilter || oosFilter.size === 0) return rows
+    return rows.filter(r =>
+      Array.isArray(r.punishes) && r.punishes.some(p => oosFilter.has(p.move))
+    )
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
       {visibleCategories.map(category => {
-        const rows = breakdown.filter(r => r.category === category)
+        const rows = applyOosFilter(breakdown.filter(r => r.category === category))
         if (!rows.length) return null
         return (
           <CategoryAccordion
-            key={category}
+            key={`${category}-${[...oosFilter].sort().join(',')}`}
             category={category}
             rows={rows}
             attackerName={matchup.attacker}
             defenderName={matchup.defender}
+            oosFilter={oosFilter}
           />
         )
       })}
@@ -581,24 +767,43 @@ function BreakdownTable({ matchup, categoryFilter }) {
   )
 }
 
-function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar }) {
+function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, oppOOS }) {
   const [view, setView] = useState('me') // 'me' = I attack opp, 'opp' = opp attacks me
   const [categoryFilter, setCategoryFilter] = useState('All')
+  const [oosFilter, setOosFilter] = useState(new Set())
 
   const active = view === 'opp' ? matchupVsOpp : matchupVsMe
   const activeColor = view === 'opp' ? 'var(--accent2)' : 'var(--accent)'
-  const label = view === 'opp'
-    ? `${oppChar} attacking`
-    : `${myChar} attacking`
+  const label = view === 'opp' ? `${oppChar} attacking` : `${myChar} attacking`
+
+  // When view switches, the defender changes — reset OOS filter
+  function switchView(v) {
+    setView(v)
+    setOosFilter(new Set())
+  }
+
+  // Defender's OOS options (what can punish the attacker)
+  const defenderOOS = view === 'me' ? oppOOS : myOOS
+
+  // OOS moves that actually appear as punishes in the selected category's rows
+  const relevantOOSMoves = useMemo(() => {
+    if (!active) return null
+    const rows = categoryFilter === 'All'
+      ? active.breakdown
+      : active.breakdown.filter(r => r.category === categoryFilter)
+    const moves = new Set()
+    rows.forEach(r => (r.punishes || []).forEach(p => moves.add(p.move)))
+    return moves
+  }, [active, categoryFilter])
 
   return (
     <div>
       {/* Toggle — my char first */}
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
-        <ToggleButton active={view === 'me'} color="var(--accent)" onClick={() => setView('me')}>
+        <ToggleButton active={view === 'me'} color="var(--accent)" onClick={() => switchView('me')}>
           {myChar} attacking
         </ToggleButton>
-        <ToggleButton active={view === 'opp'} color="var(--accent2)" onClick={() => setView('opp')}>
+        <ToggleButton active={view === 'opp'} color="var(--accent2)" onClick={() => switchView('opp')}>
           {oppChar} attacking
         </ToggleButton>
       </div>
@@ -611,7 +816,7 @@ function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar }) {
             </h2>
             <select
               value={categoryFilter}
-              onChange={e => setCategoryFilter(e.target.value)}
+              onChange={e => { setCategoryFilter(e.target.value); setOosFilter(new Set()) }}
               style={{
                 background: 'var(--surface)',
                 border: '1px solid var(--border)',
@@ -630,7 +835,12 @@ function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar }) {
               ))}
             </select>
           </div>
-          <BreakdownTable matchup={active} categoryFilter={categoryFilter} />
+          {defenderOOS.length > 0 && (
+            <div style={{ marginBottom: '12px' }}>
+              <OOSFilterBar defenderOOS={defenderOOS} oosFilter={oosFilter} setOosFilter={setOosFilter} defenderName={view === 'me' ? oppChar : myChar} relevantOOSMoves={relevantOOSMoves} />
+            </div>
+          )}
+          <BreakdownTable matchup={active} categoryFilter={categoryFilter} oosFilter={oosFilter} />
         </div>
       )}
     </div>
@@ -890,6 +1100,8 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             matchupVsMe={matchupVsMe}
             myChar={myChar}
             oppChar={oppChar}
+            myOOS={myOOS}
+            oppOOS={oppOOS}
           />
         )}
 
