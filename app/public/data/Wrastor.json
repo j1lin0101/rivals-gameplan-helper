@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-09T02:43:06.606Z",
+  "scrapedAt": "2026-06-09T17:01:03.165Z",
   "moves": [
     {
       "move": "Jab",
@@ -406,7 +406,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 10,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Clap",
@@ -476,7 +476,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 10,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Sweetspot (Star)",
@@ -546,7 +546,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 7,
+      "startup": 14,
       "hitboxes": [
         {
           "hitbox": "Stomp",
@@ -1581,7 +1581,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 20,
+      "startup": 36,
       "hitboxes": [
         {
           "hitbox": "Dive",

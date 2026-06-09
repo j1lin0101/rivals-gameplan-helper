@@ -1,7 +1,7 @@
 {
   "character": "Olympia",
   "slug": "Olympia",
-  "scrapedAt": "2026-06-09T02:43:09.747Z",
+  "scrapedAt": "2026-06-09T17:01:05.891Z",
   "moves": [
     {
       "move": "Jab",
@@ -391,7 +391,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 15,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -461,7 +461,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 4,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Hit 1",
@@ -511,7 +511,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 3,
+      "startup": 7,
       "hitboxes": [
         {
           "hitbox": "Hit 1",
@@ -1442,7 +1442,7 @@
     },
     {
       "move": "Pummel (Special)",
-      "startup": 10,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Pummel",
@@ -1555,7 +1555,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 18,
+      "startup": 24,
       "hitboxes": [
         {
           "hitbox": "Crystal",
@@ -1631,7 +1631,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 30,
+      "startup": 37,
       "hitboxes": [
         {
           "hitbox": "Punch",

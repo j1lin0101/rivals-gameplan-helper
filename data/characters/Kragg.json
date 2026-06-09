@@ -1,7 +1,7 @@
 {
   "character": "Kragg",
   "slug": "Kragg",
-  "scrapedAt": "2026-06-09T02:43:07.137Z",
+  "scrapedAt": "2026-06-09T17:01:03.629Z",
   "moves": [
     {
       "move": "Jab",
@@ -211,7 +211,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 12,
+      "startup": 25,
       "hitboxes": [
         {
           "hitbox": "Fstrong KB",
@@ -249,7 +249,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 8,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -319,7 +319,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 13,
       "hitboxes": [
         {
           "hitbox": "Inner (Strong)",
@@ -946,7 +946,7 @@
     },
     {
       "move": "Forward Special",
-      "startup": 7,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Roll",
@@ -1199,7 +1199,7 @@
     },
     {
       "move": "Up Throw",
-      "startup": 16,
+      "startup": 49,
       "hitboxes": [
         {
           "hitbox": "Throw",

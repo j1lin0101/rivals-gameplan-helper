@@ -1,7 +1,7 @@
 {
   "character": "Fleet",
   "slug": "Fleet",
-  "scrapedAt": "2026-06-09T02:43:08.698Z",
+  "scrapedAt": "2026-06-09T17:01:04.917Z",
   "moves": [
     {
       "move": "Jab",
@@ -310,7 +310,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 18,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -414,7 +414,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 16,
+      "startup": 21,
       "hitboxes": [
         {
           "hitbox": "Fully Charged: Early",
@@ -626,7 +626,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 6,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Early (Strong)",
@@ -1315,7 +1315,7 @@
     },
     {
       "move": "Down Special",
-      "startup": 8,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "On Hit: Arrow",
@@ -1640,7 +1640,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 30,
+      "startup": 33,
       "hitboxes": [
         {
           "hitbox": "Arrow",

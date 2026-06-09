@@ -1,7 +1,7 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-09T02:43:06.081Z",
+  "scrapedAt": "2026-06-09T17:01:02.535Z",
   "moves": [
     {
       "move": "Jab",
@@ -347,7 +347,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 6,
+      "startup": 14,
       "hitboxes": [
         {
           "hitbox": "No Puddle: Jet",
@@ -417,7 +417,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 6,
+      "startup": 20,
       "hitboxes": [
         {
           "hitbox": "No Puddle: Early",
@@ -551,7 +551,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 7,
       "hitboxes": [
         {
           "hitbox": "No Puddle: Normal",
@@ -755,7 +755,7 @@
     },
     {
       "move": "Forward Air",
-      "startup": 8,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Bubbles",
@@ -1404,7 +1404,7 @@
     },
     {
       "move": "Down Special",
-      "startup": 7,
+      "startup": 8,
       "hitboxes": [
         {
           "hitbox": "Bubble Pop: Bubble",
@@ -1473,7 +1473,7 @@
     },
     {
       "move": "Pummel (Special)",
-      "startup": 10,
+      "startup": 21,
       "hitboxes": [
         {
           "hitbox": "Pummel",
@@ -1488,7 +1488,7 @@
     },
     {
       "move": "Forward Throw",
-      "startup": 10,
+      "startup": 27,
       "hitboxes": [
         {
           "hitbox": "No Puddle: Throw",
@@ -1604,7 +1604,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 25,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "Emerge",
@@ -1712,7 +1712,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 14,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Multihit",

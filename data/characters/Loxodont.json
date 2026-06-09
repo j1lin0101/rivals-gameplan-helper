@@ -1,7 +1,7 @@
 {
   "character": "Loxodont",
   "slug": "Loxodont",
-  "scrapedAt": "2026-06-09T02:43:09.228Z",
+  "scrapedAt": "2026-06-09T17:01:05.401Z",
   "moves": [
     {
       "move": "Jab",
@@ -484,7 +484,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 20,
+      "startup": 28,
       "hitboxes": [
         {
           "hitbox": "Attack: Handle Early",
@@ -1238,7 +1238,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 9,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Attack: Handle",
@@ -1960,7 +1960,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 10,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Attack: Handle Early",
@@ -3171,7 +3171,7 @@
     },
     {
       "move": "Neutral Special",
-      "startup": 14,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Meatball (Grounded): Tusks",
@@ -3540,7 +3540,7 @@
     },
     {
       "move": "Down Throw",
-      "startup": 21,
+      "startup": 22,
       "hitboxes": [
         {
           "hitbox": "Lava Pool: Lava Hit",

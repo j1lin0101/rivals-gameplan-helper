@@ -1,7 +1,7 @@
 {
   "character": "Etalus",
   "slug": "Etalus",
-  "scrapedAt": "2026-06-09T02:43:05.553Z",
+  "scrapedAt": "2026-06-09T17:01:02.092Z",
   "moves": [
     {
       "move": "Jab",
@@ -353,7 +353,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 10,
+      "startup": 18,
       "hitboxes": [
         {
           "hitbox": "Armored: Hit 1 Back",
@@ -503,7 +503,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 10,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Armor: Hit 1",
@@ -635,7 +635,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 8,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Armor: Hit 1",
@@ -1274,7 +1274,7 @@
     },
     {
       "move": "Up Special",
-      "startup": 10,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Ice",
@@ -1330,7 +1330,7 @@
     },
     {
       "move": "Down Special",
-      "startup": 9,
+      "startup": 14,
       "hitboxes": [
         {
           "hitbox": "Airborne: Falling",
@@ -1653,7 +1653,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 20,
+      "startup": 31,
       "hitboxes": [
         {
           "hitbox": "Getup Special",
@@ -1763,7 +1763,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 10,
+      "startup": 22,
       "hitboxes": [
         {
           "hitbox": "Slide",

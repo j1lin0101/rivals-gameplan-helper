@@ -307,7 +307,14 @@ function fmtShieldRaw(ss) {
 
 function parseStartup(raw) {
   if (raw == null) return null;
-  const m = String(raw).match(/^(\d+)/);
+  const str = String(raw);
+  // "X+Y" or "X+Y+Z" charged move: first active frame = sum of all parts + 1
+  // (e.g. "6+3" → 10; "1+35" → 37; "6+33+4" → 44)
+  if (/^\d+(\+\d+)+$/.test(str)) {
+    const sum = str.split('+').reduce((a, n) => a + parseInt(n, 10), 0);
+    return sum + 1;
+  }
+  const m = str.match(/^(\d+)/);
   return m ? parseInt(m[1], 10) : null;
 }
 

@@ -1,7 +1,7 @@
 {
   "character": "Maypul",
   "slug": "Maypul",
-  "scrapedAt": "2026-06-09T02:43:04.513Z",
+  "scrapedAt": "2026-06-09T17:01:01.044Z",
   "moves": [
     {
       "move": "Jab",
@@ -279,7 +279,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 10,
+      "startup": 21,
       "hitboxes": [
         {
           "hitbox": "Vine (Weak)",
@@ -349,7 +349,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 14,
+      "startup": 23,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -419,7 +419,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 7,
+      "startup": 13,
       "hitboxes": [
         {
           "hitbox": "Hit 1",
@@ -1332,7 +1332,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 10,
+      "startup": 40,
       "hitboxes": [
         {
           "hitbox": "Airborne: Dive",

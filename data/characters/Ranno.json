@@ -1,7 +1,7 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-09T02:43:07.654Z",
+  "scrapedAt": "2026-06-09T17:01:04.049Z",
   "moves": [
     {
       "move": "Jab",
@@ -351,7 +351,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 8,
+      "startup": 15,
       "hitboxes": [
         {
           "hitbox": "Fully Charged: Arm (Strong)",
@@ -519,7 +519,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 8,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Top (Super Early)",
@@ -621,7 +621,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 6,
+      "startup": 10,
       "hitboxes": [
         {
           "hitbox": "Feet (Strong)",

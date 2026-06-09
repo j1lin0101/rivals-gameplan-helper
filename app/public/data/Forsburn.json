@@ -1,7 +1,7 @@
 {
   "character": "Forsburn",
   "slug": "Forsburn",
-  "scrapedAt": "2026-06-09T02:43:03.983Z",
+  "scrapedAt": "2026-06-09T17:01:00.541Z",
   "moves": [
     {
       "move": "Jab",
@@ -505,7 +505,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 9,
       "hitboxes": [
         {
           "hitbox": "Dstrong",
@@ -1140,7 +1140,7 @@
     },
     {
       "move": "Up Special",
-      "startup": 18,
+      "startup": 39,
       "hitboxes": [
         {
           "hitbox": "Regular: Uspecial",
@@ -1408,7 +1408,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 23,
+      "startup": 29,
       "hitboxes": [
         {
           "hitbox": "Slash",
@@ -1484,7 +1484,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 7,
+      "startup": 41,
       "hitboxes": [
         {
           "hitbox": "Throw Clone: Travel",

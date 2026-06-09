@@ -1,11 +1,11 @@
 {
   "character": "Absa",
   "slug": "Absa",
-  "scrapedAt": "2026-06-09T02:43:05.036Z",
+  "scrapedAt": "2026-06-09T17:01:01.584Z",
   "moves": [
     {
       "move": "Jab",
-      "startup": 2,
+      "startup": 3,
       "hitboxes": [
         {
           "hitbox": "Jab 1",
@@ -315,7 +315,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 8,
+      "startup": 12,
       "hitboxes": [
         {
           "hitbox": "Multihit Back",
@@ -377,7 +377,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 7,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Multihit",
@@ -427,7 +427,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 9,
       "hitboxes": [
         {
           "hitbox": "Multihit",
@@ -824,7 +824,7 @@
     },
     {
       "move": "Neutral Special",
-      "startup": 2,
+      "startup": 7,
       "hitboxes": [
         {
           "hitbox": "Charged",
@@ -894,7 +894,7 @@
     },
     {
       "move": "Forward Special",
-      "startup": 10,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Uncharged",
@@ -1184,7 +1184,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 30,
+      "startup": 51,
       "hitboxes": [
         {
           "hitbox": "Lightning (Up)",

@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-09T02:43:08.177Z",
+  "scrapedAt": "2026-06-09T17:01:04.469Z",
   "moves": [
     {
       "move": "Jab",
@@ -419,7 +419,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 8,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Blade",
@@ -489,7 +489,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 9,
+      "startup": 12,
       "hitboxes": [
         {
           "hitbox": "Blade",
@@ -591,7 +591,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 3,
+      "startup": 8,
       "hitboxes": [
         {
           "hitbox": "Blade 1",
@@ -1264,7 +1264,7 @@
     },
     {
       "move": "Neutral Special",
-      "startup": 6,
+      "startup": 11,
       "hitboxes": [
         {
           "hitbox": "Finisher: Laser",
@@ -1494,7 +1494,7 @@
     },
     {
       "move": "Forward Special",
-      "startup": 16,
+      "startup": 26,
       "hitboxes": [
         {
           "hitbox": "On Hit: Cross (Sour)",
@@ -2030,7 +2030,7 @@
     },
     {
       "move": "Getup Special",
-      "startup": 20,
+      "startup": 25,
       "hitboxes": [
         {
           "hitbox": "Blade",
@@ -2170,7 +2170,7 @@
     },
     {
       "move": "Ledge Special",
-      "startup": 20,
+      "startup": 33,
       "hitboxes": [
         {
           "hitbox": "Slash (Grounded)",

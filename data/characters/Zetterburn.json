@@ -1,7 +1,7 @@
 {
   "character": "Zetterburn",
   "slug": "Zetterburn",
-  "scrapedAt": "2026-06-09T02:43:03.507Z",
+  "scrapedAt": "2026-06-09T17:01:00.132Z",
   "moves": [
     {
       "move": "Jab",
@@ -277,7 +277,7 @@
     },
     {
       "move": "Dash Attack",
-      "startup": 6,
+      "startup": 10,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -347,7 +347,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 10,
+      "startup": 17,
       "hitboxes": [
         {
           "hitbox": "Consume: Hit 1",
@@ -413,7 +413,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 6,
+      "startup": 10,
       "hitboxes": [
         {
           "hitbox": "Consume: Uppercut",
@@ -515,7 +515,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 7,
       "hitboxes": [
         {
           "hitbox": "Consume: Hit 1",
@@ -989,7 +989,7 @@
     },
     {
       "move": "Neutral Special",
-      "startup": 1,
+      "startup": 2,
       "hitboxes": [
         {
           "hitbox": "Full Charge: Charged",

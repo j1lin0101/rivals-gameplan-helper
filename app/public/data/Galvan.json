@@ -1,7 +1,7 @@
 {
   "character": "Galvan",
   "slug": "Galvan",
-  "scrapedAt": "2026-06-09T02:43:10.798Z",
+  "scrapedAt": "2026-06-09T17:01:06.723Z",
   "moves": [
     {
       "move": "Jab",
@@ -396,7 +396,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 10,
+      "startup": 20,
       "hitboxes": [
         {
           "hitbox": "Early",
@@ -466,7 +466,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 8,
+      "startup": 16,
       "hitboxes": [
         {
           "hitbox": "Hit 1 (Upward)",
@@ -553,7 +553,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 7,
+      "startup": 19,
       "hitboxes": [
         {
           "hitbox": "Multihit",

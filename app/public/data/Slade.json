@@ -1,11 +1,11 @@
 {
   "character": "Slade",
   "slug": "Slade",
-  "scrapedAt": "2026-06-09T02:43:11.436Z",
+  "scrapedAt": "2026-06-09T17:01:07.144Z",
   "moves": [
     {
       "move": "Jab",
-      "startup": 2,
+      "startup": 5,
       "hitboxes": [
         {
           "hitbox": "Jab 1",
@@ -265,7 +265,7 @@
     },
     {
       "move": "Forward Strong",
-      "startup": 13,
+      "startup": 18,
       "hitboxes": [
         {
           "hitbox": "Early Tip",
@@ -367,7 +367,7 @@
     },
     {
       "move": "Up Strong",
-      "startup": 6,
+      "startup": 12,
       "hitboxes": [
         {
           "hitbox": "Slash",
@@ -405,7 +405,7 @@
     },
     {
       "move": "Down Strong",
-      "startup": 4,
+      "startup": 8,
       "hitboxes": [
         {
           "hitbox": "Blade 1",
