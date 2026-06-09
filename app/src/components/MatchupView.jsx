@@ -114,7 +114,7 @@ function CharColumnHeader({ name, accent }) {
       onMouseLeave={e => e.currentTarget.style.opacity = '1'}
     >
       <img
-        src={`/icons/${slug}.png`}
+        src={`${import.meta.env.BASE_URL}icons/${slug}.png`}
         alt={name}
         style={{ width: '32px', height: '32px', objectFit: 'contain', flexShrink: 0 }}
       />
@@ -493,12 +493,15 @@ function CategoryAccordion({ category, rows, attackerName, defenderName }) {
   )
 }
 
-function BreakdownTable({ matchup }) {
+function BreakdownTable({ matchup, categoryFilter }) {
   const { breakdown } = matchup
+  const visibleCategories = categoryFilter && categoryFilter !== 'All'
+    ? [categoryFilter]
+    : CATEGORY_ORDER
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      {CATEGORY_ORDER.map(category => {
+      {visibleCategories.map(category => {
         const rows = breakdown.filter(r => r.category === category)
         if (!rows.length) return null
         return (
@@ -517,6 +520,7 @@ function BreakdownTable({ matchup }) {
 
 function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar }) {
   const [view, setView] = useState('me') // 'me' = I attack opp, 'opp' = opp attacks me
+  const [categoryFilter, setCategoryFilter] = useState('All')
 
   const active = view === 'opp' ? matchupVsOpp : matchupVsMe
   const activeColor = view === 'opp' ? 'var(--accent2)' : 'var(--accent)'
@@ -538,10 +542,32 @@ function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar }) {
 
       {active && (
         <div>
-          <h2 style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: activeColor, marginBottom: '12px' }}>
-            {label}
-          </h2>
-          <BreakdownTable matchup={active} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px', flexWrap: 'wrap' }}>
+            <h2 style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: activeColor, margin: 0 }}>
+              {label}
+            </h2>
+            <select
+              value={categoryFilter}
+              onChange={e => setCategoryFilter(e.target.value)}
+              style={{
+                background: 'var(--surface)',
+                border: '1px solid var(--border)',
+                borderRadius: '6px',
+                color: 'var(--text)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                padding: '4px 10px',
+                cursor: 'pointer',
+                outline: 'none',
+              }}
+            >
+              <option value="All">All</option>
+              {CATEGORY_ORDER.filter(c => c !== 'Misc').map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+          </div>
+          <BreakdownTable matchup={active} categoryFilter={categoryFilter} />
         </div>
       )}
     </div>
@@ -753,34 +779,43 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
       <main className="page-main">
 
         {/* Top panels: 2-col grid, each row spans both characters so heights match */}
+        {/* On mobile, CSS order groups each character's panels together */}
         <div className="top-panels-grid">
           {/* Row 1: character headers */}
-          <CharColumnHeader name={myChar} accent="var(--accent)" />
-          <CharColumnHeader name={oppChar} accent="var(--accent2)" />
+          <div className="char-col-header-my"><CharColumnHeader name={myChar} accent="var(--accent)" /></div>
+          <div className="char-col-header-opp"><CharColumnHeader name={oppChar} accent="var(--accent2)" /></div>
 
           {/* Row 2: Safest Options — same row height for both */}
-          {myData
-            ? <Section title="Safest Options" accent="var(--accent)">
-                <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />
-              </Section>
-            : <div />}
-          {oppData
-            ? <Section title="Safest Options" accent="var(--accent2)">
-                <SafestOptionsList charData={oppData} defenderOOSOptions={myOOS} />
-              </Section>
-            : <div />}
+          <div className="char-panel-safe-my">
+            {myData
+              ? <Section title="Safest Options" accent="var(--accent)">
+                  <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />
+                </Section>
+              : <div />}
+          </div>
+          <div className="char-panel-safe-opp">
+            {oppData
+              ? <Section title="Safest Options" accent="var(--accent2)">
+                  <SafestOptionsList charData={oppData} defenderOOSOptions={myOOS} />
+                </Section>
+              : <div />}
+          </div>
 
           {/* Row 3: OOS Options — same row height for both */}
-          {myData
-            ? <Section title="OOS Options" accent="var(--accent)">
-                <OOSList charData={myData} />
-              </Section>
-            : <div />}
-          {oppData
-            ? <Section title="OOS Options" accent="var(--accent2)">
-                <OOSList charData={oppData} />
-              </Section>
-            : <div />}
+          <div className="char-panel-oos-my">
+            {myData
+              ? <Section title="OOS Options" accent="var(--accent)">
+                  <OOSList charData={myData} />
+                </Section>
+              : <div />}
+          </div>
+          <div className="char-panel-oos-opp">
+            {oppData
+              ? <Section title="OOS Options" accent="var(--accent2)">
+                  <OOSList charData={oppData} />
+                </Section>
+              : <div />}
+          </div>
         </div>
 
         {/* Breakdown tables — toggled */}

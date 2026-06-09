@@ -62,11 +62,18 @@ body {
   gap: 16px;
   align-items: stretch;
 }
-/* Small: one panel per row */
+/* Small: single column, grouped by character */
 @media (max-width: 560px) {
   .top-panels-grid {
     grid-template-columns: 1fr;
   }
+  /* Reorder: my char header → safe → oos, then opp header → safe → oos */
+  .top-panels-grid .char-col-header-my    { order: 1; }
+  .top-panels-grid .char-panel-safe-my    { order: 2; }
+  .top-panels-grid .char-panel-oos-my     { order: 3; }
+  .top-panels-grid .char-col-header-opp   { order: 4; }
+  .top-panels-grid .char-panel-safe-opp   { order: 5; }
+  .top-panels-grid .char-panel-oos-opp    { order: 6; }
 }
 
 /* ── Responsive: Page padding ── */
@@ -163,7 +170,7 @@ body {
   .move-row {
     grid-template-columns: 1fr;
     gap: 6px;
-    padding: 10px 12px;
+    padding: 10px 16px;
   }
   .move-row-badges {
     display: flex;
