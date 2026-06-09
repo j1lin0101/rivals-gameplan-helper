@@ -1,7 +1,7 @@
 {
   "character": "Zetterburn",
   "slug": "Zetterburn",
-  "scrapedAt": "2026-06-09T01:37:41.921Z",
+  "scrapedAt": "2026-06-09T02:43:03.507Z",
   "moves": [
     {
       "move": "Jab",
@@ -993,8 +993,12 @@
       "hitboxes": [
         {
           "hitbox": "Full Charge: Charged",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 8,
+            "max": 8
+          },
+          "shieldRaw": "Stun: 8",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1022,8 +1026,12 @@
         },
         {
           "hitbox": "Uncharged: Shine",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 157,
             "max": 193
@@ -1162,8 +1170,13 @@
       "hitboxes": [
         {
           "hitbox": "Airborne: Dive (On Airborne)",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 1,
+            "max": 1,
+            "isStun": true,
+            "isProjectile": false
+          },
+          "shieldRaw": "Stun: 1",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1174,8 +1187,13 @@
         },
         {
           "hitbox": "Airborne: Dive (On Grounded)",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 1,
+            "max": 1,
+            "isStun": true,
+            "isProjectile": false
+          },
+          "shieldRaw": "Stun: 1",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},

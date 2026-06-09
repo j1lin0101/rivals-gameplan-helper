@@ -1,7 +1,7 @@
 {
   "character": "Absa",
   "slug": "Absa",
-  "scrapedAt": "2026-06-09T01:37:43.412Z",
+  "scrapedAt": "2026-06-09T02:43:05.036Z",
   "moves": [
     {
       "move": "Jab",
@@ -319,8 +319,11 @@
       "hitboxes": [
         {
           "hitbox": "Multihit Back",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -31,
+            "max": -30
+          },
+          "shieldRaw": "-31 to -30",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -328,8 +331,11 @@
         },
         {
           "hitbox": "Multihit Front",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -31,
+            "max": -30
+          },
+          "shieldRaw": "-31 to -30",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -930,8 +936,11 @@
       "hitboxes": [
         {
           "hitbox": "Double Blip: Blip",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -17,
+            "max": -17
+          },
+          "shieldRaw": "-17",
           "tumblePercent": {
             "min": 385,
             "max": 385
@@ -942,8 +951,11 @@
         },
         {
           "hitbox": "Single Blip (Short): Blip",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -17,
+            "max": -17
+          },
+          "shieldRaw": "-17",
           "tumblePercent": {
             "min": 385,
             "max": 385

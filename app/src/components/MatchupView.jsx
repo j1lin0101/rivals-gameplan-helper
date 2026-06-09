@@ -43,7 +43,7 @@ const PROJECTILE_COLOR = '#7B68EE'
 const PROJ_TOOLTIP = "This hitbox is flagged as a projectile by the game and wiki, though it may not behave like a traditional projectile. Distance greatly impacts safety and follow-up potential, so we show raw shield stun instead of a frame advantage."
 
 const STUN_COLOR = '#E69F00'
-const STUN_TOOLTIP = "This move has special properties (e.g. active for many frames while falling, can be jump-cancelled, or hits during landing) that make a fixed shield safety value unreliable. We show raw shield stun so you can assess the situation yourself."
+const STUN_TOOLTIP = "This move has special properties (e.g. active for many frames while falling, can be jump-cancelled, hits during landing, or has a unique hitbox) that make a fixed shield safety value unreliable. We show raw shield stun so you can assess the situation yourself."
 
 function ProjectileBadge({ stun }) {
   const [visible, setVisible] = useState(false)
@@ -341,7 +341,7 @@ function TumbleBadge({ row, defenderName }) {
   if (aerialStr && aerialStr !== groundedStr) {
     const aBadge = makeBadge(aerialNum, aerialStr)
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '4px', alignItems: 'center' }}>
         <span style={gBadge.style}>Grounded {gBadge.str}</span>
         <span style={aBadge.style}>Aerial {aBadge.str}</span>
       </div>
@@ -816,8 +816,10 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             <span style={{ color: 'var(--muted)', margin: '0 8px' }}>vs</span>
             <span style={{ color: 'var(--accent2)' }}>{oppChar}</span>
           </h1>
-          <p style={{ color: 'var(--muted)', fontSize: '0.72rem', marginTop: '2px' }}>
-            Shield safety &amp; punish analysis · Shield release {matchupVsOpp?.shieldRelease}f · Jump squat 4f
+          <p style={{ color: 'var(--muted)', fontSize: '0.72rem', marginTop: '2px', lineHeight: 1.6 }}>
+            Shield safety &amp; punish analysis
+            <span className="subtitle-break"> · </span>
+            Shield release {matchupVsOpp?.shieldRelease}f · Jump squat 4f
           </p>
         </div>
         <button

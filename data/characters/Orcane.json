@@ -1,7 +1,7 @@
 {
   "character": "Orcane",
   "slug": "Orcane",
-  "scrapedAt": "2026-06-09T01:37:44.952Z",
+  "scrapedAt": "2026-06-09T02:43:06.081Z",
   "moves": [
     {
       "move": "Jab",
@@ -1176,8 +1176,11 @@
       "hitboxes": [
         {
           "hitbox": "Hit 1",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -23,
+            "max": -23
+          },
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1185,8 +1188,11 @@
         },
         {
           "hitbox": "Hit 1 Empowered",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -23,
+            "max": -23
+          },
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1194,8 +1200,13 @@
         },
         {
           "hitbox": "Hit 2",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 5,
+            "max": 5,
+            "isStun": true,
+            "isProjectile": false
+          },
+          "shieldRaw": "Stun: 5",
           "tumblePercent": {
             "min": 16,
             "max": 21
@@ -1223,8 +1234,13 @@
         },
         {
           "hitbox": "Hit 2 Empowered",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 5,
+            "max": 5,
+            "isStun": true,
+            "isProjectile": false
+          },
+          "shieldRaw": "Stun: 5",
           "tumblePercent": {
             "min": 16,
             "max": 21

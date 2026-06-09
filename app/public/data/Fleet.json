@@ -1,7 +1,7 @@
 {
   "character": "Fleet",
   "slug": "Fleet",
-  "scrapedAt": "2026-06-09T01:37:47.675Z",
+  "scrapedAt": "2026-06-09T02:43:08.698Z",
   "moves": [
     {
       "move": "Jab",
@@ -1113,8 +1113,12 @@
       "hitboxes": [
         {
           "hitbox": "Wind Chime",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 2,
+            "max": 2
+          },
+          "shieldRaw": "Stun: 2",
           "tumblePercent": {
             "min": 16,
             "max": 21

@@ -1,7 +1,7 @@
 {
   "character": "Kragg",
   "slug": "Kragg",
-  "scrapedAt": "2026-06-09T01:37:46.045Z",
+  "scrapedAt": "2026-06-09T02:43:07.137Z",
   "moves": [
     {
       "move": "Jab",
@@ -950,8 +950,12 @@
       "hitboxes": [
         {
           "hitbox": "Roll",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 3,
+            "max": 3
+          },
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 151,
             "max": 186
@@ -1283,10 +1287,10 @@
         {
           "hitbox": "Hit 2",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -21
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23 to -21",
           "tumblePercent": {
             "min": 0,
             "max": 0

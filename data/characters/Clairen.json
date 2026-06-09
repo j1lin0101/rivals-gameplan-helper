@@ -1,7 +1,7 @@
 {
   "character": "Clairen",
   "slug": "Clairen",
-  "scrapedAt": "2026-06-09T01:37:47.074Z",
+  "scrapedAt": "2026-06-09T02:43:08.177Z",
   "moves": [
     {
       "move": "Jab",
@@ -1498,8 +1498,12 @@
       "hitboxes": [
         {
           "hitbox": "On Hit: Cross (Sour)",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 6,
+            "max": 6
+          },
+          "shieldRaw": "Stun: 6",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1527,8 +1531,12 @@
         },
         {
           "hitbox": "On Hit: Center (Sweetspot)",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 10,
+            "max": 10
+          },
+          "shieldRaw": "Stun: 10",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1563,10 +1571,10 @@
         {
           "hitbox": "Early Multihit (Base)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1575,10 +1583,10 @@
         {
           "hitbox": "Early Multihit (Mid)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1587,10 +1595,10 @@
         {
           "hitbox": "Early Multihit (Tip)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1599,10 +1607,10 @@
         {
           "hitbox": "Late Multihit (Base)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1611,10 +1619,10 @@
         {
           "hitbox": "Late Multihit (Mid)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1623,10 +1631,10 @@
         {
           "hitbox": "Late Multihit (Tip)",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -23,
+            "max": -23
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-23",
           "tumblePercent": null,
           "tumbleRaw": "☑️",
           "perCharacterTumble": {},
@@ -1635,10 +1643,10 @@
         {
           "hitbox": "Final Blade",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -20,
+            "max": -20
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-20",
           "tumblePercent": {
             "min": 8,
             "max": 11
@@ -1667,10 +1675,10 @@
         {
           "hitbox": "Final Tipper",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "min": -17,
+            "max": -17
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "-17",
           "tumblePercent": {
             "min": 0,
             "max": 1

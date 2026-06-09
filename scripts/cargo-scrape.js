@@ -127,12 +127,14 @@ function calcShieldSafety(attack, hitActive, iasa, landingLag, customSS, isProje
   const SHARED = 1;
 
   if (customSS === 'N/A') {
-    // Projectile articles with no computable SS → show raw stun value as badge
+    // No computable SS — show raw stun value as badge
+    const stunVal = shieldStun - SHARED;
     if (isProjectileHitbox) {
-      const stunVal = shieldStun - SHARED;
       return { isProjectile: true, isStun: true, min: stunVal, max: stunVal };
     }
-    return null;
+    // Non-projectile N/A (e.g. Zetterburn Shine, Clairen Fspecial sour) —
+    // show STUN badge so the move still appears in the table
+    return { isStun: true, min: stunVal, max: stunVal };
   }
 
   // Explicit override (not a formula placeholder)
@@ -170,8 +172,6 @@ function calcShieldSafety(attack, hitActive, iasa, landingLag, customSS, isProje
     if (!isNaN(v)) return { min: v, max: v };
   }
 
-  if (iasa == null) return null;
-
   const activeStr = String(hitActive);
 
   // Projectile / ongoing hitbox → show stun value instead of ±frame advantage
@@ -180,13 +180,19 @@ function calcShieldSafety(attack, hitActive, iasa, landingLag, customSS, isProje
     return { min: stunVal, max: stunVal, isStun: true, isProjectile: isProjectileHitbox };
   }
 
-  // Aerial: SS = ShieldStun − 1 − landingLag
+  // Aerial: SS = ShieldStun − 1 − landingLag (does not require iasa)
   if (landingLag != null) {
-    const ss = shieldStun - SHARED - Number(landingLag);
+    const ss = shieldStun - SHARED - landingLag;
     return { min: ss, max: ss };
   }
 
-  // Grounded: SS range based on first/last active frame of the LAST active window
+  // Grounded: requires iasa — if missing, fall back to raw stun badge
+  if (iasa == null) {
+    const stunVal = shieldStun - SHARED;
+    return { isStun: true, min: stunVal, max: stunVal };
+  }
+
+  // SS range based on first/last active frame of the LAST active window
   // (matches the Lua rpartition(hitActive, ", ") logic)
   const lastRange = activeStr.split(', ').pop().trim();
   const parts     = lastRange.split('-').map(s => parseInt(s.trim(), 10));
@@ -194,8 +200,8 @@ function calcShieldSafety(attack, hitActive, iasa, landingLag, customSS, isProje
   const lastF     = parts.length > 1 ? parts[1] : firstF;
   if (isNaN(firstF)) return null;
 
-  const ssMin = shieldStun - SHARED - (Number(iasa) - firstF - 1);
-  const ssMax = shieldStun - SHARED - (Number(iasa) - lastF  - 1);
+  const ssMin = shieldStun - SHARED - (iasa - firstF - 1);
+  const ssMax = shieldStun - SHARED - (iasa - lastF  - 1);
   return { min: ssMin, max: ssMax };
 }
 
@@ -370,8 +376,16 @@ async function scrapeCharacter(charName, charSlug, characterWeights) {
       const hitMoveIDs  = Array.isArray(mode.hitMoveID)          ? mode.hitMoveID          : [];
       const customSSArr = Array.isArray(mode.customShieldSafety) ? mode.customShieldSafety : [];
 
-      const iasa       = mode.iasa       != null ? Number(mode.iasa)       : null;
-      const landingLag = mode.landingLag != null ? Number(mode.landingLag) : null;
+      // iasa may be "N/A" or "X / Y" (mode-split) — treat N/A as null, take min of a range
+      const iasaStr  = mode.iasa != null && mode.iasa !== 'N/A' ? String(mode.iasa) : null;
+      const iasa     = iasaStr != null
+        ? (Math.min(...iasaStr.split('/').map(s => Number(s.trim())).filter(n => !isNaN(n))) || null)
+        : null;
+      // landingLag may be "X / Y" (grounded/aerial split) — take the smaller (best case)
+      const lagRaw   = mode.landingLag != null ? String(mode.landingLag) : null;
+      const landingLag = lagRaw != null
+        ? Math.min(...lagRaw.split('/').map(s => Number(s.trim())).filter(n => !isNaN(n))) || null
+        : null;
 
       for (let i = 0; i < hitIDs.length; i++) {
         const hitID    = hitIDs[i];
@@ -388,7 +402,22 @@ async function scrapeCharacter(charName, charSlug, characterWeights) {
           : `${mode.mode}: ${hitName}`;
 
         // Look up hit data (key: hitMoveID + hitID)
-        const hit = (hitMap[moveID] || {})[hitID];
+        // Fall back to prefix match when names diverge (e.g. "Multihit Back" ↔ "Multihit")
+        const moveHits = hitMap[moveID] || {};
+        let hit = moveHits[hitID];
+        if (!hit) {
+          // Prefix fallback: "Multihit Back" ↔ "Multihit"
+          const fallback = Object.keys(moveHits).find(k =>
+            k.startsWith(hitID) || hitID.startsWith(k)
+          );
+          if (fallback) hit = moveHits[fallback];
+        }
+        if (!hit) {
+          // Last resort: if only one HitData entry exists for this move, use it
+          // (handles name mismatches like Etalus Uspecial "Ice" vs "Spike")
+          const keys = Object.keys(moveHits);
+          if (keys.length === 1) hit = moveHits[keys[0]];
+        }
         if (!hit && !NO_SHIELD.has(attack)) {
           console.warn(`\n    [WARN] No HitData: ${charName} attack="${attack}" moveID="${moveID}" hitID="${hitID}"`);
         }

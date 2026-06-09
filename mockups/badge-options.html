@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badge Design Mockups</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0d0d14;
+    color: #e0e0f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #555577;
+    margin-bottom: 12px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .card {
+    background: #13131f;
+    border: 1px solid #2a2a3f;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 12px 16px;
+    min-height: 44px;
+    border-bottom: 1px solid #2a2a3f;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+  }
+  .card-body { padding: 10px 10px; }
+
+  .row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 6px;
+    font-size: 0.83rem;
+  }
+  .move { font-weight: 600; }
+  .hint { color: #555577; font-size: 0.72rem; }
+
+  /* ── OPTION A: Monospace number, no box ── */
+  .a-num {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    width: 56px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .a-safe   { color: #4ade80; }
+  .a-risky  { color: #facc15; }
+  .a-oos    { color: #22d3ee; }
+
+  /* ── OPTION B: Pill badge, no fixed width — floated right ── */
+  .b-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 6px;
+    font-size: 0.83rem;
+  }
+  .b-move-group { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .b-badge {
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-left: auto;
+  }
+  .b-safe  { background: #4ade8022; color: #4ade80; border: 1px solid #4ade8044; }
+  .b-risky { background: #facc1522; color: #facc15; border: 1px solid #facc1544; }
+  .b-oos   { background: #22d3ee22; color: #22d3ee; border: 1px solid #22d3ee44; }
+
+  /* ── OPTION C: Colored dot + plain number ── */
+  .c-num-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 64px;
+    flex-shrink: 0;
+    justify-content: flex-end;
+  }
+  .c-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .c-num {
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .c-safe  { color: #4ade80; }
+  .c-risky { color: #facc15; }
+  .c-oos   { color: #22d3ee; }
+
+  /* ── OPTION D: Compact table — number right-col, tight pill ── */
+  .d-row {
+    display: grid;
+    grid-template-columns: 52px 1fr;
+    align-items: center;
+    gap: 0;
+    padding: 4px 6px;
+    font-size: 0.83rem;
+  }
+  .d-num {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  .d-safe  { color: #4ade80; }
+  .d-risky { color: #facc15; }
+  .d-oos   { color: #22d3ee; }
+  .d-label { display: flex; align-items: center; gap: 6px; }
+
+  /* divider between option and its description */
+  .option-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #444466;
+    margin-bottom: 4px;
+    padding: 0 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="label">Design Options — Safe Options & OOS Cards</div>
+
+<div class="grid">
+
+  <!-- ══ OPTION A: Monospace, no box ══ -->
+  <div>
+    <div class="option-label">A — Monospace number, no box</div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn's Safest Options</div>
+      <div class="card-body">
+        <div class="row"><span class="a-num a-safe">−2</span><span class="move">Forward Air</span><span class="hint">[Claw (Strong)]</span></div>
+        <div class="row"><span class="a-num a-safe">−3</span><span class="move">Up Air</span><span class="hint">[Top (Strong)]</span></div>
+        <div class="row"><span class="a-num a-safe">−3</span><span class="move">Down Air</span><span class="hint">[Top]</span></div>
+        <div class="row"><span class="a-num a-safe">−4</span><span class="move">Back Air</span><span class="hint">[Tipper (Strong)]</span></div>
+        <div class="row"><span class="a-num a-safe">−7</span><span class="move">Neutral Air</span><span class="hint">[Final]</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #f472b6;">Kragg's Safest Options</div>
+      <div class="card-body">
+        <div class="row"><span class="a-num a-safe" style="font-size:0.68rem">+3 to +12</span><span class="move">Down Special</span><span class="hint">[Final Spike]</span></div>
+        <div class="row"><span class="a-num a-safe">−3</span><span class="move">Forward Air</span><span class="hint">[Early (Strong)]</span></div>
+        <div class="row"><span class="a-num a-safe">−4</span><span class="move">Neutral Air</span><span class="hint">[Hit 4]</span></div>
+        <div class="row"><span class="a-num a-safe">−4</span><span class="move">Back Air</span><span class="hint">[Early (Strong)]</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn OOS Options</div>
+      <div class="card-body">
+        <div class="row"><span class="a-num a-oos">5f</span><span class="move">JC Neutral Special</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><span class="a-num a-oos">9f</span><span class="move">Neutral Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><span class="a-num a-oos">10f</span><span class="move">JC Up Strong</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><span class="a-num a-oos">11f</span><span class="move">Up Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><span class="a-num a-oos">12f</span><span class="move">Jab</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OPTION B: Badge floated right ══ -->
+  <div>
+    <div class="option-label">B — Badge floated to the right</div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn's Safest Options</div>
+      <div class="card-body">
+        <div class="b-row"><div class="b-move-group"><span class="move">Forward Air</span><span class="hint">[Claw (Strong)]</span></div><span class="b-badge b-safe">−2</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Up Air</span><span class="hint">[Top (Strong)]</span></div><span class="b-badge b-safe">−3</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Down Air</span><span class="hint">[Top]</span></div><span class="b-badge b-safe">−3</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Back Air</span><span class="hint">[Tipper (Strong)]</span></div><span class="b-badge b-safe">−4</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Neutral Air</span><span class="hint">[Final]</span></div><span class="b-badge b-safe">−7</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #f472b6;">Kragg's Safest Options</div>
+      <div class="card-body">
+        <div class="b-row"><div class="b-move-group"><span class="move">Down Special</span><span class="hint">[Final Spike]</span></div><span class="b-badge b-safe">+3 to +12</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Forward Air</span><span class="hint">[Early (Strong)]</span></div><span class="b-badge b-safe">−3</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Neutral Air</span><span class="hint">[Hit 4]</span></div><span class="b-badge b-safe">−4</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Back Air</span><span class="hint">[Early (Strong)]</span></div><span class="b-badge b-safe">−4</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn OOS Options</div>
+      <div class="card-body">
+        <div class="b-row"><div class="b-move-group"><span class="move">JC Neutral Special</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div><span class="b-badge b-oos">5f</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Neutral Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div><span class="b-badge b-oos">9f</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">JC Up Strong</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div><span class="b-badge b-oos">10f</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Up Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div><span class="b-badge b-oos">11f</span></div>
+        <div class="b-row"><div class="b-move-group"><span class="move">Jab</span></div><span class="b-badge b-oos">12f</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OPTION C: Dot + plain colored number ══ -->
+  <div>
+    <div class="option-label">C — Colored dot + plain number</div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn's Safest Options</div>
+      <div class="card-body">
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−2</span></div><span class="move">Forward Air</span><span class="hint">[Claw (Strong)]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−3</span></div><span class="move">Up Air</span><span class="hint">[Top (Strong)]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−3</span></div><span class="move">Down Air</span><span class="hint">[Top]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#facc15"></span><span class="c-num c-risky">−4</span></div><span class="move">Back Air</span><span class="hint">[Tipper (Strong)]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#facc15"></span><span class="c-num c-risky">−7</span></div><span class="move">Neutral Air</span><span class="hint">[Final]</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #f472b6;">Kragg's Safest Options</div>
+      <div class="card-body">
+        <div class="row"><div class="c-num-group" style="width:80px"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe" style="font-size:0.68rem">+3 to +12</span></div><span class="move">Down Special</span><span class="hint">[Final Spike]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−3</span></div><span class="move">Forward Air</span><span class="hint">[Early (Strong)]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−4</span></div><span class="move">Neutral Air</span><span class="hint">[Hit 4]</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#4ade80"></span><span class="c-num c-safe">−4</span></div><span class="move">Back Air</span><span class="hint">[Early (Strong)]</span></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn OOS Options</div>
+      <div class="card-body">
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#22d3ee"></span><span class="c-num c-oos">5f</span></div><span class="move">JC Neutral Special</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#22d3ee"></span><span class="c-num c-oos">9f</span></div><span class="move">Neutral Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#22d3ee"></span><span class="c-num c-oos">10f</span></div><span class="move">JC Up Strong</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#22d3ee"></span><span class="c-num c-oos">11f</span></div><span class="move">Up Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div>
+        <div class="row"><div class="c-num-group"><span class="c-dot" style="background:#22d3ee"></span><span class="c-num c-oos">12f</span></div><span class="move">Jab</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ OPTION D: Tight grid, no badge ══ -->
+  <div>
+    <div class="option-label">D — Tight grid, number in its own column</div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn's Safest Options</div>
+      <div class="card-body">
+        <div class="d-row"><span class="d-num d-safe">−2</span><div class="d-label"><span class="move">Forward Air</span><span class="hint">[Claw (Strong)]</span></div></div>
+        <div class="d-row"><span class="d-num d-safe">−3</span><div class="d-label"><span class="move">Up Air</span><span class="hint">[Top (Strong)]</span></div></div>
+        <div class="d-row"><span class="d-num d-safe">−3</span><div class="d-label"><span class="move">Down Air</span><span class="hint">[Top]</span></div></div>
+        <div class="d-row"><span class="d-num d-safe">−4</span><div class="d-label"><span class="move">Back Air</span><span class="hint">[Tipper (Strong)]</span></div></div>
+        <div class="d-row"><span class="d-num d-safe">−7</span><div class="d-label"><span class="move">Neutral Air</span><span class="hint">[Final]</span></div></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #f472b6;">Kragg's Safest Options</div>
+      <div class="card-body">
+        <div class="d-row" style="grid-template-columns:72px 1fr"><span class="d-num d-safe" style="font-size:0.65rem">+3 to +12</span><div class="d-label"><span class="move">Down Special</span><span class="hint">[Final Spike]</span></div></div>
+        <div class="d-row" style="grid-template-columns:72px 1fr"><span class="d-num d-safe">−3</span><div class="d-label"><span class="move">Forward Air</span><span class="hint">[Early (Strong)]</span></div></div>
+        <div class="d-row" style="grid-template-columns:72px 1fr"><span class="d-num d-safe">−4</span><div class="d-label"><span class="move">Neutral Air</span><span class="hint">[Hit 4]</span></div></div>
+        <div class="d-row" style="grid-template-columns:72px 1fr"><span class="d-num d-safe">−4</span><div class="d-label"><span class="move">Back Air</span><span class="hint">[Early (Strong)]</span></div></div>
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="card">
+      <div class="card-header" style="color: #22d3ee;">Zetterburn OOS Options</div>
+      <div class="card-body">
+        <div class="d-row"><span class="d-num d-oos">5f</span><div class="d-label"><span class="move">JC Neutral Special</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div></div>
+        <div class="d-row"><span class="d-num d-oos">9f</span><div class="d-label"><span class="move">Neutral Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div></div>
+        <div class="d-row"><span class="d-num d-oos">10f</span><div class="d-label"><span class="move">JC Up Strong</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div></div>
+        <div class="d-row"><span class="d-num d-oos">11f</span><div class="d-label"><span class="move">Up Air</span><span style="color:#f472b6;font-size:0.7rem;font-weight:600">JC</span></div></div>
+        <div class="d-row"><span class="d-num d-oos">12f</span><div class="d-label"><span class="move">Jab</span></div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

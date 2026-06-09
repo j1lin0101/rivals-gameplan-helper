@@ -1,7 +1,7 @@
 {
   "character": "Maypul",
   "slug": "Maypul",
-  "scrapedAt": "2026-06-09T01:37:42.910Z",
+  "scrapedAt": "2026-06-09T02:43:04.513Z",
   "moves": [
     {
       "move": "Jab",
@@ -841,10 +841,11 @@
         {
           "hitbox": "Grounded: Dash",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "isStun": true,
+            "min": 3,
+            "max": 3
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 60,
             "max": 74
@@ -878,8 +879,11 @@
       "hitboxes": [
         {
           "hitbox": "Hit 1",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -22,
+            "max": -22
+          },
+          "shieldRaw": "-22",
           "tumblePercent": {
             "min": 6,
             "max": 8
@@ -907,8 +911,11 @@
         },
         {
           "hitbox": "Hit 2 Early",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -19,
+            "max": -19
+          },
+          "shieldRaw": "-19",
           "tumblePercent": {
             "min": 10,
             "max": 14
@@ -936,8 +943,11 @@
         },
         {
           "hitbox": "Hit 2 Late",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -21,
+            "max": -21
+          },
+          "shieldRaw": "-21",
           "tumblePercent": {
             "min": 16,
             "max": 21
@@ -971,8 +981,12 @@
       "hitboxes": [
         {
           "hitbox": "Lily Bite (Hitstun): Bite",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 3,
+            "max": 3
+          },
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 60,
             "max": 74
@@ -1001,10 +1015,11 @@
         {
           "hitbox": "Lily Bite (No Hitstun): Bite",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "isStun": true,
+            "min": 3,
+            "max": 3
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 60,
             "max": 74
@@ -1033,10 +1048,11 @@
         {
           "hitbox": "Lily Wrap: Wrap",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "isStun": true,
+            "min": 3,
+            "max": 3
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 60,
             "max": 74
@@ -1249,9 +1265,29 @@
           "hitbox": "Throw",
           "shieldSafety": null,
           "shieldRaw": null,
-          "tumblePercent": null,
-          "tumbleRaw": "Never",
-          "perCharacterTumble": {},
+          "tumblePercent": {
+            "min": 2,
+            "max": 4
+          },
+          "tumbleRaw": "2 - 4%",
+          "perCharacterTumble": {
+            "ABSA": 3,
+            "CLAIREN": 3,
+            "ETALUS": 4,
+            "FLEET": 3,
+            "FORSBURN": 4,
+            "GALVAN": 4,
+            "KRAGG": 4,
+            "LA REINA": 4,
+            "LOXODONT": 4,
+            "MAYPUL": 3,
+            "OLYMPIA": 3,
+            "ORCANE": 4,
+            "RANNO": 3,
+            "SLADE": 4,
+            "WRASTOR": 2,
+            "ZETTERBURN": 4
+          },
           "perCharacterTumbleAerial": {}
         }
       ]
@@ -1300,8 +1336,12 @@
       "hitboxes": [
         {
           "hitbox": "Airborne: Dive",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 3,
+            "max": 3
+          },
+          "shieldRaw": "Stun: 3",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1309,8 +1349,12 @@
         },
         {
           "hitbox": "Airborne: Landing",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1338,8 +1382,12 @@
         },
         {
           "hitbox": "Grounded (Standard): Dive",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 3,
+            "max": 3
+          },
+          "shieldRaw": "Stun: 3",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1347,8 +1395,12 @@
         },
         {
           "hitbox": "Grounded (Standard): Landing",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1420,8 +1472,12 @@
       "hitboxes": [
         {
           "hitbox": "Parrying Terry (Perry): Terry",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 25,
             "max": 32
@@ -1449,8 +1505,12 @@
         },
         {
           "hitbox": "Seed at Terry: Terry",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 25,
             "max": 32
@@ -1478,8 +1538,12 @@
         },
         {
           "hitbox": "Summoning Terry: Terry",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 25,
             "max": 32

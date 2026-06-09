@@ -1,7 +1,7 @@
 {
   "character": "Etalus",
   "slug": "Etalus",
-  "scrapedAt": "2026-06-09T01:37:43.971Z",
+  "scrapedAt": "2026-06-09T02:43:05.553Z",
   "moves": [
     {
       "move": "Jab",
@@ -285,8 +285,12 @@
       "hitboxes": [
         {
           "hitbox": "Early",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 38,
             "max": 47
@@ -314,8 +318,12 @@
         },
         {
           "hitbox": "Late",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 3,
+            "max": 3
+          },
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 71,
             "max": 88
@@ -1075,8 +1083,11 @@
         },
         {
           "hitbox": "Throw",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -6,
+            "max": -6
+          },
+          "shieldRaw": "-6",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1267,8 +1278,12 @@
       "hitboxes": [
         {
           "hitbox": "Ice",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 6,
+            "max": 6
+          },
+          "shieldRaw": "Stun: 6",
           "tumblePercent": {
             "min": 36,
             "max": 46
@@ -1388,10 +1403,11 @@
         {
           "hitbox": "Grounded: Rising",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "isStun": true,
+            "min": 3,
+            "max": 3
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "Stun: 3",
           "tumblePercent": {
             "min": 0,
             "max": 0
@@ -1437,10 +1453,11 @@
         {
           "hitbox": "Grounded: Landing",
           "shieldSafety": {
-            "min": null,
-            "max": null
+            "isStun": true,
+            "min": 6,
+            "max": 6
           },
-          "shieldRaw": "NaN to NaN",
+          "shieldRaw": "Stun: 6",
           "tumblePercent": {
             "min": 0,
             "max": 0

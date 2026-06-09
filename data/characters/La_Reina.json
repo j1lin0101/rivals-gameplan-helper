@@ -1,7 +1,7 @@
 {
   "character": "La Reina",
   "slug": "La_Reina",
-  "scrapedAt": "2026-06-09T01:37:49.148Z",
+  "scrapedAt": "2026-06-09T02:43:10.275Z",
   "moves": [
     {
       "move": "Jab",
@@ -740,8 +740,13 @@
       "hitboxes": [
         {
           "hitbox": "Recall: Chair",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 4,
+            "max": 4,
+            "isStun": true,
+            "isProjectile": true
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 43,
             "max": 54
@@ -961,8 +966,12 @@
       "hitboxes": [
         {
           "hitbox": "Roll",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 12,
             "max": 16
@@ -1146,9 +1155,29 @@
           "hitbox": "Throw",
           "shieldSafety": null,
           "shieldRaw": null,
-          "tumblePercent": null,
-          "tumbleRaw": "Never",
-          "perCharacterTumble": {},
+          "tumblePercent": {
+            "min": 2,
+            "max": 4
+          },
+          "tumbleRaw": "2 - 4%",
+          "perCharacterTumble": {
+            "ABSA": 3,
+            "CLAIREN": 3,
+            "ETALUS": 4,
+            "FLEET": 3,
+            "FORSBURN": 4,
+            "GALVAN": 4,
+            "KRAGG": 4,
+            "LA REINA": 4,
+            "LOXODONT": 4,
+            "MAYPUL": 3,
+            "OLYMPIA": 3,
+            "ORCANE": 4,
+            "RANNO": 3,
+            "SLADE": 4,
+            "WRASTOR": 2,
+            "ZETTERBURN": 4
+          },
           "perCharacterTumbleAerial": {}
         }
       ]

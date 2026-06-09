@@ -1,7 +1,7 @@
 {
   "character": "Ranno",
   "slug": "Ranno",
-  "scrapedAt": "2026-06-09T01:37:46.551Z",
+  "scrapedAt": "2026-06-09T02:43:07.654Z",
   "moves": [
     {
       "move": "Jab",
@@ -1220,8 +1220,12 @@
       "hitboxes": [
         {
           "hitbox": "On Hit: Hit 1",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 6,
+            "max": 6
+          },
+          "shieldRaw": "Stun: 6",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1229,8 +1233,12 @@
         },
         {
           "hitbox": "On Hit: Hit 2",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 7,
+            "max": 7
+          },
+          "shieldRaw": "Stun: 7",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1299,8 +1307,11 @@
       "hitboxes": [
         {
           "hitbox": "Divekick",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -28,
+            "max": -28
+          },
+          "shieldRaw": "-28",
           "tumblePercent": {
             "min": 3,
             "max": 4
@@ -1328,8 +1339,13 @@
         },
         {
           "hitbox": "Divekick: Landing Hit",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 4,
+            "max": 4,
+            "isStun": true,
+            "isProjectile": false
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 3,
             "max": 4
@@ -1357,8 +1373,11 @@
         },
         {
           "hitbox": "Lunge: Early",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -23,
+            "max": -23
+          },
+          "shieldRaw": "-23",
           "tumblePercent": {
             "min": 20,
             "max": 26
@@ -1386,8 +1405,11 @@
         },
         {
           "hitbox": "Lunge: Late",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -23,
+            "max": -23
+          },
+          "shieldRaw": "-23",
           "tumblePercent": {
             "min": 186,
             "max": 230
@@ -1415,8 +1437,13 @@
         },
         {
           "hitbox": "Needle Storm: Dart",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 1,
+            "max": 1,
+            "isStun": true,
+            "isProjectile": true
+          },
+          "shieldRaw": "Stun: 1",
           "tumblePercent": {
             "min": 388,
             "max": 388
@@ -1427,8 +1454,11 @@
         },
         {
           "hitbox": "Needle Storm: Vortex Multihit",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -13,
+            "max": -13
+          },
+          "shieldRaw": "-13",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
@@ -1436,8 +1466,11 @@
         },
         {
           "hitbox": "Needle Storm: Vortex Final",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": -13,
+            "max": -13
+          },
+          "shieldRaw": "-13",
           "tumblePercent": {
             "min": 0,
             "max": 0

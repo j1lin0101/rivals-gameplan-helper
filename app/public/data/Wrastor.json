@@ -1,7 +1,7 @@
 {
   "character": "Wrastor",
   "slug": "Wrastor",
-  "scrapedAt": "2026-06-09T01:37:45.513Z",
+  "scrapedAt": "2026-06-09T02:43:06.606Z",
   "moves": [
     {
       "move": "Jab",
@@ -305,8 +305,12 @@
       "hitboxes": [
         {
           "hitbox": "Early",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 5,
+            "max": 5
+          },
+          "shieldRaw": "Stun: 5",
           "tumblePercent": {
             "min": 22,
             "max": 29
@@ -334,8 +338,12 @@
         },
         {
           "hitbox": "Mid",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 4,
+            "max": 4
+          },
+          "shieldRaw": "Stun: 4",
           "tumblePercent": {
             "min": 48,
             "max": 60
@@ -363,8 +371,12 @@
         },
         {
           "hitbox": "Late",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "isStun": true,
+            "min": 2,
+            "max": 2
+          },
+          "shieldRaw": "Stun: 2",
           "tumblePercent": {
             "min": 90,
             "max": 111
@@ -1277,8 +1289,11 @@
         },
         {
           "hitbox": "Command Throw: Throw",
-          "shieldSafety": null,
-          "shieldRaw": null,
+          "shieldSafety": {
+            "min": 0,
+            "max": 0
+          },
+          "shieldRaw": "+0",
           "tumblePercent": null,
           "tumbleRaw": "Never",
           "perCharacterTumble": {},
