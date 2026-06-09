@@ -367,9 +367,12 @@ async function scrapeCharacter(charName, charSlug, characterWeights) {
     const modelist    = attackModes.get(attack);
     const displayName = MOVE_DISPLAY[attack] || attack;
 
-    // Startup: smallest non-null value across modes
+    // Startup: smallest non-null value across modes, skipping landing sub-phases
+    // (e.g. Olympia Fspecial "Gem Landing"/"Landing Slam" have startup=1 but are
+    // not the intended attack startup — they fire when landing mid-animation)
     let startup = null;
     for (const m of modelist) {
+      if (/landing/i.test(m.mode)) continue;
       const s = parseStartup(m.startup);
       if (s != null && (startup == null || s < startup)) startup = s;
     }
