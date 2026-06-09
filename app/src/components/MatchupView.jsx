@@ -42,6 +42,9 @@ function ShieldBadge({ value, color }) {
 const PROJECTILE_COLOR = '#7B68EE'
 const PROJ_TOOLTIP = "This hitbox is flagged as a projectile by the game and wiki, though it may not behave like a traditional projectile. Distance greatly impacts safety and follow-up potential, so we show raw shield stun instead of a frame advantage."
 
+const STUN_COLOR = '#E69F00'
+const STUN_TOOLTIP = "This is an ongoing or falling hitbox whose frame advantage can't be expressed as a fixed number. We show raw shield stun instead."
+
 function ProjectileBadge({ stun }) {
   const [visible, setVisible] = useState(false)
   return (
@@ -87,6 +90,57 @@ function ProjectileBadge({ stun }) {
           boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
         }}>
           {PROJ_TOOLTIP}
+        </span>
+      )}
+    </span>
+  )
+}
+
+function StunBadge({ stun }) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex' }}>
+      <span
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
+          padding: '2px 8px',
+          borderRadius: '4px',
+          background: STUN_COLOR + '22',
+          color: STUN_COLOR,
+          border: `1px solid ${STUN_COLOR}44`,
+          fontSize: '0.75rem',
+          fontWeight: 700,
+          whiteSpace: 'nowrap',
+          cursor: 'help',
+        }}
+      >
+        <span style={{ fontSize: '0.65rem', opacity: 0.8 }}>STUN</span>
+        {stun}
+      </span>
+      {visible && (
+        <span style={{
+          position: 'absolute',
+          bottom: 'calc(100% + 6px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: '#1a1a2e',
+          color: '#e0e0f0',
+          border: `1px solid ${STUN_COLOR}66`,
+          borderRadius: '6px',
+          padding: '8px 10px',
+          fontSize: '0.7rem',
+          lineHeight: 1.45,
+          width: '240px',
+          whiteSpace: 'normal',
+          zIndex: 1000,
+          pointerEvents: 'none',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.5)',
+        }}>
+          {STUN_TOOLTIP}
         </span>
       )}
     </span>
@@ -316,7 +370,9 @@ function MoveRow({ row, attackerName, defenderName }) {
       <div className="move-row-badges" style={{ textAlign: 'center' }}>
         {row.shieldSafety?.isProjectile
           ? <ProjectileBadge stun={row.shieldSafety.min} />
-          : <ShieldBadge value={row.shieldSafety} color={statusColor} />}
+          : row.shieldSafety?.isStun
+            ? <StunBadge stun={row.shieldSafety.min} />
+            : <ShieldBadge value={row.shieldSafety} color={statusColor} />}
       </div>
       <div className="move-row-badges" style={{ textAlign: 'center' }}>
         <TumbleBadge row={row} defenderName={defenderName} />
