@@ -26,7 +26,8 @@ const fs     = require('fs');
 const path   = require('path');
 
 const BASE     = 'https://dragdown.wiki/wiki/Special:CargoExport';
-const DATA_DIR = path.join(__dirname, '../data/characters');
+const DATA_DIR     = path.join(__dirname, '../data/characters');
+const PUBLIC_DIR   = path.join(__dirname, '../app/public/data');
 
 const { characters } = require('../characters.json');
 
@@ -453,13 +454,16 @@ async function main() {
   const characterWeights = weightRows.map(r => ({ chara: r.chara, Weight: Number(r.Weight) }));
   console.log(`  ${characterWeights.length} characters loaded.\n`);
 
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+  if (!fs.existsSync(DATA_DIR))   fs.mkdirSync(DATA_DIR,   { recursive: true });
+  if (!fs.existsSync(PUBLIC_DIR)) fs.mkdirSync(PUBLIC_DIR, { recursive: true });
 
   for (const { name, slug } of characters) {
     try {
-      const data = await scrapeCharacter(name, slug, characterWeights);
-      const out  = path.join(DATA_DIR, `${slug}.json`);
-      fs.writeFileSync(out, JSON.stringify(data, null, 2));
+      const data    = await scrapeCharacter(name, slug, characterWeights);
+      const payload = JSON.stringify(data, null, 2);
+      const out     = path.join(DATA_DIR, `${slug}.json`);
+      fs.writeFileSync(out, payload);
+      fs.writeFileSync(path.join(PUBLIC_DIR, `${slug}.json`), payload);
     } catch (err) {
       console.error(`\n  ✗ ${name}: ${err.message}`);
     }
