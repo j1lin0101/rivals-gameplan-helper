@@ -243,9 +243,10 @@ function SafestOptionsList({ charData, defenderOOSOptions }) {
           : '—'
         return (
           <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', padding: '10px 16px', borderBottom: '1px solid var(--border)' }}>
-            <span style={{ fontWeight: 600, flexShrink: 0 }}>{getDisplayName(charData.character, o.move)}</span>
-            <span style={{ color: 'var(--muted)', fontSize: '0.75rem', flexShrink: 0 }}>[{o.hitbox}]</span>
-            <span style={{ flex: 1 }} />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <span style={{ fontWeight: 600 }}>{getDisplayName(charData.character, o.move)}</span>
+              <span className="hitbox-label" style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>[{o.hitbox}]</span>
+            </div>
             <span style={{
               display: 'inline-block', padding: '2px 8px', borderRadius: '4px',
               background: tagColor + '22', color: tagColor,
@@ -362,7 +363,7 @@ function MoveRow({ row, attackerName, defenderName, oosFilter }) {
       <div>
         <span style={{ fontWeight: 600 }}>{getDisplayName(attackerName, row.move)}</span>
         {row.hitbox && (
-          <span style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>
+          <span className="hitbox-label" style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>
             [{row.hitbox}]
           </span>
         )}
@@ -713,9 +714,10 @@ function OOSFilterBar({ defenderOOS, oosFilter, setOosFilter, defenderName, defe
       {/* Bottom-sheet modal */}
       {modalOpen && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 1000, display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-          <div ref={modalRef} style={{ background: 'var(--surface)', borderRadius: '16px 16px 0 0', padding: '20px 24px 32px', width: '100%', maxWidth: '480px', maxHeight: '80vh', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>{defenderName}'s Punish Options</span>
+          <div ref={modalRef} style={{ background: 'var(--surface)', borderRadius: '16px 16px 0 0', width: '100%', maxWidth: '480px', maxHeight: '80vh', display: 'flex', flexDirection: 'column' }}>
+            {/* Header */}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 24px 12px', flexShrink: 0, borderBottom: '1px solid var(--border)' }}>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.04em', color: 'var(--muted)' }}>{defenderName}'s Punish Options</span>
               <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                 {activeCount > 0 && (
                   <button onClick={clearAll} style={{ fontSize: '0.75rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>Clear all</button>
@@ -723,14 +725,20 @@ function OOSFilterBar({ defenderOOS, oosFilter, setOosFilter, defenderName, defe
                 <button onClick={() => setModalOpen(false)} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '1.2rem', cursor: 'pointer', lineHeight: 1 }}>✕</button>
               </div>
             </div>
-            {OOS_FILTER_GROUPS.map(g => renderGroup(g, grouped[g] || [], true))}
-            {wavedashOpt && renderGroup('Wavedash', [wavedashOpt], true)}
-            <button
-              onClick={() => setModalOpen(false)}
-              style={{ marginTop: '12px', padding: '12px', borderRadius: '10px', background: 'var(--accent2)', border: 'none', color: '#fff', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
-            >
-              Apply
-            </button>
+            {/* Scrollable content */}
+            <div style={{ flex: 1, overflowY: 'scroll', padding: '8px 24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              {OOS_FILTER_GROUPS.map(g => renderGroup(g, grouped[g] || [], true))}
+              {wavedashOpt && renderGroup('Wavedash', [wavedashOpt], true)}
+            </div>
+            {/* Fixed apply button */}
+            <div style={{ padding: '12px 24px 28px', flexShrink: 0, borderTop: '1px solid var(--border)' }}>
+              <button
+                onClick={() => setModalOpen(false)}
+                style={{ width: '100%', padding: '12px', borderRadius: '10px', background: 'var(--accent2)', border: 'none', color: '#fff', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer' }}
+              >
+                Apply
+              </button>
+            </div>
           </div>
         </div>
       )}

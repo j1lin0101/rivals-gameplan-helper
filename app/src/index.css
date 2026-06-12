@@ -177,14 +177,26 @@ body {
 }
 @media (max-width: 600px) {
   .move-row {
-    grid-template-columns: 1fr;
-    gap: 6px;
+    grid-template-columns: 2fr 3fr;
+    grid-template-rows: auto auto auto;
+    gap: 4px 12px;
     padding: 10px 16px;
+    align-items: start;
   }
+  .move-row > div:nth-child(1) { grid-column: 1; grid-row: 1 / 4; align-self: start; }
+  .move-row > div:nth-child(2) { grid-column: 2; grid-row: 1; text-align: right; justify-self: end; }
+  .move-row > div:nth-child(3) { grid-column: 2; grid-row: 2; text-align: right; justify-self: end; }
+  .move-row > div:nth-child(4) { grid-column: 2; grid-row: 3; text-align: right; }
+  .move-row > div:nth-child(4) > div { justify-content: flex-end; }
   .move-row-badges {
     display: flex;
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
+  }
+  .hitbox-label {
+    display: block !important;
+    margin-left: 0 !important;
+    margin-top: 3px;
   }
 }
