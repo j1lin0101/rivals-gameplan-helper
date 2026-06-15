@@ -198,7 +198,19 @@ function getOOSOptions(characterData) {
     });
   });
 
-  // Wavedash is a universal OOS option at 12f for every character
+  // Grab and Wavedash are universal OOS options for every character
+  // Add Grab only if not already present from character move data
+  if (!options.some(function(o) { return isGrabMove(o.move); })) {
+    options.push({
+      move:         'Grab',
+      label:        'Grab',
+      startup:      8,
+      oosDelay:     GRAB_OOS_DELAY,
+      oosStartup:   8,
+      jumpCancel:   false,
+      shieldSafety: null,
+    });
+  }
   options.push({
     move:         'Wavedash',
     label:        'Wavedash',
