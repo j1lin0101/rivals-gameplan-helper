@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from 'react'
 import { useCharacterData } from '../hooks/useMatchupData'
-import { getSafestOptions, getOOSOptions, getDisplayOOSOptions, analyzeMatchup, CATEGORY_ORDER, getCategory } from '../analysis/analysis'
+import { getSafestOptions, getOOSOptions, getDisplayOOSOptions, analyzeMatchup, CATEGORY_ORDER, getCategory, getFloorhugBreakers, getOnHitBreakdown, analyzePerfectShieldMatchup, getPerfectShieldOOSOptions } from '../analysis/analysis'
 import { getDisplayName } from '../analysis/nicknames'
 
 const SAFE_COLOR  = 'var(--safe)'
@@ -185,7 +185,40 @@ function CharColumnHeader({ name, accent }) {
   )
 }
 
-function Section({ title, accent, subtitle, children }) {
+function TooltipIcon({ text }) {
+  const [visible, setVisible] = useState(false)
+  return (
+    <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}>
+      <button
+        onMouseEnter={() => setVisible(true)}
+        onMouseLeave={() => setVisible(false)}
+        onFocus={() => setVisible(true)}
+        onBlur={() => setVisible(false)}
+        style={{
+          background: 'none', border: '1px solid var(--border)', color: 'var(--muted)',
+          borderRadius: '50%', width: '14px', height: '14px',
+          fontSize: '0.55rem', fontWeight: 700, cursor: 'default',
+          display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+          lineHeight: 1, padding: 0, flexShrink: 0,
+        }}
+      >?</button>
+      {visible && (
+        <span style={{
+          position: 'absolute', left: 0, top: 'calc(100% + 6px)',
+          background: 'var(--bg)', border: '1px solid var(--border)',
+          borderRadius: '6px', padding: '6px 10px',
+          fontSize: '0.72rem', color: 'var(--muted)', lineHeight: 1.5,
+          width: '220px', zIndex: 100,
+          pointerEvents: 'none',
+        }}>
+          {text}
+        </span>
+      )}
+    </span>
+  )
+}
+
+function Section({ title, accent, subtitle, tooltip, children }) {
   return (
     <div style={{
       background: 'var(--surface)',
@@ -204,9 +237,12 @@ function Section({ title, accent, subtitle, children }) {
         flexDirection: subtitle ? 'column' : 'row',
         gap: '2px',
       }}>
-        <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: accent }}>
-          {title}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: accent }}>
+            {title}
+          </span>
+          {tooltip && <TooltipIcon text={tooltip} />}
+        </div>
         {subtitle && (
           <span style={{ fontSize: '0.6rem', color: 'var(--muted)', opacity: 0.7 }}>{subtitle}</span>
         )}
@@ -292,6 +328,45 @@ function OOSList({ charData }) {
   )
 }
 
+function FloorhugList({ charData, accent }) {
+  const moves = useMemo(() => getFloorhugBreakers(charData), [charData])
+  if (!moves.length) return <p style={{ color: 'var(--muted)', fontSize: '0.85rem', padding: '10px 16px' }}>No data.</p>
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      {moves.map((m, i) => (
+        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.82rem', padding: '10px 16px', borderBottom: '1px solid var(--border)' }}>
+          <span style={{ fontWeight: 600, flex: 1 }}>
+            {m.move}
+            {m.hitbox && <span style={{ fontWeight: 400, color: 'var(--muted)', marginLeft: '6px' }}>[{m.hitbox}]</span>}
+          </span>
+          {m.aerialTumble != null && (() => {
+            const { min, max } = m.aerialTumble
+            const label = max === 0
+              ? 'Always Amsah Techable'
+              : `Amsah Tech ≤ ${min}%`
+            return (
+              <span style={{
+                display: 'inline-block',
+                padding: '2px 7px',
+                borderRadius: '4px',
+                background: 'var(--risky)22',
+                color: 'var(--risky)',
+                border: '1px solid var(--risky)44',
+                fontSize: '0.68rem',
+                fontWeight: 700,
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+              }}>
+                {label}
+              </span>
+            )
+          })()}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function TumbleBadge({ row, defenderName }) {
   const key = defenderName ? defenderName.toUpperCase() : null
 
@@ -369,16 +444,13 @@ function MoveRow({ row, attackerName, defenderName, oosFilter }) {
         )}
       </div>
 
-      {/* Shield safety + Tumble % — grouped in a flex row on mobile */}
+      {/* Shield safety */}
       <div className="move-row-badges" style={{ textAlign: 'center' }}>
         {row.shieldSafety?.isProjectile
           ? <ProjectileBadge stun={row.shieldSafety.min} />
           : row.shieldSafety?.isStun
             ? <StunBadge stun={row.shieldSafety.min} />
             : <ShieldBadge value={row.shieldSafety} color={statusColor} />}
-      </div>
-      <div className="move-row-badges" style={{ textAlign: 'center' }}>
-        <TumbleBadge row={row} defenderName={defenderName} />
       </div>
 
       {/* Punishes */}
@@ -422,25 +494,16 @@ function getTumbleNum(row, defKey) {
   return null
 }
 
-function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilter }) {
+function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilter, isPerfectShield }) {
   const [open, setOpen] = useState(true)
-  const [sortBy, setSortBy] = useState('shield')   // 'move' | 'shield' | 'tumble'
-  const [sortDir, setSortDir] = useState(1)         // 1 = default asc/desc per column, flipped on click
+  const [sortBy, setSortBy] = useState('shield')   // 'move' | 'shield'
+  const [sortDir, setSortDir] = useState(1)
 
   const safe      = rows.filter(r => r.isSafe).length
   const risky     = rows.filter(r => r.isRisky).length
   const punishable = rows.filter(r => r.isPunishable).length
 
   const defKey = defenderName ? defenderName.toUpperCase() : null
-  // Count each hitbox row individually — matches exactly what's shown in the table
-  const tumbleCounts = useMemo(() => {
-    const vals = rows.map(r => getTumbleNum(r, defKey)).filter(t => t !== null)
-    return {
-      early:  vals.filter(t => t <= 40).length,
-      medium: vals.filter(t => t > 40 && t <= 80).length,
-      high:   vals.filter(t => t > 80 && t <= 130).length,
-    }
-  }, [rows, defKey])
 
   function handleSort(col) {
     if (sortBy === col) {
@@ -459,13 +522,10 @@ function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilt
         cmp = a.move.localeCompare(b.move)
       } else if (sortBy === 'shield') {
         cmp = (a.shieldSafety?.max ?? -999) - (b.shieldSafety?.max ?? -999)
-      } else if (sortBy === 'tumble') {
-        const getT = r => getTumbleNum(r, defKey) ?? 9999
-        cmp = getT(a) - getT(b)
       }
       return cmp * sortDir
     })
-  }, [rows, sortBy, sortDir, defKey])
+  }, [rows, sortBy, sortDir])
 
   function SortHeader({ col, label, align }) {
     const active = sortBy === col
@@ -525,21 +585,11 @@ function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilt
           {category}
         </span>
         <div className="accordion-counts">
-          {/* Row 1: shield safety */}
           <div className="accordion-counts-row">
             <span style={{ color: SAFE_COLOR, fontSize: '0.72rem' }}>{safe} safe</span>
             <span style={{ color: RISKY_COLOR, fontSize: '0.72rem' }}>{risky} risky</span>
             <span style={{ color: PUNISH_COLOR, fontSize: '0.72rem' }}>{punishable} punishable</span>
           </div>
-          {/* Row 2: KD tiers (only if any exist) */}
-          {(tumbleCounts.early > 0 || tumbleCounts.medium > 0 || tumbleCounts.high > 0) && (<>
-            <span className="accordion-counts-divider">|</span>
-            <div className="accordion-counts-row">
-              {tumbleCounts.early  > 0 && <span style={{ color: TUMBLE_EARLY_COLOR,  fontSize: '0.72rem' }}>{tumbleCounts.early} early KD</span>}
-              {tumbleCounts.medium > 0 && <span style={{ color: TUMBLE_MEDIUM_COLOR, fontSize: '0.72rem' }}>{tumbleCounts.medium} mid KD</span>}
-              {tumbleCounts.high   > 0 && <span style={{ color: TUMBLE_HIGH_COLOR,   fontSize: '0.72rem' }}>{tumbleCounts.high} high KD</span>}
-            </div>
-          </>)}
         </div>
         <span style={{ color: 'var(--muted)', fontSize: '0.7rem', marginLeft: '4px', flexShrink: 0 }}>
           {open ? '▲' : '▼'}
@@ -552,10 +602,11 @@ function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilt
           <div className="col-headers">
             <SortHeader col="move" label="Move" />
             <SortHeader col="shield" label="On Shield" align="center" />
-            <SortHeader col="tumble" label="Tumble %" align="center" />
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>Punish Options</span>
-              <span style={{ fontSize: '0.6rem', color: 'var(--muted)', opacity: 0.6 }}>Shield release 12f · Jump squat 4f</span>
+              <span style={{ fontSize: '0.6rem', color: 'var(--muted)', opacity: 0.6 }}>
+                {isPerfectShield ? 'Grounded only · No shield release' : 'Shield release 12f · Jump squat 4f'}
+              </span>
             </div>
           </div>
           {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} oosFilter={oosFilter} />)}
@@ -746,13 +797,258 @@ function OOSFilterBar({ defenderOOS, oosFilter, setOosFilter, defenderName, defe
   )
 }
 
-function BreakdownTable({ matchup, categoryFilter, oosFilter }) {
+/* ── On Hit Components ── */
+
+function OnHitAdvBadge({ adv }) {
+  if (adv === null) return <span style={{ color: 'var(--muted)', fontSize: '0.75rem' }}>—</span>
+  const color = adv > 0 ? SAFE_COLOR : adv >= -3 ? RISKY_COLOR : PUNISH_COLOR
+  const label = `${adv > 0 ? '+' : ''}${adv}`
+  return (
+    <span style={{
+      display: 'inline-block', padding: '2px 8px', borderRadius: '4px',
+      background: color + '22', color, border: `1px solid ${color}44`,
+      fontSize: '0.75rem', fontWeight: 700, whiteSpace: 'nowrap',
+    }}>
+      {label}
+    </span>
+  )
+}
+
+function OnHitRow({ row, attackerName, defenderName, defKey, pct }) {
+  const amsahThreshold = row.alwaysBreaks ? getRowThreshold(row, defKey, true) : null
+  const canAmsah = amsahThreshold != null && pct < amsahThreshold
+
+  const advCell = row.breaksFloorhug
+    ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
+        <span style={{
+          display: 'inline-block', padding: '2px 8px', borderRadius: '4px',
+          background: 'var(--safe)22', color: 'var(--safe)',
+          border: '1px solid var(--safe)44', fontSize: '0.72rem', fontWeight: 700,
+        }}>Knockdown</span>
+        {canAmsah && (
+          <span style={{
+            display: 'inline-block', padding: '1px 6px', borderRadius: '4px',
+            background: 'var(--risky)22', color: 'var(--risky)',
+            border: '1px solid var(--risky)44', fontSize: '0.65rem', fontWeight: 700,
+          }}>Amsah Tech</span>
+        )}
+      </div>
+    : <OnHitAdvBadge adv={row.flugAdvantage} />
+
+  return (
+    <div className="on-hit-row">
+      <div>
+        <span style={{ fontWeight: 600 }}>{getDisplayName(attackerName, row.move)}</span>
+        {row.hitbox && (
+          <span className="hitbox-label" style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>
+            [{row.hitbox}]
+          </span>
+        )}
+      </div>
+      <div style={{ textAlign: 'center' }}>{advCell}</div>
+      <div style={{ textAlign: 'center' }}>
+        <TumbleBadge row={row} defenderName={defenderName} />
+      </div>
+      <div>
+        {!row.breaksFloorhug && row.punishes && row.punishes.length > 0 ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+            {row.punishes.map((p, i) => (
+              <span key={i} style={{
+                padding: '1px 7px', borderRadius: '4px',
+                background: 'var(--surface)', border: '1px solid var(--border)',
+                fontSize: '0.72rem', color: 'var(--text)', whiteSpace: 'nowrap',
+              }}>
+                {p.label} <span style={{ color: 'var(--muted)' }}>{p.onHitStartup}f</span>
+              </span>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+function getRowThreshold(row, defKey, includeAlwaysBreaks = false) {
+  if (row.alwaysBreaks && !includeAlwaysBreaks) return null
+  if (!row.tumblePercent) return null
+  const upper = defKey?.toUpperCase()
+  if (upper && row.perCharacterTumble?.[upper] !== undefined) return row.perCharacterTumble[upper]
+  return row.tumblePercent.min
+}
+
+function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, categoryFilter, oosFilter }) {
+  const defKey = defenderData?.character
+  const breakdown = useMemo(
+    () => getOnHitBreakdown(attackerData, defenderData, pct, isCrouch),
+    [attackerData, defenderData, pct, isCrouch]
+  )
+  const [sortCol, setSortCol] = useState(null)
+  const [sortDir, setSortDir] = useState(1)
+
+  function handleSort(col) {
+    if (sortCol === col) setSortDir(d => -d)
+    else { setSortCol(col); setSortDir(1) }
+  }
+
+  function sortRows(rows) {
+    if (!sortCol) return rows
+    return [...rows].sort((a, b) => {
+      let av, bv
+      if (sortCol === 'move') {
+        av = a.move || ''; bv = b.move || ''
+        return av.localeCompare(bv) * sortDir
+      } else if (sortCol === 'adv') {
+        av = a.breaksFloorhug ? Infinity : (a.flugAdvantage ?? -Infinity)
+        bv = b.breaksFloorhug ? Infinity : (b.flugAdvantage ?? -Infinity)
+      } else if (sortCol === 'tumble') {
+        av = getRowThreshold(a, defKey, true) ?? Infinity
+        bv = getRowThreshold(b, defKey, true) ?? Infinity
+      }
+      return (av - bv) * sortDir
+    })
+  }
+
+  const filtered = useMemo(() => {
+    let rows = breakdown
+    if (categoryFilter && categoryFilter !== 'All') {
+      rows = rows.filter(r => r.category === categoryFilter)
+    }
+    if (oosFilter && oosFilter.size > 0) {
+      rows = rows.filter(r => Array.isArray(r.punishes) && r.punishes.some(p => oosFilter.has(p.move)))
+    }
+    return rows
+  }, [breakdown, categoryFilter, oosFilter])
+
+  const byCategory = CATEGORY_ORDER
+    .map(cat => ({ cat, rows: filtered.filter(r => r.category === cat) }))
+    .filter(({ rows }) => rows.length > 0)
+
+  if (!breakdown.length) return (
+    <p style={{ color: 'var(--muted)', fontSize: '0.85rem', padding: '16px' }}>No on-hit data available.</p>
+  )
+
+  function ColHeader({ col, label, style }) {
+    const active = sortCol === col
+    const arrow = active ? (sortDir > 0 ? ' ▲' : ' ▼') : ' ↕'
+    return (
+      <span
+        onClick={() => handleSort(col)}
+        style={{
+          fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em',
+          color: active ? 'var(--accent)' : 'var(--muted)',
+          cursor: 'pointer', userSelect: 'none',
+          ...style,
+        }}
+      >
+        {label}<span style={{ opacity: active ? 1 : 0.4 }}>{arrow}</span>
+      </span>
+    )
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+      {byCategory.map(({ cat, rows }) => {
+        const earlyKD = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t <= 40 }).length
+        const midKD   = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t > 40 && t <= 80 }).length
+        const highKD  = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t > 80 }).length
+        const sortedRows = sortRows(rows)
+        return (
+        <div key={cat} style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', overflow: 'hidden' }}>
+          <div style={{ padding: '10px 16px', background: 'var(--surface)', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text)' }}>
+              {cat}
+            </span>
+            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+              {earlyKD > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_EARLY_COLOR }}>{earlyKD} early KD</span>}
+              {midKD   > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_MEDIUM_COLOR }}>{midKD} mid KD</span>}
+              {highKD  > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_HIGH_COLOR }}>{highKD} high KD</span>}
+            </div>
+          </div>
+          {/* Column headers */}
+          <div className="on-hit-col-headers">
+            <ColHeader col="move" label="Move" />
+            <ColHeader col="adv" label="On Hit" style={{ textAlign: 'center' }} />
+            <ColHeader col="tumble" label="Tumble %" style={{ textAlign: 'center' }} />
+            <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Punish Options</span>
+          </div>
+          <div style={{ background: 'var(--surface)' }}>
+            {sortedRows.map((row, i) => <OnHitRow key={i} row={row} attackerName={attackerData.character} defenderName={defenderName} defKey={defKey} pct={pct} />)}
+          </div>
+        </div>
+      )})}
+    </div>
+  )
+}
+
+function OnHitSection({ attackerData, defenderData, categoryFilter, oosFilter }) {
+  const [pct, setPct] = useState(0)
+  const [isCrouch, setIsCrouch] = useState(false)
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+      {/* Controls */}
+      <div style={{
+        display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px',
+        padding: '12px 16px',
+        background: 'var(--surface)', border: '1px solid var(--border)',
+        borderRadius: 'var(--radius)',
+      }}>
+        {/* Percent input */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.07em', flexShrink: 0 }}>
+            Defender
+          </span>
+          <input
+            type="number"
+            min={0} max={999} step={1}
+            value={pct}
+            onChange={e => {
+              const v = Math.max(0, Math.min(999, Number(e.target.value) || 0))
+              setPct(v)
+            }}
+            style={{
+              width: '64px', padding: '4px 8px', borderRadius: '6px',
+              border: '1px solid var(--border)', background: 'var(--bg)',
+              color: 'var(--text)', fontSize: '0.82rem', fontWeight: 700,
+              textAlign: 'right',
+            }}
+          />
+          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--muted)' }}>%</span>
+        </div>
+        {/* Floorhug / CC toggle */}
+        <div style={{ display: 'flex', gap: '4px' }}>
+          {[['Floorhug', false], ['Crouch Cancel', true]].map(([label, val]) => (
+            <button
+              key={label}
+              onClick={() => setIsCrouch(val)}
+              style={{
+                padding: '5px 12px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 600,
+                border: `1px solid ${isCrouch === val ? 'var(--accent)' : 'var(--border)'}`,
+                background: isCrouch === val ? 'var(--accent)22' : 'var(--surface)',
+                color: isCrouch === val ? 'var(--accent)' : 'var(--muted)',
+                cursor: 'pointer', transition: 'all 0.15s',
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <div style={{ marginLeft: 'auto' }}>
+          <AboutHitButton />
+        </div>
+      </div>
+
+      <OnHitTable attackerData={attackerData} defenderData={defenderData} pct={pct} isCrouch={isCrouch} defenderName={defenderData.character} categoryFilter={categoryFilter} oosFilter={oosFilter} />
+    </div>
+  )
+}
+
+function BreakdownTable({ matchup, categoryFilter, oosFilter, isPerfectShield }) {
   const { breakdown } = matchup
   const visibleCategories = categoryFilter && categoryFilter !== 'All'
     ? [categoryFilter]
     : CATEGORY_ORDER
 
-  // Filter rows by selected OOS punish options (empty set = show all)
   function applyOosFilter(rows) {
     if (!oosFilter || oosFilter.size === 0) return rows
     return rows.filter(r =>
@@ -767,12 +1063,13 @@ function BreakdownTable({ matchup, categoryFilter, oosFilter }) {
         if (!rows.length) return null
         return (
           <CategoryAccordion
-            key={`${category}-${[...oosFilter].sort().join(',')}`}
+            key={`${category}-${[...oosFilter].sort().join(',')}-${isPerfectShield}`}
             category={category}
             rows={rows}
             attackerName={matchup.attacker}
             defenderName={matchup.defender}
             oosFilter={oosFilter}
+            isPerfectShield={isPerfectShield}
           />
         )
       })}
@@ -780,106 +1077,392 @@ function BreakdownTable({ matchup, categoryFilter, oosFilter }) {
   )
 }
 
-function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, oppOOS, view, setView }) {
+function FilterModal({
+  attackerName, attackerColor,
+  defenderName, defenderColor,
+  categoryTabs, categoryFilter, setCategoryFilter,
+  defenderOOS, oosFilter, setOosFilter, relevantOOSMoves,
+  onClose,
+}) {
+  const [tab, setTab] = useState('attacks')
+  const modalRef = useRef(null)
+
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
+  useEffect(() => {
+    function handleClick(e) {
+      if (modalRef.current && !modalRef.current.contains(e.target)) onClose()
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [onClose])
+
+  function toggleOOS(moveName) {
+    setOosFilter(prev => {
+      const next = new Set(prev)
+      if (next.has(moveName)) next.delete(moveName)
+      else next.add(moveName)
+      return next
+    })
+  }
+
+  const grouped = useMemo(() => {
+    const map = {}
+    OOS_FILTER_GROUPS.forEach(g => { map[g] = [] })
+    defenderOOS.forEach(opt => {
+      if (opt.move === 'Wavedash') return
+      const cat = getCategory(opt.move)
+      if (map[cat]) map[cat].push(opt)
+      else map['Misc'].push(opt)
+    })
+    return map
+  }, [defenderOOS])
+  const wavedashOpt = defenderOOS.find(o => o.move === 'Wavedash')
+
+  const attackColor = attackerColor
+  const atkActive = categoryFilter !== 'All'
+  const oosActive = oosFilter.size
+
+  return (
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.6)', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}>
+      <div ref={modalRef} style={{ background: 'var(--surface)', borderRadius: '12px', width: '100%', maxWidth: '480px', maxHeight: '80vh', display: 'flex', flexDirection: 'column', border: '1px solid var(--border)' }}>
+
+        {/* Modal header */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 20px', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--muted)' }}>Filters</span>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--muted)', fontSize: '1.1rem', cursor: 'pointer', lineHeight: 1 }}>✕</button>
+        </div>
+
+        {/* Inner tabs */}
+        <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', flexShrink: 0 }}>
+          {[
+            { id: 'attacks', label: `${attackerName}'s Attacks`, color: attackColor, badge: atkActive ? 1 : 0 },
+            { id: 'punish', label: `${defenderName}'s Punish Options`, color: defenderColor, badge: oosActive },
+          ].map(t => {
+            const isActive = tab === t.id
+            return (
+              <button
+                key={t.id}
+                onClick={() => setTab(t.id)}
+                style={{
+                  flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                  padding: '10px 16px', background: 'none', border: 'none',
+                  borderBottom: `2px solid ${isActive ? t.color : 'transparent'}`,
+                  color: isActive ? t.color : 'var(--muted)',
+                  fontWeight: isActive ? 700 : 400, fontSize: '0.78rem',
+                  cursor: 'pointer', transition: 'all 0.15s',
+                }}
+              >
+                {t.label}
+                {t.badge > 0 && (
+                  <span style={{ background: t.color, color: '#0e0e12', borderRadius: '10px', padding: '1px 7px', fontSize: '0.65rem', fontWeight: 700 }}>
+                    {t.badge}
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Tab content */}
+        <div className="filter-modal-content" style={{ flex: 1, overflowY: 'auto', padding: '8px 0' }}>
+          {tab === 'attacks' && (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {categoryTabs.map(c => {
+                const isActive = categoryFilter === c
+                return (
+                  <button
+                    key={c}
+                    onClick={() => setCategoryFilter(c)}
+                    style={{
+                      display: 'flex', alignItems: 'center', gap: '12px',
+                      padding: '12px 20px', background: 'none', border: 'none',
+                      borderLeft: `3px solid ${isActive ? attackColor : 'transparent'}`,
+                      borderBottom: '1px solid var(--border)',
+                      cursor: 'pointer', textAlign: 'left', width: '100%',
+                      transition: 'background 0.1s',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                  >
+                    {/* Custom radio indicator */}
+                    <span style={{
+                      width: '16px', height: '16px', borderRadius: '50%', flexShrink: 0,
+                      border: `2px solid ${isActive ? attackColor : 'var(--muted)'}`,
+                      background: isActive ? attackColor : 'transparent',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {isActive && <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#0e0e12' }} />}
+                    </span>
+                    <span style={{ fontSize: '0.88rem', color: isActive ? attackColor : 'var(--text)', fontWeight: isActive ? 700 : 400 }}>
+                      {c}
+                    </span>
+                  </button>
+                )
+              })}
+            </div>
+          )}
+          {tab === 'punish' && (
+            <div style={{ display: 'flex', flexDirection: 'column' }}>
+              {oosActive > 0 && (
+                <button onClick={() => setOosFilter(new Set())} style={{ alignSelf: 'flex-start', margin: '8px 20px', fontSize: '0.72rem', color: 'var(--muted)', background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'underline' }}>
+                  Clear all ({oosActive})
+                </button>
+              )}
+              {[...OOS_FILTER_GROUPS, 'Wavedash'].map(g => {
+                const opts = g === 'Wavedash'
+                  ? (wavedashOpt ? [wavedashOpt] : [])
+                  : (grouped[g] || []).filter(o => !relevantOOSMoves || relevantOOSMoves.has(o.move))
+                if (!opts.length) return null
+                return (
+                  <div key={g}>
+                    <div style={{ fontSize: '0.65rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.09em', color: 'var(--muted)', padding: '10px 20px 4px' }}>{g}</div>
+                    {opts.map(opt => {
+                      const active = oosFilter.has(opt.move)
+                      return (
+                        <button
+                          key={opt.move}
+                          onClick={() => toggleOOS(opt.move)}
+                          style={{
+                            display: 'flex', alignItems: 'center', gap: '12px',
+                            padding: '11px 20px', background: 'none', border: 'none',
+                            borderLeft: `3px solid ${active ? defenderColor : 'transparent'}`,
+                            borderBottom: '1px solid var(--border)',
+                            cursor: 'pointer', width: '100%', textAlign: 'left',
+                            transition: 'background 0.1s',
+                          }}
+                          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                          onMouseLeave={e => e.currentTarget.style.background = 'none'}
+                        >
+                          {/* Custom checkbox indicator */}
+                          <span style={{
+                            width: '16px', height: '16px', borderRadius: '4px', flexShrink: 0,
+                            border: `2px solid ${active ? defenderColor : 'var(--muted)'}`,
+                            background: active ? defenderColor : 'transparent',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center',
+                          }}>
+                            {active && <span style={{ fontSize: '0.7rem', color: '#0e0e12', fontWeight: 900, lineHeight: 1 }}>✓</span>}
+                          </span>
+                          <span style={{ flex: 1, fontSize: '0.88rem', color: active ? defenderColor : 'var(--text)', fontWeight: active ? 600 : 400 }}>{opt.label}</span>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--muted)', fontWeight: 600 }}>{opt.oosStartup}f</span>
+                        </button>
+                      )
+                    })}
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Apply button */}
+        <div style={{ padding: '12px 20px 16px', borderTop: '1px solid var(--border)', flexShrink: 0 }}>
+          <button
+            onClick={onClose}
+            style={{ width: '100%', padding: '11px', borderRadius: '8px', background: tab === 'punish' ? defenderColor : attackColor, border: 'none', color: '#0e0e12', fontSize: '0.88rem', fontWeight: 700, cursor: 'pointer', letterSpacing: '0.04em' }}
+          >
+            Done
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, oppOOS, view, myData, oppData }) {
   const [categoryFilter, setCategoryFilter] = useState('All')
   const [oosFilter, setOosFilter] = useState(new Set())
+  const [filterModalOpen, setFilterModalOpen] = useState(false)
+  const [subTab, setSubTab] = useState('onShield')
+  const [shieldMode, setShieldMode] = useState('normal')
 
   const active = view === 'opp' ? matchupVsOpp : matchupVsMe
   const activeColor = view === 'opp' ? 'var(--accent2)' : 'var(--accent)'
   const label = view === 'opp' ? `${oppChar}'s Attacks` : `${myChar}'s Attacks`
 
-  // When view switches, reset filters
-  function switchView(v) {
-    setView(v)
-    setOosFilter(new Set())
-  }
+  const attackerData = view === 'opp' ? oppData : myData
+  const defenderData = view === 'opp' ? myData : oppData
 
-  // Keep filters in sync when view changes externally (from header toggle)
+  // Perfect Shield matchup (computed from raw data)
+  const psMatchup = useMemo(() => {
+    if (!attackerData || !defenderData) return null
+    return analyzePerfectShieldMatchup(attackerData, defenderData)
+  }, [attackerData, defenderData])
+
+  const isPerfectShield = subTab === 'onShield' && shieldMode === 'perfect'
+  const effectiveMatchup = isPerfectShield ? psMatchup : active
+
+  // Reset filters and sub-tab when tab (view) changes
   const prevView = useRef(view)
   useEffect(() => {
     if (prevView.current !== view) {
       setOosFilter(new Set())
+      setCategoryFilter('All')
+      setSubTab('onShield')
+      setShieldMode('normal')
       prevView.current = view
     }
   }, [view])
 
-  // Defender's OOS options (what can punish the attacker)
-  const defenderOOS = view === 'me' ? oppOOS : myOOS
+  // Reset OOS filter when shield mode changes (different OOS option sets)
+  const prevShieldMode = useRef(shieldMode)
+  useEffect(() => {
+    if (prevShieldMode.current !== shieldMode) {
+      setOosFilter(new Set())
+      prevShieldMode.current = shieldMode
+    }
+  }, [shieldMode])
+
+  // Defender's OOS options: PS uses grounded-only set, normal uses standard OOS
+  const defenderOOS = useMemo(() => {
+    const baseOOS = view === 'me' ? oppOOS : myOOS
+    if (!isPerfectShield) return baseOOS
+    const defData = view === 'me' ? oppData : myData
+    return defData ? getPerfectShieldOOSOptions(defData) : baseOOS
+  }, [view, myOOS, oppOOS, isPerfectShield, myData, oppData])
 
   // OOS moves that actually appear as punishes in the selected category's rows
   const relevantOOSMoves = useMemo(() => {
-    if (!active) return null
+    if (!effectiveMatchup) return null
     const rows = categoryFilter === 'All'
-      ? active.breakdown
-      : active.breakdown.filter(r => r.category === categoryFilter)
+      ? effectiveMatchup.breakdown
+      : effectiveMatchup.breakdown.filter(r => r.category === categoryFilter)
     const moves = new Set()
     rows.forEach(r => (r.punishes || []).forEach(p => moves.add(p.move)))
     return moves
-  }, [active, categoryFilter])
+  }, [effectiveMatchup, categoryFilter])
 
   const categoryTabs = ['All', ...CATEGORY_ORDER.filter(c => c !== 'Misc')]
 
   return (
     <div>
-      {active && (
-        <div>
-          {/* Section header */}
-          <h2 style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--muted)', margin: '0 0 16px 0' }}>
-            Attack-Punish Breakdown
-          </h2>
+      {/* Sub-tab bar: On Shield / On Hit */}
+      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '16px', background: 'var(--surface)', borderRadius: 'var(--radius) var(--radius) 0 0' }}>
+        {[
+          { id: 'onShield', label: 'On Shield' },
+          { id: 'onHit',   label: 'On Hit' },
+        ].map(t => (
+          <button
+            key={t.id}
+            onClick={() => setSubTab(t.id)}
+            style={{
+              padding: '10px 20px', background: 'none', border: 'none',
+              borderBottom: `2px solid ${subTab === t.id ? activeColor : 'transparent'}`,
+              color: subTab === t.id ? activeColor : 'var(--muted)',
+              fontWeight: subTab === t.id ? 700 : 400,
+              fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.15s',
+            }}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
 
-          {/* Attacker toggle */}
-          <div style={{ marginBottom: '20px', display: 'flex', gap: '8px' }}>
-            <ToggleButton active={view === 'me'} color="var(--accent)" onClick={() => switchView('me')}>
-              {myChar} Is Attacking
-            </ToggleButton>
-            <ToggleButton active={view === 'opp'} color="var(--accent2)" onClick={() => switchView('opp')}>
-              {oppChar} Is Attacking
-            </ToggleButton>
-          </div>
-
-          {/* Category tab bar — primary filter */}
-          <div style={{ borderTop: '1px solid var(--border)', marginBottom: '16px' }} />
-          <div style={{ marginBottom: '4px' }}>
-            <span style={{ fontSize: '0.78rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: activeColor }}>
-              {label}
-            </span>
-          </div>
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '20px' }}>
-            {categoryTabs.map(c => {
-              const isActive = categoryFilter === c
-              return (
+      {/* Filter button — shown for both sub-tabs */}
+      {effectiveMatchup && (() => {
+            const atkActive = categoryFilter !== 'All' ? 1 : 0
+            const oosActive = oosFilter.size
+            const defenderColor = view === 'me' ? 'var(--accent2)' : 'var(--accent)'
+            const anyActive = atkActive > 0 || oosActive > 0
+            return (
+              <div style={{ marginBottom: '12px' }}>
                 <button
-                  key={c}
-                  onClick={() => { setCategoryFilter(c); setOosFilter(new Set()) }}
+                  onClick={() => setFilterModalOpen(true)}
                   style={{
-                    padding: '5px 14px',
-                    borderRadius: '20px',
-                    border: `1px solid ${isActive ? activeColor : 'var(--border)'}`,
-                    background: isActive ? activeColor + '22' : 'var(--surface)',
-                    color: isActive ? activeColor : 'var(--muted)',
-                    fontSize: '0.75rem',
-                    fontWeight: isActive ? 700 : 400,
-                    cursor: 'pointer',
+                    display: 'inline-flex', alignItems: 'center', gap: '8px',
+                    padding: '7px 16px', borderRadius: '8px',
+                    border: `1px solid ${anyActive ? 'var(--text)' : 'var(--border)'}`,
+                    background: anyActive ? activeColor + '18' : 'var(--surface)',
+                    color: 'var(--text)',
+                    fontSize: '0.82rem', fontWeight: 600, cursor: 'pointer',
                     letterSpacing: '0.02em',
-                    transition: 'all 0.15s',
                   }}
                 >
-                  {c}
+                  <span>⚙ Filters</span>
+                  {atkActive > 0 && (
+                    <span style={{
+                      width: '18px', height: '18px', borderRadius: '50%',
+                      background: activeColor, color: '#0e0e12',
+                      fontSize: '0.65rem', fontWeight: 800,
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {atkActive}
+                    </span>
+                  )}
+                  {oosActive > 0 && (
+                    <span style={{
+                      width: '18px', height: '18px', borderRadius: '50%',
+                      background: defenderColor, color: '#0e0e12',
+                      fontSize: '0.65rem', fontWeight: 800,
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {oosActive}
+                    </span>
+                  )}
                 </button>
-              )
-            })}
-          </div>
+                {filterModalOpen && (
+                  <FilterModal
+                    attackerName={view === 'me' ? myChar : oppChar}
+                    attackerColor={activeColor}
+                    defenderName={view === 'me' ? oppChar : myChar}
+                    defenderColor={view === 'me' ? 'var(--accent2)' : 'var(--accent)'}
+                    categoryTabs={categoryTabs}
+                    categoryFilter={categoryFilter}
+                    setCategoryFilter={v => { setCategoryFilter(v); setOosFilter(new Set()) }}
+                    defenderOOS={defenderOOS}
+                    oosFilter={oosFilter}
+                    setOosFilter={setOosFilter}
+                    relevantOOSMoves={relevantOOSMoves}
+                    onClose={() => setFilterModalOpen(false)}
+                  />
+                )}
+              </div>
+            )
+          })()}
 
-          {/* Punish options chips — secondary filter */}
-          {defenderOOS.length > 0 && (
-            <div style={{ marginBottom: '12px', paddingTop: '16px', borderTop: '1px solid var(--border)' }}>
-              <OOSFilterBar defenderOOS={defenderOOS} oosFilter={oosFilter} setOosFilter={setOosFilter} defenderName={view === 'me' ? oppChar : myChar} defenderColor={view === 'me' ? 'var(--accent2)' : 'var(--accent)'} relevantOOSMoves={relevantOOSMoves} />
-            </div>
-          )}
-          <div style={{ borderTop: '1px solid var(--border)', marginBottom: '16px' }} />
-          <BreakdownTable matchup={active} categoryFilter={categoryFilter} oosFilter={oosFilter} />
+      {/* Normal / Perfect Shield toggle + About icon — shown only on On Shield sub-tab */}
+      {subTab === 'onShield' && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px',
+          padding: '12px 16px',
+          background: 'var(--surface)', border: '1px solid var(--border)',
+          borderRadius: 'var(--radius)',
+        }}>
+          {[['Normal Shield', 'normal'], ['Perfect Shield', 'perfect']].map(([label, val]) => (
+            <button
+              key={val}
+              onClick={() => setShieldMode(val)}
+              style={{
+                padding: '5px 12px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 600,
+                border: `1px solid ${shieldMode === val ? 'var(--accent)' : 'var(--border)'}`,
+                background: shieldMode === val ? 'var(--accent)22' : 'var(--surface)',
+                color: shieldMode === val ? 'var(--accent)' : 'var(--muted)',
+                cursor: 'pointer', transition: 'all 0.15s',
+              }}
+            >
+              {label}
+            </button>
+          ))}
+          <div style={{ marginLeft: 'auto' }}>
+            <AboutShieldButton />
+          </div>
         </div>
+      )}
+
+      {subTab === 'onHit' && attackerData && defenderData && (
+        <OnHitSection
+          attackerData={attackerData}
+          defenderData={defenderData}
+          categoryFilter={categoryFilter}
+          oosFilter={oosFilter}
+        />
+      )}
+
+      {subTab === 'onShield' && effectiveMatchup && (
+        <BreakdownTable matchup={effectiveMatchup} categoryFilter={categoryFilter} oosFilter={oosFilter} isPerfectShield={isPerfectShield} />
       )}
     </div>
   )
@@ -904,6 +1487,126 @@ function ToggleButton({ active, color, onClick, children }) {
     >
       {children}
     </button>
+  )
+}
+
+const ON_SHIELD_INFO = (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+    <div>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
+        "Dictates how much faster the attacker can act after the defender, calculated based on context."
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
+        A <span style={{ color: 'var(--safe)', fontWeight: 600 }}>positive value</span> means the attacker can act before the opponent, making the move safe on shield.
+        A <span style={{ color: 'var(--punish)', fontWeight: 600 }}>negative value</span> means the defender acts first, opening a window to punish.
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
+        OOS options have <strong>12 frames</strong> of built-in shield release. Aerials and Up Strong buffer during jump squat (<strong>4 frames</strong>). Grab has no extra delay.
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
+        If a move has a shield safety of <strong>-10</strong>, any OOS option with a total startup of <strong>10 frames or fewer</strong> can punish it.
+      </p>
+    </div>
+    <div style={{ height: '1px', background: 'var(--border)' }} />
+    <div>
+      <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent)', marginBottom: '6px' }}>Safe / Risky / Punishable</p>
+      <ul style={{ fontSize: '0.85rem', lineHeight: 1.8, paddingLeft: '16px' }}>
+        <li><span style={{ color: 'var(--safe)', fontWeight: 600 }}>Safe</span> — 0 OOS options can punish it.</li>
+        <li><span style={{ color: 'var(--risky)', fontWeight: 600 }}>Risky</span> — 1–3 OOS options can punish it.</li>
+        <li><span style={{ color: 'var(--punish)', fontWeight: 600 }}>Punishable</span> — 4+ OOS options can punish it.</li>
+      </ul>
+    </div>
+    <p style={{ fontSize: '0.72rem', color: 'var(--muted)', fontStyle: 'italic' }}>
+      Definition sourced from{' '}
+      <a href="https://dragdown.wiki/wiki/RoA2" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>dragdown.wiki</a>
+    </p>
+  </div>
+)
+
+const ON_HIT_INFO = (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+    <div>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
+        "Floorhugging is a mechanic that uses ASDI to ground airborne opponents. It requires downward ASDI as well as a stick position on the bottom half of the Left Stick."
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px', fontStyle: 'italic' }}>
+        "If a crouching character is hit, the initial knockback will be reduced by 20%. This is known as crouch cancelling (CC)."
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
+        Floorhugging that doesn't knock down generates weak landing hitstun, calculated by halving the original hitstun, then capping it between 4–8 frames. If crouch cancelled, it is capped between 4–5 frames.
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
+        Floorhugging or Crouch Cancelling a move before its tumble value will give the defender a chance to counterattack. Similar to shield safety, we show a +/- value to represent how quickly each player is actionable after the attack is landed.
+      </p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
+        A <span style={{ color: 'var(--safe)', fontWeight: 600 }}>positive value</span> means the attacker acts first. A <span style={{ color: 'var(--punish)', fontWeight: 600 }}>negative value</span> means the defender can punish. Strongs and spikes always knock down regardless of %, however, if these moves land before their tumble value, the defending player can still <span style={{ color: 'var(--risky)', fontWeight: 600 }}>Amsah Tech</span>.
+      </p>
+    </div>
+    <div style={{ height: '1px', background: 'var(--border)' }} />
+    <div>
+      <p style={{ fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', color: 'var(--accent)', marginBottom: '6px' }}>Tumble %</p>
+      <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
+        "The percent that sends an opponent into tumble. On floorhug, this can knock down."
+      </p>
+      <ul style={{ fontSize: '0.82rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '4px' }}>
+        <li><span style={{ color: '#00CED1', fontWeight: 600 }}>Early KD</span> — tumble at ≤40%</li>
+        <li><span style={{ color: '#F0E442', fontWeight: 600 }}>Mid KD</span> — tumble at 41–80%</li>
+        <li><span style={{ color: '#DA70D6', fontWeight: 600 }}>High KD</span> — tumble at 81–130%</li>
+      </ul>
+    </div>
+    <p style={{ fontSize: '0.72rem', color: 'var(--muted)', fontStyle: 'italic' }}>
+      Definition sourced from{' '}
+      <a href="https://dragdown.wiki/wiki/RoA2" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>dragdown.wiki</a>
+    </p>
+  </div>
+)
+
+function InfoModal({ title, children, onClose }) {
+  return (
+    <div
+      onClick={onClose}
+      style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '24px' }}
+    >
+      <div
+        onClick={e => e.stopPropagation()}
+        style={{ background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: 'var(--radius)', maxWidth: '520px', width: '100%', maxHeight: '80vh', overflowY: 'auto', padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h2 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text)' }}>{title}</h2>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', color: 'var(--muted)', cursor: 'pointer', fontSize: '1.2rem', lineHeight: 1, padding: '2px 6px' }}>✕</button>
+        </div>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+const aboutIconStyle = {
+  background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.35)',
+  color: 'var(--text)',
+  borderRadius: '50%', width: '22px', height: '22px',
+  fontSize: '0.72rem', fontWeight: 700, cursor: 'pointer',
+  display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+  lineHeight: 1, padding: 0, flexShrink: 0,
+}
+
+function AboutShieldButton() {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <button onClick={() => setOpen(true)} style={aboutIconStyle} title="About On Shield Safety">?</button>
+      {open && <InfoModal title="About On Shield Safety" onClose={() => setOpen(false)}>{ON_SHIELD_INFO}</InfoModal>}
+    </>
+  )
+}
+
+function AboutHitButton() {
+  const [open, setOpen] = useState(false)
+  return (
+    <>
+      <button onClick={() => setOpen(true)} style={aboutIconStyle} title="About On Hit Analysis">?</button>
+      {open && <InfoModal title="About On Hit Analysis" onClose={() => setOpen(false)}>{ON_HIT_INFO}</InfoModal>}
+    </>
   )
 }
 
@@ -946,7 +1649,7 @@ function HelpModal({ onClose }) {
         {/* Video embed */}
         <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, borderRadius: 'var(--radius)', overflow: 'hidden' }}>
           <iframe
-            src="https://www.youtube.com/embed/IofMDcrx6Nk"
+            src="https://www.youtube.com/embed/W2QBwcA57y0"
             title="How to read this"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -954,74 +1657,16 @@ function HelpModal({ onClose }) {
           />
         </div>
 
-        {/* Shield Safety + OOS */}
+        {/* Overview */}
         <div>
           <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
-            On Shield Safety &amp; OOS Options
-          </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
-            "Dictates how much faster the attacker can act after the defender, calculated based on context."
-          </p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
-            A <span style={{ color: 'var(--safe)', fontWeight: 600 }}>positive value</span> means the attacker can act before the opponent can, making the move safe.
-            A <span style={{ color: 'var(--punish)', fontWeight: 600 }}>negative value</span> means the defender acts first, opening a window to punish.
-          </p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
-            Out of Shield (OOS) options have <strong>12 frames</strong> of built-in shield release before a move can come out. The exceptions to this rule are aerials and Up Strong which can be buffered during Jump Squat (adding <strong>4 frames</strong> instead of 12) and grab which has no additional startup frames.
-          </p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
-            If a move has a shield safety of <strong>−10</strong>, any OOS option with a total startup of <strong>10 frames or fewer</strong> can punish it. The more OOS options that fit inside that window, the more dangerous the move is to throw out.
-          </p>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, marginTop: '8px' }}>
-            Shield safety and OOS options do not account for spaced moves. A move can be negative on hit and still go unpunished if spaced well enough or with enough disjoint.
-          </p>
-          <p style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '8px', fontStyle: 'italic' }}>
-            Definition sourced from{' '}
-            <a href="https://dragdown.wiki/wiki/RoA2" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>dragdown.wiki</a>
-          </p>
-        </div>
-
-        <div style={{ height: '1px', background: 'var(--border)' }} />
-
-        {/* Safe / Risky / Punishable */}
-        <div>
-          <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
-            Safe / Risky / Punishable
+            What is this?
           </h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6 }}>
-            Each move is classified by how many of the opponent's OOS options can punish it in this specific matchup:
-          </p>
-          <ul style={{ fontSize: '0.85rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '6px' }}>
-            <li><span style={{ color: 'var(--safe)', fontWeight: 600 }}>Safe</span> — 0 OOS options can punish it.</li>
-            <li><span style={{ color: 'var(--risky)', fontWeight: 600 }}>Risky</span> — 1–3 OOS options can punish it.</li>
-            <li><span style={{ color: 'var(--punish)', fontWeight: 600 }}>Punishable</span> — 4 or more OOS options can punish it.</li>
-          </ul>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
-            These safety categories are matchup-specific. Some characters have faster OOS options than others, so this rating reflects how a move is in the matchup context.
-          </p>
-        </div>
-
-        <div style={{ height: '1px', background: 'var(--border)' }} />
-
-        {/* Tumble % */}
-        <div>
-          <h3 style={{ fontSize: '0.72rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '8px' }}>
-            Tumble %
-          </h3>
-          <p style={{ fontSize: '0.85rem', color: 'var(--text)', lineHeight: 1.6, fontStyle: 'italic' }}>
-            "The percent that sends an opponent into tumble. On floorhug, this can knock down."
+            MatchupBuddy shows frame data in a matchup context. The Matchup Overview gives a quick snapshot of each character's safest moves, OOS options, and floorhug counterplay. The individual character tabs break down every move with On Shield and On Hit analysis.
           </p>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', lineHeight: 1.6, marginTop: '8px' }}>
-            Lower % = the move sends into tumble earlier, making it a safer move on hit and more effective combo starter and extender. The color tiers used here:
-          </p>
-          <ul style={{ fontSize: '0.82rem', lineHeight: 1.8, paddingLeft: '16px', marginTop: '4px' }}>
-            <li><span style={{ color: '#00CED1', fontWeight: 600 }}>Early KD</span> — tumble at ≤40%</li>
-            <li><span style={{ color: '#F0E442', fontWeight: 600 }}>Mid KD</span> — tumble at 41–80%</li>
-            <li><span style={{ color: '#DA70D6', fontWeight: 600 }}>High KD</span> — tumble at 81–130%</li>
-          </ul>
-          <p style={{ fontSize: '0.72rem', color: 'var(--muted)', marginTop: '8px', fontStyle: 'italic' }}>
-            Definition sourced from{' '}
-            <a href="https://dragdown.wiki/wiki/RoA2" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)' }}>dragdown.wiki</a>
+            Use the <strong>About</strong> buttons on each tab for detailed explanations of the On Shield and On Hit math. Hover the <strong>?</strong> icons on the overview for quick definitions.
           </p>
         </div>
       </div>
@@ -1031,7 +1676,7 @@ function HelpModal({ onClose }) {
 
 export default function MatchupView({ myChar, oppChar, onBack }) {
   const [helpOpen, setHelpOpen] = useState(false)
-  const [attackerView, setAttackerView] = useState('me')
+  const [activeTab, setActiveTab] = useState('overview')
   const { data: myData,  loading: myLoading  } = useCharacterData(myChar)
   const { data: oppData, loading: oppLoading } = useCharacterData(oppChar)
 
@@ -1056,8 +1701,17 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
     </div>
   )
 
+  const mySlug  = myChar.replace(/ /g, '_')
+  const oppSlug = oppChar.replace(/ /g, '_')
+
+  const tabs = [
+    { id: 'overview', label: 'Matchup Overview' },
+    { id: 'me',  label: `${myChar} Attacking`,  icon: `${import.meta.env.BASE_URL}icons/${mySlug}.png`,  color: 'var(--accent)' },
+    { id: 'opp', label: `${oppChar} Attacking`, icon: `${import.meta.env.BASE_URL}icons/${oppSlug}.png`, color: 'var(--accent2)' },
+  ]
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', overflowX: 'hidden' }}>
       {helpOpen && <HelpModal onClose={() => setHelpOpen(false)} />}
 
       {/* Header */}
@@ -1081,69 +1735,141 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
           </p>
         </div>
 
-        <button
-          onClick={() => setHelpOpen(true)}
-          title="How to read this"
-          style={{
-            flexShrink: 0,
-            background: 'none',
-            border: '1px solid var(--border)',
-            color: 'var(--text)',
-            borderRadius: '50%',
-            width: '28px', height: '28px',
-            cursor: 'pointer',
-            fontSize: '0.82rem',
-            fontWeight: 700,
-            lineHeight: 1,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}
-        >?</button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexShrink: 0 }}>
+          <a
+            href="https://ko-fi.com/boi_jiro"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              color: 'var(--muted)',
+              borderRadius: '6px',
+              padding: '4px 10px',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              lineHeight: 1,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              textDecoration: 'none',
+              whiteSpace: 'nowrap',
+            }}
+          >☕ Support me on Ko-Fi!</a>
+          <button
+            onClick={() => setHelpOpen(true)}
+            title="How to read this"
+            style={{
+              background: 'none',
+              border: '1px solid var(--border)',
+              color: 'var(--text)',
+              borderRadius: '6px',
+              padding: '4px 10px',
+              cursor: 'pointer',
+              fontSize: '0.72rem',
+              fontWeight: 700,
+              lineHeight: 1,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >Demo</button>
+        </div>
       </header>
+
+      {/* Tab bar */}
+      <nav className="matchup-tabs" style={{
+        display: 'flex',
+        borderBottom: '1px solid var(--border)',
+        background: 'var(--surface)',
+        flexShrink: 0,
+      }}>
+        {tabs.map(tab => {
+          const isActive = activeTab === tab.id
+          const color = tab.color || 'var(--text)'
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '12px 20px',
+                background: 'none',
+                border: 'none',
+                borderBottom: `2px solid ${isActive ? color : 'transparent'}`,
+                color: isActive ? color : 'var(--muted)',
+                fontWeight: isActive ? 700 : 400,
+                fontSize: '0.82rem',
+                cursor: 'pointer',
+                letterSpacing: '0.02em',
+                transition: 'color 0.15s, border-color 0.15s',
+                flex: 1,
+              }}
+            >
+              {tab.icon && (
+                <img src={tab.icon} alt="" style={{ width: '20px', height: '20px', objectFit: 'contain', opacity: isActive ? 1 : 0.5 }} />
+              )}
+              {tab.label}
+            </button>
+          )
+        })}
+      </nav>
 
       <main className="page-main">
 
-        {/* Top panels: 2-col grid, each row spans both characters so heights match */}
-        {/* On mobile, CSS order groups each character's panels together */}
-        <div className="top-panels-grid">
-          {/* Row 1: character headers */}
-          <div className="char-col-header-my"><CharColumnHeader name={myChar} accent="var(--accent)" /></div>
-          <div className="char-col-header-opp"><CharColumnHeader name={oppChar} accent="var(--accent2)" /></div>
+        {activeTab === 'overview' && (
+          <div className="top-panels-grid">
+            <div className="char-col-header-my"><CharColumnHeader name={myChar} accent="var(--accent)" /></div>
+            <div className="char-col-header-opp"><CharColumnHeader name={oppChar} accent="var(--accent2)" /></div>
 
-          {/* Row 2: Safest Options — same row height for both */}
-          <div className="char-panel-safe-my">
-            {myData
-              ? <Section title="Safest Options" accent="var(--accent)">
-                  <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />
-                </Section>
-              : <div />}
-          </div>
-          <div className="char-panel-safe-opp">
-            {oppData
-              ? <Section title="Safest Options" accent="var(--accent2)">
-                  <SafestOptionsList charData={oppData} defenderOOSOptions={myOOS} />
-                </Section>
-              : <div />}
-          </div>
+            <div className="char-panel-safe-my">
+              {myData
+                ? <Section title="Safest Options" accent="var(--accent)" tooltip="Moves with the fewest OOS punish options available to the opponent in this matchup. Positive = attacker acts first. Negative = defender acts first.">
+                    <SafestOptionsList charData={myData} defenderOOSOptions={oppOOS} />
+                  </Section>
+                : <div />}
+            </div>
+            <div className="char-panel-safe-opp">
+              {oppData
+                ? <Section title="Safest Options" accent="var(--accent2)" tooltip="Moves with the fewest OOS punish options available to the opponent in this matchup. Positive = attacker acts first. Negative = defender acts first.">
+                    <SafestOptionsList charData={oppData} defenderOOSOptions={myOOS} />
+                  </Section>
+                : <div />}
+            </div>
 
-          {/* Row 3: OOS Options — same row height for both */}
-          <div className="char-panel-oos-my">
-            {myData
-              ? <Section title="OOS Options" accent="var(--accent)" subtitle="Shield release 12f · Jump squat 4f">
-                  <OOSList charData={myData} />
-                </Section>
-              : <div />}
-          </div>
-          <div className="char-panel-oos-opp">
-            {oppData
-              ? <Section title="OOS Options" accent="var(--accent2)" subtitle="Shield release 12f · Jump squat 4f">
-                  <OOSList charData={oppData} />
-                </Section>
-              : <div />}
-          </div>
-        </div>
+            <div className="char-panel-oos-my">
+              {myData
+                ? <Section title="OOS Options" accent="var(--accent)" subtitle="Shield release 12f · Jump squat 4f" tooltip="Out of Shield options, sorted by how quickly they can punish. Grounded moves cost 12f of shield release, aerials and Up Strong cost 4f of jump squat, grab has no extra delay.">
+                    <OOSList charData={myData} />
+                  </Section>
+                : <div />}
+            </div>
+            <div className="char-panel-oos-opp">
+              {oppData
+                ? <Section title="OOS Options" accent="var(--accent2)" subtitle="Shield release 12f · Jump squat 4f" tooltip="Out of Shield options, sorted by how quickly they can punish. Grounded moves cost 12f of shield release, aerials and Up Strong cost 4f of jump squat, grab has no extra delay.">
+                    <OOSList charData={oppData} />
+                  </Section>
+                : <div />}
+            </div>
 
-        {/* Breakdown tables — toggled */}
-        {(matchupVsOpp || matchupVsMe) && (
+            {/* Row 4: Floorhug Counterplay */}
+            <div className="char-panel-floorhug-my">
+              {myData
+                ? <Section title="Floorhug Counterplay" accent="var(--accent)" subtitle="Always breaks floorhug" tooltip="Moves that always cause knockdown regardless of percent. The defender cannot floorhug these, but may Amsah Tech if their percent is below the tumble threshold.">
+                    <FloorhugList charData={myData} accent="var(--accent)" />
+                  </Section>
+                : <div />}
+            </div>
+            <div className="char-panel-floorhug-opp">
+              {oppData
+                ? <Section title="Floorhug Counterplay" accent="var(--accent2)" subtitle="Always breaks floorhug" tooltip="Moves that always cause knockdown regardless of percent. The defender cannot floorhug these, but may Amsah Tech if their percent is below the tumble threshold.">
+                    <FloorhugList charData={oppData} accent="var(--accent2)" />
+                  </Section>
+                : <div />}
+            </div>
+          </div>
+        )}
+
+        {(activeTab === 'me' || activeTab === 'opp') && (matchupVsOpp || matchupVsMe) && (
           <BreakdownSection
             matchupVsOpp={matchupVsOpp}
             matchupVsMe={matchupVsMe}
@@ -1151,8 +1877,9 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             oppChar={oppChar}
             myOOS={myOOS}
             oppOOS={oppOOS}
-            view={attackerView}
-            setView={setAttackerView}
+            view={activeTab}
+            myData={myData}
+            oppData={oppData}
           />
         )}
 

@@ -33,12 +33,27 @@ function SelectPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <header className="select-header">
-        <h1 style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--accent)' }}>
-          MatchupBuddy
-        </h1>
-        <p style={{ color: 'var(--muted)', fontSize: '0.85rem', marginTop: '4px' }}>
-          Shield safety &amp; punish analysis
-        </p>
+        <div className="select-header-text">
+          <h1 style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '0.02em', color: 'var(--accent)' }}>
+            MatchupBuddy
+          </h1>
+          <p style={{ color: 'var(--muted)', fontSize: '0.85rem', marginTop: '4px' }}>
+            Shield safety &amp; punish analysis
+          </p>
+        </div>
+        <a
+          href="https://ko-fi.com/boi_jiro"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="kofi-link"
+          style={{
+            display: 'inline-flex', alignItems: 'center', gap: '6px',
+            padding: '6px 14px', borderRadius: '6px',
+            border: '1px solid var(--border)',
+            color: 'var(--muted)', fontSize: '0.78rem', fontWeight: 600,
+            textDecoration: 'none', flexShrink: 0,
+          }}
+        >☕ Support me on Ko-Fi!</a>
       </header>
 
       <main className="select-main">

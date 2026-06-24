@@ -287,8 +287,19 @@ function buildTumbleData(hit, characterWeights) {
 
   const minT = Math.min(...vals);
   const maxT = Math.max(...vals);
+
+  let aerialSummary = undefined;
+  if (aerialDiffers) {
+    const aerialVals = Object.values(perAerial);
+    if (aerialVals.length) {
+      aerialSummary = { min: Math.min(...aerialVals), max: Math.max(...aerialVals) };
+    }
+  }
+
   return {
-    tumblePercent: { min: minT, max: maxT },
+    tumblePercent: aerialSummary
+      ? { min: minT, max: maxT, aerial: aerialSummary }
+      : { min: minT, max: maxT },
     tumbleRaw: minT === maxT ? `${minT}%` : `${minT} - ${maxT}%`,
     perCharacterTumble: perGrounded,
     perCharacterTumbleAerial: aerialDiffers ? perAerial : {},
@@ -330,7 +341,8 @@ async function scrapeCharacter(charName, charSlug, characterWeights) {
     cargo('ROA2_HitData',
       'chara,moveID,nameID,Damage,BaseKnockback,KnockbackScaling,ExtraShieldStun,' +
       'HitpauseMultiplier,ShieldHitpauseMultiplier,HitstunMultiplier,ForceTumble,' +
-      'KnockbackAngle,KnockbackAngleMode,bIgnoresWeight',
+      'KnockbackAngle,KnockbackAngleMode,bIgnoresWeight,' +
+      'bForceFlinch,ASDIMultiplier,SDIMultiplier,bAutoFloorhuggable',
       `chara="${charName}"`),
     cargo('ROA2_Articles',
       'chara,moveID,ArticleName,bIsProjectile,bIsAttachedToOwner',
@@ -470,6 +482,17 @@ async function scrapeCharacter(charName, charSlug, characterWeights) {
           tumbleRaw,
           perCharacterTumble,
           perCharacterTumbleAerial,
+          knockbackAngle:      hit ? Number(hit.KnockbackAngle)           : null,
+          knockbackAngleMode:  hit ? (hit.KnockbackAngleMode || null)    : null,
+          forceTumble:         hit ? (hit.ForceTumble === 'True')         : false,
+          forceFlinch:         hit ? (hit.bForceFlinch === 'True')        : false,
+          asdiMultiplier:      hit ? Number(hit.ASDIMultiplier)           : null,
+          sdiMultiplier:       hit ? Number(hit.SDIMultiplier)            : null,
+          autoFloorhuggable:   hit ? (hit.bAutoFloorhuggable === 'True')  : false,
+          bkb:                 hit ? Number(hit.BaseKnockback)            : null,
+          kbs:                 hit ? Number(hit.KnockbackScaling)         : null,
+          hitstunMultiplier:   hit ? Number(hit.HitstunMultiplier)        : null,
+          damage:              hit ? Number(hit.Damage)                   : null,
         });
       }
     }
