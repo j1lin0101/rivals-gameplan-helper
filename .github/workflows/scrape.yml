@@ -29,10 +29,7 @@ jobs:
         run: npm ci
 
       - name: Run scraper
-        run: node scripts/scrape.js
-
-      - name: Sync data to app/public/data
-        run: cp data/characters/*.json app/public/data/
+        run: node scripts/cargo-scrape.js
 
       - name: Commit updated data
         run: |
