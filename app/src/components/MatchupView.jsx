@@ -1719,13 +1719,14 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
         <button onClick={onBack} style={{
           background: 'none', border: '1px solid var(--border)',
           color: 'var(--muted)', borderRadius: 'var(--radius)',
-          padding: '6px 14px', cursor: 'pointer', fontSize: '0.82rem',
-          flexShrink: 0,
+          padding: '6px 10px', cursor: 'pointer', fontSize: '1rem',
+          flexShrink: 0, lineHeight: 1,
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          ← Back
+          ←
         </button>
         <div style={{ minWidth: 0, flex: 1 }}>
-          <h1 style={{ fontSize: '1.1rem', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+          <h1 style={{ fontSize: 'clamp(0.72rem, 3.8vw, 1.1rem)', fontWeight: 700, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
             <span style={{ color: 'var(--accent)' }}>{myChar}</span>
             <span style={{ color: 'var(--muted)', margin: '0 8px' }}>vs</span>
             <span style={{ color: 'var(--accent2)' }}>{oppChar}</span>
@@ -1740,20 +1741,19 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
             href="https://ko-fi.com/boi_jiro"
             target="_blank"
             rel="noopener noreferrer"
+            title="Support me on Ko-Fi!"
             style={{
               background: 'none',
               border: '1px solid var(--border)',
               color: 'var(--muted)',
               borderRadius: '6px',
-              padding: '4px 10px',
-              fontSize: '0.72rem',
-              fontWeight: 700,
+              padding: '4px 8px',
+              fontSize: '1rem',
               lineHeight: 1,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               textDecoration: 'none',
-              whiteSpace: 'nowrap',
             }}
-          >☕ Support me on Ko-Fi!</a>
+          >☕</a>
           <button
             onClick={() => setHelpOpen(true)}
             title="How to read this"
