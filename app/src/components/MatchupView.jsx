@@ -429,14 +429,14 @@ function TumbleBadge({ row, defenderName }) {
   return <span style={gBadge.style}>{gBadge.str}</span>
 }
 
-function MoveRow({ row, attackerName, defenderName, oosFilter }) {
+function MoveRow({ row, attackerName, defenderName, oosFilter, simplified }) {
   const statusColor = row.isSafe ? SAFE_COLOR : row.isRisky ? RISKY_COLOR : PUNISH_COLOR
 
   return (
-    <div className="move-row">
+    <div className={`move-row${simplified ? ' simplified' : ''}`}>
       {/* Move + hitbox */}
       <div>
-        <span style={{ fontWeight: 600 }}>{getDisplayName(attackerName, row.move)}</span>
+        <span style={{ fontWeight: 600, color: statusColor }}>{getDisplayName(attackerName, row.move)}</span>
         {row.hitbox && (
           <span className="hitbox-label" style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>
             [{row.hitbox}]
@@ -445,13 +445,15 @@ function MoveRow({ row, attackerName, defenderName, oosFilter }) {
       </div>
 
       {/* Shield safety */}
-      <div className="move-row-badges" style={{ textAlign: 'center' }}>
-        {row.shieldSafety?.isProjectile
-          ? <ProjectileBadge stun={row.shieldSafety.min} />
-          : row.shieldSafety?.isStun
-            ? <StunBadge stun={row.shieldSafety.min} />
-            : <ShieldBadge value={row.shieldSafety} color={statusColor} />}
-      </div>
+      {!simplified && (
+        <div className="move-row-badges" style={{ textAlign: 'center' }}>
+          {row.shieldSafety?.isProjectile
+            ? <ProjectileBadge stun={row.shieldSafety.min} />
+            : row.shieldSafety?.isStun
+              ? <StunBadge stun={row.shieldSafety.min} />
+              : <ShieldBadge value={row.shieldSafety} color={statusColor} />}
+        </div>
+      )}
 
       {/* Punishes */}
       <div>
@@ -494,7 +496,7 @@ function getTumbleNum(row, defKey) {
   return null
 }
 
-function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilter, isPerfectShield }) {
+function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilter, isPerfectShield, simplified }) {
   const [open, setOpen] = useState(true)
   const [sortBy, setSortBy] = useState('shield')   // 'move' | 'shield'
   const [sortDir, setSortDir] = useState(1)
@@ -599,9 +601,9 @@ function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilt
       {open && (
         <div style={{ background: 'var(--surface)' }}>
           {/* Column headers */}
-          <div className="col-headers">
+          <div className={`col-headers${simplified ? ' simplified' : ''}`}>
             <SortHeader col="move" label="Move" />
-            <SortHeader col="shield" label="On Shield" align="center" />
+            {!simplified && <SortHeader col="shield" label="On Shield" align="center" />}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
               <span style={{ fontSize: '0.65rem', fontWeight: 700, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--muted)' }}>Punish Options</span>
               <span style={{ fontSize: '0.6rem', color: 'var(--muted)', opacity: 0.6 }}>
@@ -609,7 +611,7 @@ function CategoryAccordion({ category, rows, attackerName, defenderName, oosFilt
               </span>
             </div>
           </div>
-          {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} oosFilter={oosFilter} />)}
+          {sorted.map((row, i) => <MoveRow key={i} row={row} attackerName={attackerName} defenderName={defenderName} oosFilter={oosFilter} simplified={simplified} />)}
         </div>
       )}
     </div>
@@ -814,9 +816,15 @@ function OnHitAdvBadge({ adv }) {
   )
 }
 
-function OnHitRow({ row, attackerName, defenderName, defKey, pct }) {
+function OnHitRow({ row, attackerName, defenderName, defKey, pct, simplified }) {
   const amsahThreshold = row.alwaysBreaks ? getRowThreshold(row, defKey, true) : null
   const canAmsah = amsahThreshold != null && pct < amsahThreshold
+
+  const moveColor = row.breaksFloorhug
+    ? SAFE_COLOR
+    : row.flugAdvantage == null
+      ? 'var(--text)'
+      : row.flugAdvantage > 0 ? SAFE_COLOR : row.flugAdvantage >= -3 ? RISKY_COLOR : PUNISH_COLOR
 
   const advCell = row.breaksFloorhug
     ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px' }}>
@@ -836,19 +844,21 @@ function OnHitRow({ row, attackerName, defenderName, defKey, pct }) {
     : <OnHitAdvBadge adv={row.flugAdvantage} />
 
   return (
-    <div className="on-hit-row">
+    <div className={`on-hit-row${simplified ? ' simplified' : ''}`}>
       <div>
-        <span style={{ fontWeight: 600 }}>{getDisplayName(attackerName, row.move)}</span>
+        <span style={{ fontWeight: 600, color: moveColor }}>{getDisplayName(attackerName, row.move)}</span>
         {row.hitbox && (
           <span className="hitbox-label" style={{ color: 'var(--muted)', marginLeft: '6px', fontSize: '0.75rem' }}>
             [{row.hitbox}]
           </span>
         )}
       </div>
-      <div style={{ textAlign: 'center' }}>{advCell}</div>
-      <div style={{ textAlign: 'center' }}>
-        <TumbleBadge row={row} defenderName={defenderName} />
-      </div>
+      {!simplified && <div style={{ textAlign: 'center' }}>{advCell}</div>}
+      {!simplified && (
+        <div style={{ textAlign: 'center' }}>
+          <TumbleBadge row={row} defenderName={defenderName} />
+        </div>
+      )}
       <div>
         {!row.breaksFloorhug && row.punishes && row.punishes.length > 0 ? (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
@@ -876,7 +886,7 @@ function getRowThreshold(row, defKey, includeAlwaysBreaks = false) {
   return row.tumblePercent.min
 }
 
-function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, categoryFilter, oosFilter }) {
+function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, categoryFilter, oosFilter, simplified }) {
   const defKey = defenderData?.character
   const breakdown = useMemo(
     () => getOnHitBreakdown(attackerData, defenderData, pct, isCrouch),
@@ -951,6 +961,9 @@ function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, c
         const earlyKD = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t <= 40 }).length
         const midKD   = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t > 40 && t <= 80 }).length
         const highKD  = rows.filter(r => { const t = getRowThreshold(r, defKey); return t != null && t > 80 }).length
+        const safe       = rows.filter(r => r.breaksFloorhug || (r.flugAdvantage != null && r.flugAdvantage > 0)).length
+        const risky      = rows.filter(r => !r.breaksFloorhug && r.flugAdvantage != null && r.flugAdvantage <= 0 && r.flugAdvantage >= -3).length
+        const punishable = rows.filter(r => !r.breaksFloorhug && r.flugAdvantage != null && r.flugAdvantage < -3).length
         const sortedRows = sortRows(rows)
         return (
         <div key={cat} style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', overflow: 'hidden' }}>
@@ -958,21 +971,29 @@ function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, c
             <span style={{ fontSize: '0.72rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text)' }}>
               {cat}
             </span>
-            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-              {earlyKD > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_EARLY_COLOR }}>{earlyKD} early KD</span>}
-              {midKD   > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_MEDIUM_COLOR }}>{midKD} mid KD</span>}
-              {highKD  > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_HIGH_COLOR }}>{highKD} high KD</span>}
+            <div className="accordion-counts">
+              <div className="accordion-counts-row">
+                <span style={{ color: SAFE_COLOR, fontSize: '0.72rem' }}>{safe} safe</span>
+                <span style={{ color: RISKY_COLOR, fontSize: '0.72rem' }}>{risky} risky</span>
+                <span style={{ color: PUNISH_COLOR, fontSize: '0.72rem' }}>{punishable} punishable</span>
+              </div>
+              <span className="accordion-counts-divider">|</span>
+              <div className="accordion-counts-row">
+                {earlyKD > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_EARLY_COLOR }}>{earlyKD} early KD</span>}
+                {midKD   > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_MEDIUM_COLOR }}>{midKD} mid KD</span>}
+                {highKD  > 0 && <span style={{ fontSize: '0.72rem', fontWeight: 400, color: TUMBLE_HIGH_COLOR }}>{highKD} high KD</span>}
+              </div>
             </div>
           </div>
           {/* Column headers */}
-          <div className="on-hit-col-headers">
+          <div className={`on-hit-col-headers${simplified ? ' simplified' : ''}`}>
             <ColHeader col="move" label="Move" />
-            <ColHeader col="adv" label="On Hit" style={{ textAlign: 'center' }} />
-            <ColHeader col="tumble" label="Tumble %" style={{ textAlign: 'center' }} />
+            {!simplified && <ColHeader col="adv" label="On Hit" style={{ textAlign: 'center' }} />}
+            {!simplified && <ColHeader col="tumble" label="Tumble %" style={{ textAlign: 'center' }} />}
             <span style={{ fontSize: '0.65rem', color: 'var(--muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>Punish Options</span>
           </div>
           <div style={{ background: 'var(--surface)' }}>
-            {sortedRows.map((row, i) => <OnHitRow key={i} row={row} attackerName={attackerData.character} defenderName={defenderName} defKey={defKey} pct={pct} />)}
+            {sortedRows.map((row, i) => <OnHitRow key={i} row={row} attackerName={attackerData.character} defenderName={defenderName} defKey={defKey} pct={pct} simplified={simplified} />)}
           </div>
         </div>
       )})}
@@ -980,70 +1001,7 @@ function OnHitTable({ attackerData, defenderData, pct, isCrouch, defenderName, c
   )
 }
 
-function OnHitSection({ attackerData, defenderData, categoryFilter, oosFilter }) {
-  const [pct, setPct] = useState(0)
-  const [isCrouch, setIsCrouch] = useState(false)
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-      {/* Controls */}
-      <div style={{
-        display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px',
-        padding: '12px 16px',
-        background: 'var(--surface)', border: '1px solid var(--border)',
-        borderRadius: 'var(--radius)',
-      }}>
-        {/* Percent input */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.07em', flexShrink: 0 }}>
-            Defender
-          </span>
-          <input
-            type="number"
-            min={0} max={999} step={1}
-            value={pct}
-            onChange={e => {
-              const v = Math.max(0, Math.min(999, Number(e.target.value) || 0))
-              setPct(v)
-            }}
-            style={{
-              width: '64px', padding: '4px 8px', borderRadius: '6px',
-              border: '1px solid var(--border)', background: 'var(--bg)',
-              color: 'var(--text)', fontSize: '0.82rem', fontWeight: 700,
-              textAlign: 'right',
-            }}
-          />
-          <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--muted)' }}>%</span>
-        </div>
-        {/* Floorhug / CC toggle */}
-        <div style={{ display: 'flex', gap: '4px' }}>
-          {[['Floorhug', false], ['Crouch Cancel', true]].map(([label, val]) => (
-            <button
-              key={label}
-              onClick={() => setIsCrouch(val)}
-              style={{
-                padding: '5px 12px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 600,
-                border: `1px solid ${isCrouch === val ? 'var(--accent)' : 'var(--border)'}`,
-                background: isCrouch === val ? 'var(--accent)22' : 'var(--surface)',
-                color: isCrouch === val ? 'var(--accent)' : 'var(--muted)',
-                cursor: 'pointer', transition: 'all 0.15s',
-              }}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-        <div style={{ marginLeft: 'auto' }}>
-          <AboutHitButton />
-        </div>
-      </div>
-
-      <OnHitTable attackerData={attackerData} defenderData={defenderData} pct={pct} isCrouch={isCrouch} defenderName={defenderData.character} categoryFilter={categoryFilter} oosFilter={oosFilter} />
-    </div>
-  )
-}
-
-function BreakdownTable({ matchup, categoryFilter, oosFilter, isPerfectShield }) {
+function BreakdownTable({ matchup, categoryFilter, oosFilter, isPerfectShield, simplified }) {
   const { breakdown } = matchup
   const visibleCategories = categoryFilter && categoryFilter !== 'All'
     ? [categoryFilter]
@@ -1070,6 +1028,7 @@ function BreakdownTable({ matchup, categoryFilter, oosFilter, isPerfectShield })
             defenderName={matchup.defender}
             oosFilter={oosFilter}
             isPerfectShield={isPerfectShield}
+            simplified={simplified}
           />
         )
       })}
@@ -1272,12 +1231,79 @@ function FilterModal({
   )
 }
 
+const TOOLBAR_H = '32px'
+
+function SimplifiedIcon() {
+  return (
+    <svg width="15" height="12" viewBox="0 0 18 14" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <rect x="1" y="1" width="16" height="12" rx="1.5" />
+      <line x1="9" y1="1" x2="9" y2="13" />
+    </svg>
+  )
+}
+
+function ExpandedIcon() {
+  return (
+    <svg width="15" height="12" viewBox="0 0 18 14" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden="true">
+      <rect x="1" y="1" width="16" height="12" rx="1.5" />
+      <line x1="5" y1="1" x2="5" y2="13" />
+      <line x1="9" y1="1" x2="9" y2="13" />
+      <line x1="13" y1="1" x2="13" y2="13" />
+    </svg>
+  )
+}
+
+// A group of options rendered as one self-contained bordered unit, with a divider
+// between each segment inside it.
+function SegmentedToggle({ options, value, onChange, activeColor }) {
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'stretch', height: TOOLBAR_H,
+      border: '1px solid var(--border)', borderRadius: 'var(--radius)', overflow: 'hidden',
+    }}>
+      {options.map((opt, i) => {
+        const active = value === opt.value
+        return (
+          <button
+            key={String(opt.value)}
+            onClick={() => onChange(opt.value)}
+            aria-label={opt.title || opt.label}
+            title={opt.title || opt.label}
+            style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px',
+              height: TOOLBAR_H, padding: opt.icon ? '0 12px' : '0 14px',
+              border: 'none',
+              borderLeft: i > 0 ? '1px solid var(--border)' : 'none',
+              background: active ? activeColor + '22' : 'var(--surface)',
+              color: active ? activeColor : 'var(--muted)',
+              fontSize: '0.72rem', fontWeight: 600, lineHeight: 1,
+              cursor: 'pointer', transition: 'all 0.15s',
+            }}
+          >
+            {opt.icon}
+            {opt.label}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+// A thin vertical rule placed between separate toolbar units.
+function ToolbarDivider() {
+  return <div style={{ width: '1px', alignSelf: 'stretch', background: 'var(--border)' }} />
+}
+
 function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, oppOOS, view, myData, oppData }) {
   const [categoryFilter, setCategoryFilter] = useState('All')
   const [oosFilter, setOosFilter] = useState(new Set())
   const [filterModalOpen, setFilterModalOpen] = useState(false)
   const [subTab, setSubTab] = useState('onShield')
   const [shieldMode, setShieldMode] = useState('normal')
+  const [viewMode, setViewMode] = useState('expanded')
+  const [pct, setPct] = useState(0)
+  const [isCrouch, setIsCrouch] = useState(false)
+  const simplified = viewMode === 'simplified'
 
   const active = view === 'opp' ? matchupVsOpp : matchupVsMe
   const activeColor = view === 'opp' ? 'var(--accent2)' : 'var(--accent)'
@@ -1337,43 +1363,108 @@ function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, o
 
   const categoryTabs = ['All', ...CATEGORY_ORDER.filter(c => c !== 'Misc')]
 
+  const atkActive = categoryFilter !== 'All' ? 1 : 0
+  const oosActive = oosFilter.size
+  const defenderColor = view === 'me' ? 'var(--accent2)' : 'var(--accent)'
+  const anyActive = atkActive > 0 || oosActive > 0
+
   return (
     <div>
-      {/* Sub-tab bar: On Shield / On Hit */}
-      <div style={{ display: 'flex', borderBottom: '1px solid var(--border)', marginBottom: '16px', background: 'var(--surface)', borderRadius: 'var(--radius) var(--radius) 0 0' }}>
-        {[
-          { id: 'onShield', label: 'On Shield' },
-          { id: 'onHit',   label: 'On Hit' },
-        ].map(t => (
-          <button
-            key={t.id}
-            onClick={() => setSubTab(t.id)}
-            style={{
-              padding: '10px 20px', background: 'none', border: 'none',
-              borderBottom: `2px solid ${subTab === t.id ? activeColor : 'transparent'}`,
-              color: subTab === t.id ? activeColor : 'var(--muted)',
-              fontWeight: subTab === t.id ? 700 : 400,
-              fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.15s',
-            }}
-          >
-            {t.label}
-          </button>
-        ))}
-      </div>
+      {/* Sub-tabs + toolbar live in one shared card so they read as a single unit */}
+      <div style={{ border: '1px solid var(--border)', borderRadius: 'var(--radius)', overflow: 'hidden', marginBottom: '16px', background: 'var(--surface)' }}>
+        {/* Sub-tab bar: On Shield / On Hit */}
+        <div style={{ display: 'flex', borderBottom: '1px solid var(--border)' }}>
+          {[
+            { id: 'onShield', label: 'On Shield' },
+            { id: 'onHit',   label: 'On Hit' },
+          ].map(t => (
+            <button
+              key={t.id}
+              onClick={() => setSubTab(t.id)}
+              style={{
+                padding: '10px 20px', background: 'none', border: 'none',
+                borderBottom: `2px solid ${subTab === t.id ? activeColor : 'transparent'}`,
+                color: subTab === t.id ? activeColor : 'var(--muted)',
+                fontWeight: subTab === t.id ? 700 : 400,
+                fontSize: '0.82rem', cursor: 'pointer', transition: 'all 0.15s',
+              }}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
 
-      {/* Filter button — shown for both sub-tabs */}
-      {effectiveMatchup && (() => {
-            const atkActive = categoryFilter !== 'All' ? 1 : 0
-            const oosActive = oosFilter.size
-            const defenderColor = view === 'me' ? 'var(--accent2)' : 'var(--accent)'
-            const anyActive = atkActive > 0 || oosActive > 0
-            return (
-              <div style={{ marginBottom: '12px' }}>
+        {/* Toolbar row: view mode, mode-specific controls, filters, about */}
+        {effectiveMatchup && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', padding: '10px 16px' }}>
+                {/* View mode icon toggle */}
+                <SegmentedToggle
+                  activeColor={activeColor}
+                  value={viewMode}
+                  onChange={setViewMode}
+                  options={[
+                    { value: 'simplified', icon: <SimplifiedIcon />, title: 'Simplified — Move and Punish Options only' },
+                    { value: 'expanded', icon: <ExpandedIcon />, title: 'Expanded — all columns' },
+                  ]}
+                />
+
+                <ToolbarDivider />
+
+                {subTab === 'onShield' ? (
+                  <SegmentedToggle
+                    activeColor="var(--accent)"
+                    value={shieldMode}
+                    onChange={setShieldMode}
+                    options={[
+                      { value: 'normal', label: 'Normal Shield' },
+                      { value: 'perfect', label: 'Perfect Shield' },
+                    ]}
+                  />
+                ) : (
+                  <>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.07em', flexShrink: 0 }}>
+                        Defender
+                      </span>
+                      <input
+                        type="number"
+                        min={0} max={999} step={1}
+                        value={pct}
+                        onChange={e => {
+                          const v = Math.max(0, Math.min(999, Number(e.target.value) || 0))
+                          setPct(v)
+                        }}
+                        style={{
+                          width: '56px', height: '22px', padding: '0 8px', borderRadius: '6px',
+                          border: '1px solid var(--border)', background: 'var(--bg)',
+                          color: 'var(--text)', fontSize: '0.82rem', fontWeight: 700,
+                          textAlign: 'right',
+                        }}
+                      />
+                      <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--muted)' }}>%</span>
+                    </div>
+
+                    <ToolbarDivider />
+
+                    <SegmentedToggle
+                      activeColor="var(--accent)"
+                      value={isCrouch}
+                      onChange={setIsCrouch}
+                      options={[
+                        { value: false, label: 'Floorhug' },
+                        { value: true, label: 'Crouch Cancel' },
+                      ]}
+                    />
+                  </>
+                )}
+
+                <ToolbarDivider />
+
                 <button
                   onClick={() => setFilterModalOpen(true)}
                   style={{
-                    display: 'inline-flex', alignItems: 'center', gap: '8px',
-                    padding: '7px 16px', borderRadius: '8px',
+                    display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                    height: TOOLBAR_H, padding: '0 16px', borderRadius: 'var(--radius)',
                     border: `1px solid ${anyActive ? 'var(--text)' : 'var(--border)'}`,
                     background: anyActive ? activeColor + '18' : 'var(--surface)',
                     color: 'var(--text)',
@@ -1403,66 +1494,46 @@ function BreakdownSection({ matchupVsOpp, matchupVsMe, myChar, oppChar, myOOS, o
                     </span>
                   )}
                 </button>
-                {filterModalOpen && (
-                  <FilterModal
-                    attackerName={view === 'me' ? myChar : oppChar}
-                    attackerColor={activeColor}
-                    defenderName={view === 'me' ? oppChar : myChar}
-                    defenderColor={view === 'me' ? 'var(--accent2)' : 'var(--accent)'}
-                    categoryTabs={categoryTabs}
-                    categoryFilter={categoryFilter}
-                    setCategoryFilter={v => { setCategoryFilter(v); setOosFilter(new Set()) }}
-                    defenderOOS={defenderOOS}
-                    oosFilter={oosFilter}
-                    setOosFilter={setOosFilter}
-                    relevantOOSMoves={relevantOOSMoves}
-                    onClose={() => setFilterModalOpen(false)}
-                  />
-                )}
-              </div>
-            )
-          })()}
 
-      {/* Normal / Perfect Shield toggle + About icon — shown only on On Shield sub-tab */}
-      {subTab === 'onShield' && (
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px',
-          padding: '12px 16px',
-          background: 'var(--surface)', border: '1px solid var(--border)',
-          borderRadius: 'var(--radius)',
-        }}>
-          {[['Normal Shield', 'normal'], ['Perfect Shield', 'perfect']].map(([label, val]) => (
-            <button
-              key={val}
-              onClick={() => setShieldMode(val)}
-              style={{
-                padding: '5px 12px', borderRadius: '6px', fontSize: '0.72rem', fontWeight: 600,
-                border: `1px solid ${shieldMode === val ? 'var(--accent)' : 'var(--border)'}`,
-                background: shieldMode === val ? 'var(--accent)22' : 'var(--surface)',
-                color: shieldMode === val ? 'var(--accent)' : 'var(--muted)',
-                cursor: 'pointer', transition: 'all 0.15s',
-              }}
-            >
-              {label}
-            </button>
-          ))}
-          <div style={{ marginLeft: 'auto' }}>
-            <AboutShieldButton />
-          </div>
-        </div>
+                <div style={{ marginLeft: 'auto' }}>
+                  {subTab === 'onShield' ? <AboutShieldButton /> : <AboutHitButton />}
+                </div>
+              </div>
+        )}
+      </div>
+
+      {effectiveMatchup && filterModalOpen && (
+        <FilterModal
+          attackerName={view === 'me' ? myChar : oppChar}
+          attackerColor={activeColor}
+          defenderName={view === 'me' ? oppChar : myChar}
+          defenderColor={view === 'me' ? 'var(--accent2)' : 'var(--accent)'}
+          categoryTabs={categoryTabs}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={v => { setCategoryFilter(v); setOosFilter(new Set()) }}
+          defenderOOS={defenderOOS}
+          oosFilter={oosFilter}
+          setOosFilter={setOosFilter}
+          relevantOOSMoves={relevantOOSMoves}
+          onClose={() => setFilterModalOpen(false)}
+        />
       )}
 
       {subTab === 'onHit' && attackerData && defenderData && (
-        <OnHitSection
+        <OnHitTable
           attackerData={attackerData}
           defenderData={defenderData}
+          pct={pct}
+          isCrouch={isCrouch}
+          defenderName={defenderData.character}
           categoryFilter={categoryFilter}
           oosFilter={oosFilter}
+          simplified={simplified}
         />
       )}
 
       {subTab === 'onShield' && effectiveMatchup && (
-        <BreakdownTable matchup={effectiveMatchup} categoryFilter={categoryFilter} oosFilter={oosFilter} isPerfectShield={isPerfectShield} />
+        <BreakdownTable matchup={effectiveMatchup} categoryFilter={categoryFilter} oosFilter={oosFilter} isPerfectShield={isPerfectShield} simplified={simplified} />
       )}
     </div>
   )
@@ -1747,7 +1818,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
               border: '1px solid var(--border)',
               color: 'var(--muted)',
               borderRadius: '6px',
-              padding: '4px 8px',
+              height: '26px', padding: '0 8px',
               fontSize: '1rem',
               lineHeight: 1,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -1762,7 +1833,7 @@ export default function MatchupView({ myChar, oppChar, onBack }) {
               border: '1px solid var(--border)',
               color: 'var(--text)',
               borderRadius: '6px',
-              padding: '4px 10px',
+              height: '26px', padding: '0 10px',
               cursor: 'pointer',
               fontSize: '0.72rem',
               fontWeight: 700,

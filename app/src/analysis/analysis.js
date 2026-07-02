@@ -325,6 +325,12 @@ function getFloorhugBreakers(characterData) {
 
     const isStrong = /^(Forward|Up|Down) Strong/i.test(move.move);
 
+    // Strongs are normally deduped to one entry per move since every hitbox always
+    // breaks floorhug. But some characters (e.g. Forsburn's Cape hitboxes on Fstrong/
+    // Ustrong) mix auto-floorhuggable hitboxes with non-auto-floorhuggable ones (Dagger) —
+    // in that case the hitbox identity matters and must be shown per-hitbox instead.
+    const collapseHitbox = isStrong && move.hitboxes.every(function(hb) { return !hb.autoFloorhuggable; });
+
     move.hitboxes.forEach(function(h) {
       // Condition 1: Strong attacks (always break floorhug)
       const qualifiesStrong = isStrong;
@@ -352,7 +358,7 @@ function getFloorhugBreakers(characterData) {
         ? move.move.replace(/^((Neutral|Forward|Up|Down) Special).*/i, '$1')
         : move.move;
 
-      const seenKey = isStrong ? displayMove : `${displayMove}|${h.hitbox}`;
+      const seenKey = collapseHitbox ? displayMove : `${displayMove}|${h.hitbox}`;
       if (qualifies && !seen.has(seenKey)) {
         seen.add(seenKey);
         // For spikes: if aerial tumble threshold > 0, the move can be Amsah teched below
@@ -365,7 +371,7 @@ function getFloorhugBreakers(characterData) {
         results.push({
           move:         displayMove,
           startup:      move.startup,
-          hitbox:       isStrong ? null : (h.hitbox || null),
+          hitbox:       collapseHitbox ? null : (h.hitbox || null),
           aerialTumble, // {min, max} or null
           category:     getCategory(move.move),
         });
@@ -445,6 +451,8 @@ function getOnHitOptions(characterData) {
   if (!options.some(function(o) { return isGrabMove(o.move); })) {
     options.push({ move: 'Grab', label: 'Grab', startup: 8, onHitStartup: 8, jumpCancel: false });
   }
+  // Shield is a universal frame-1 option for every character
+  options.push({ move: 'Shield', label: 'Shield', startup: 1, onHitStartup: 1, jumpCancel: false });
   options.sort(function(a, b) { return a.onHitStartup - b.onHitStartup; });
   return options;
 }
@@ -464,21 +472,28 @@ function getOnHitBreakdown(attackerData, defenderData, pct, isCrouch) {
     if (isGrabMove(move.move)) return;
 
     const isStrong = /^(Forward|Up|Down) Strong/i.test(move.move);
+    // Strongs are normally deduped to one entry per move since every hitbox always
+    // breaks floorhug. But some characters (e.g. Forsburn's Cape hitboxes on Fstrong/
+    // Ustrong) mix auto-floorhuggable hitboxes with non-auto-floorhuggable ones (Dagger) —
+    // in that case the hitbox identity matters and must be shown per-hitbox instead.
+    const collapseHitbox = isStrong && move.hitboxes.every(function(hb) { return !hb.autoFloorhuggable; });
     const seenStrong = new Set();
 
     move.hitboxes.forEach(function(h) {
       const angle = h.knockbackAngle;
       const isSpike = h.knockbackAngleMode === 'SpecifiedAngle' && angle > 180 && angle < 360;
 
-      // Moves that always break floorhug (per the 5-condition rule)
-      const alwaysBreaks = isStrong || isSpike || h.forceTumble === true || h.forceFlinch === true
-        || h.asdiMultiplier === 0 || (h.sdiMultiplier === 0 && h.asdiMultiplier === -1);
+      // Moves that always break floorhug (per the 5-condition rule). Auto-floorhuggable
+      // hitboxes are excluded — the defender can still floorhug those regardless of the
+      // other conditions.
+      const alwaysBreaks = (isStrong || isSpike || h.forceTumble === true || h.forceFlinch === true
+        || h.asdiMultiplier === 0 || (h.sdiMultiplier === 0 && h.asdiMultiplier === -1)) && !h.autoFloorhuggable;
 
-      // Deduplicate strongs: only one row per move name
+      // Deduplicate strongs to one row only when every hitbox uniformly always breaks
       const displayMove = /^(Neutral|Forward|Up|Down) Special/i.test(move.move)
         ? move.move.replace(/^((Neutral|Forward|Up|Down) Special).*/i, '$1')
         : move.move;
-      if (isStrong) {
+      if (collapseHitbox) {
         if (seenStrong.has(displayMove)) return;
         seenStrong.add(displayMove);
       }
@@ -514,7 +529,7 @@ function getOnHitBreakdown(attackerData, defenderData, pct, isCrouch) {
 
       results.push({
         move:               displayMove,
-        hitbox:             isStrong ? null : h.hitbox,
+        hitbox:             collapseHitbox ? null : h.hitbox,
         startup:            move.startup,
         category:           getCategory(move.move),
         breaksFloorhug,

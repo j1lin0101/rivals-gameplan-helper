@@ -268,3 +268,30 @@ body {
     margin-top: 3px;
   }
 }
+
+/* ── Simplified view: Move + Punish Options only ── */
+.col-headers.simplified,
+.move-row.simplified {
+  grid-template-columns: 0.6fr 1fr;
+}
+.on-hit-col-headers.simplified,
+.on-hit-row.simplified {
+  grid-template-columns: 0.8fr 1fr;
+}
+@media (max-width: 600px) {
+  .move-row.simplified,
+  .on-hit-row.simplified {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+  .move-row.simplified > div,
+  .on-hit-row.simplified > div {
+    grid-column: 1;
+    text-align: left;
+    justify-self: stretch;
+  }
+  .move-row.simplified > div:nth-child(1),
+  .on-hit-row.simplified > div:nth-child(1) { grid-row: 1; }
+  .move-row.simplified > div:nth-child(2),
+  .on-hit-row.simplified > div:nth-child(2) { grid-row: 2; margin-top: 4px; }
+}
